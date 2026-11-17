@@ -119,7 +119,11 @@
 
     {{-- ATAS: Header logo & nama sekolah --}}
     <div class="sidebar-brand flex-shrink-0">
-        <div class="sidebar-brand-row d-flex align-items-center gap-2.5 pb-3 border-bottom border-light border-opacity-25">
+        <div class="sidebar-brand-row d-flex align-items-center gap-2.5 pb-3 border-bottom border-light border-opacity-25"
+             role="link" tabindex="0" title="{{ __('Muat ulang halaman') }}" aria-label="{{ __('Muat ulang halaman') }}"
+             style="cursor: pointer; -webkit-tap-highlight-color: transparent;"
+             onclick="window.location.reload();"
+             onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.location.reload();}">
             <img src="{{ \App\Models\Setting::getLogoUrl() }}"
                  alt="{{ __('Logo Sekolah') }}"
                  class="sidebar-brand-logo" style="width: 36px; height: 36px; object-fit: contain;"

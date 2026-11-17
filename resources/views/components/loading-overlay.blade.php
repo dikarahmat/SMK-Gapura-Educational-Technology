@@ -1,8 +1,34 @@
+{{-- Progress bar tipis di atas layar: indikator utama saat PINDAH HALAMAN (klik tautan/menu).
+     Overlay gelap + spinner di bawah hanya dipakai saat SUBMIT FORM (simpan/hapus/import). --}}
+<div id="smart-top-bar" aria-hidden="true"></div>
+
 <div id="smart-page-loader" class="loader-overlay" style="display: none;">
     <div class="loader"></div>
 </div>
 
 <style>
+    #smart-top-bar {
+        position: fixed;
+        top: env(safe-area-inset-top, 0px);
+        left: 0;
+        right: 0;
+        height: 3px;
+        z-index: 999999998;
+        pointer-events: none;
+        background: #2563eb;
+        box-shadow: none;
+        transform-origin: left center;
+        transform: scaleX(0);
+        opacity: 0;
+        transition: transform .25s ease-out, opacity .3s ease;
+    }
+    #smart-top-bar.is-active { opacity: 1; }
+
+    /* Desktop (>= 1024px) memakai spinner overlay (bawah); progress bar hanya untuk HP/tablet. */
+    @media (min-width: 1024px) {
+        #smart-top-bar { display: none !important; }
+    }
+
     /* Overlay loading penuh layar: HITAM transparan (alpha 0.50) sehingga halaman
        di belakang masih samar terlihat. Warna overlay INI TIDAK DIUBAH - tetap
        gelap supaya spinner putih di atasnya tetap kontras & terbaca. */
@@ -181,10 +207,120 @@
         }
     }
 
+    /* ======================================================================
+       PROGRESS BAR PINDAH HALAMAN
+       - Mulai SEGERA saat tautan diketuk (tanpa jeda 100ms), naik cepat ke ~30%,
+         lalu merayap pelan ke maks ~90% selama halaman tujuan dimuat.
+       - Posisi bar disimpan saat halaman ditinggalkan; halaman baru MELANJUTKAN
+         dari posisi itu (tidak reset ke 0), lalu menuntaskannya ke 100%.
+       - Waktu tampil minimum (MIN_MS) dihitung sejak ketukan, jadi tidak sekadar
+         kelip bila server cepat.
+       ====================================================================== */
+    // Desktop = spinner overlay; HP/tablet = progress bar di atas. Batas sama dengan navbar bawah (1024px).
+    function isDesktop() {
+        return window.matchMedia && window.matchMedia('(min-width: 1024px)').matches;
+    }
+
+    const BAR_KEY = '__topBarState';
+    const BAR_MIN_MS = 350;
+    const BAR_MAX_P = 0.9;
+    const BAR_SAFETY_MS = 15000;
+    let barEl = null, barP = 0, barTick = null, barStartedAt = 0;
+    let barFinish = null, barReset = null, barSafety = null, barActive = false;
+
+    function getBar() {
+        if (!barEl) barEl = document.getElementById('smart-top-bar');
+        return barEl;
+    }
+
+    function setBar(v, animate) {
+        const bar = getBar();
+        if (!bar) return;
+        barP = v;
+        if (!animate) bar.style.transition = 'none';
+        bar.style.transform = 'scaleX(' + v + ')';
+        if (!animate) {
+            void bar.offsetWidth;
+            bar.style.transition = '';
+        }
+    }
+
+    function barStart(fromP, startedAt) {
+        const bar = getBar();
+        if (!bar) return;
+        clearTimeout(barFinish); barFinish = null;
+        clearTimeout(barReset); barReset = null;
+        clearInterval(barTick);
+        clearTimeout(barSafety);
+
+        barActive = true;
+        barStartedAt = startedAt || Date.now();
+        bar.classList.add('is-active');
+        setBar(typeof fromP === 'number' ? fromP : 0, false);
+
+        if (typeof fromP !== 'number') {
+            setTimeout(function () { if (barActive) setBar(0.3, true); }, 20);
+        }
+        barTick = setInterval(function () {
+            if (barP < BAR_MAX_P) setBar(barP + (BAR_MAX_P - barP) * 0.07, true);
+        }, 300);
+        barSafety = setTimeout(barDone, BAR_SAFETY_MS);
+    }
+
+    function barDone() {
+        const bar = getBar();
+        if (!bar || !barActive) return;
+        clearInterval(barTick); barTick = null;
+        clearTimeout(barSafety); barSafety = null;
+        const wait = Math.max(0, BAR_MIN_MS - (Date.now() - barStartedAt));
+        clearTimeout(barFinish);
+        barFinish = setTimeout(function () {
+            setBar(1, true);
+            barReset = setTimeout(function () {
+                bar.classList.remove('is-active');       // fade out
+                barReset = setTimeout(function () {
+                    barActive = false;
+                    setBar(0, false);
+                    barReset = null;
+                }, 320);
+            }, 220);
+            barFinish = null;
+        }, wait);
+    }
+
+    // Simpan posisi bar saat meninggalkan halaman supaya halaman baru bisa melanjutkan.
+    window.addEventListener('pagehide', function () {
+        if (!barActive) return;
+        try {
+            sessionStorage.setItem(BAR_KEY, JSON.stringify({ p: barP, t0: barStartedAt, w: Date.now() }));
+        } catch (error) { /* abaikan */ }
+    });
+
+    // Halaman baru: lanjutkan bar bila datang dari klik tautan, lalu tuntaskan saat siap.
+    (function resumeBar() {
+        try {
+            const raw = sessionStorage.getItem(BAR_KEY);
+            sessionStorage.removeItem(BAR_KEY);
+            if (raw) {
+                const o = JSON.parse(raw);
+                if (o && Date.now() - o.w < 10000) {
+                    barStart(Math.min(Math.max(o.p || 0.3, 0.1), BAR_MAX_P), o.t0);
+                }
+            }
+        } catch (error) { /* abaikan */ }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', barDone);
+        } else {
+            barDone();
+        }
+    })();
+
     window.addEventListener('load', hideLoader);
     window.addEventListener('pageshow', function(event) {
         if (event.persisted) {
             hideLoader();
+            barDone();
         }
     });
 
@@ -219,7 +355,15 @@
             }
         }
 
-        showLoaderWithDelay();
+        // Pindah halaman: desktop = spinner overlay, HP/tablet = progress bar tipis.
+        // Bila ada skrip lain yang membatalkan klik (preventDefault), tidak ada
+        // perpindahan halaman, jadi bar tidak dimulai.
+        if (event.defaultPrevented) return;
+        if (isDesktop()) {
+            showLoaderWithDelay();   // desktop: spinner muter
+        } else {
+            barStart();              // HP/tablet: garis di atas
+        }
     });
 
     document.addEventListener('submit', function(event) {
@@ -239,7 +383,9 @@
         showLoaderWithDelay();
     });
 
-    if (document.readyState !== 'complete') {
+    // Desktop: spinner tetap tampil selama halaman baru dimuat (perilaku lama).
+    // HP/tablet: kelanjutannya ditangani progress bar (resumeBar di atas).
+    if (isDesktop() && document.readyState !== 'complete') {
         showLoaderWithDelay();
     }
 

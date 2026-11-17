@@ -121,17 +121,15 @@ class AdminDashboardController extends Controller
         $countAlfa  = (int) $kelasSummary->sum('alpha');
         $totalKetidakhadiran = $countSakit + $countIzin + $countAlfa;
 
-        $statusHariIni = Attendance::join('students', 'attendances.student_id', '=', 'students.id')
-            ->where('students.status', 'Aktif')
-            ->whereNull('students.deleted_at')
-            ->whereDate('attendances.date', $dateString)
-            ->whereIn('attendances.status', ['Hadir', 'Terlambat'])
-            ->groupBy('attendances.status')
-            ->selectRaw('attendances.status as st, count(*) as total')
-            ->pluck('total', 'st');
-
-        $countHadir     = (int) ($statusHariIni->get('Hadir') ?? 0);
-        $countTerlambat = (int) ($statusHariIni->get('Terlambat') ?? 0);
+        // Terlambat TIDAK disimpan sebagai status 'Terlambat' di tabel presensi,
+        // melainkan status 'Hadir' + penanda time_remark 'Terlambat'. Karena itu
+        // query lama (WHERE status IN ('Hadir','Terlambat') GROUP BY status)
+        // memasukkan SEMUA yang terlambat ke hitungan Hadir, dan Terlambat
+        // selalu 0. Sekarang Hadir (tepat waktu) & Terlambat diambil dari helper
+        // yang sama dengan halaman Presensi (DailyAttendanceSummary), sehingga
+        // angka Dashboard = angka tabel Presensi Siswa Hari Ini.
+        $countHadir     = (int) $kelasSummary->sum('hadir');
+        $countTerlambat = (int) $kelasSummary->sum('terlambat');
 
         // 3. REKAP MINGGUAN PER ROMBEL - data pendukung dashboard. Tetap
         //    dihitung agar variabel $classesAttendance tidak hilang dari data

@@ -143,6 +143,51 @@
 
     @stack('styles')
 
+    {{-- ===== NAVBAR MOBILE: indikator aktif BERGESER halus antar menu =====
+         Navbar identik di setiap halaman (posisi & tampilan sama), jadi yang
+         terlihat bergerak hanya garis indikatornya. Animasi dijalankan lewat JS
+         (lihat skrip di bawah <nav>) dan tidak bergantung pada dukungan View
+         Transitions browser. Isi halaman memudar halus saat dibuka. --}}
+    <style>
+        .mobile-nav-indicator {
+            position: absolute !important;
+            top: 0;
+            left: 0;
+            width: 36px;
+            height: 3px;
+            background: #2563eb;
+            border-radius: 1.5px;
+            box-shadow: 0 0 8px rgba(37, 99, 235, .6);
+            pointer-events: none;
+            z-index: 3;
+            opacity: 0;
+            transform: translateX(var(--nav-ind-x, 0px));
+        }
+        .mobile-nav-indicator.is-on { opacity: 1; }
+        .mobile-nav-indicator::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 50%;
+            width: 64px;
+            height: 52px;
+            margin-left: -32px;
+            background: linear-gradient(to bottom, rgba(37, 99, 235, .22), transparent);
+            clip-path: polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%);
+            filter: blur(2px);
+        }
+        /* Setelah indikator baru aktif, garis/sorot lama di item aktif dimatikan. */
+        .mobile-bottom-nav.nav-ind-ready .mobile-nav-item.active::before,
+        .mobile-bottom-nav.nav-ind-ready .mobile-nav-item.active::after {
+            display: none !important;
+        }
+
+        @keyframes pageFadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @media (max-width: 1023.98px) and (prefers-reduced-motion: no-preference) {
+            .content-scroll-wrapper > main { animation: pageFadeIn .18s ease-out; }
+        }
+    </style>
+
     <style>
         :root {
             --sidebar-width: 218px;
@@ -5801,6 +5846,7 @@ min-height: 0 !important; /* batalkan min-height: 100vh dari aturan dasar */
     </a>
 
     <div class="mobile-nav-grid">
+        <span class="mobile-nav-indicator" aria-hidden="true"></span>
         <!-- 1. Dashboard (bx bxs-dashboard) - tampil untuk semua role -->
         <a href="{{ $navDashboardUrl }}" 
            class="mobile-nav-item {{ $isNavDashboardActive ? 'active' : '' }}"
@@ -5845,6 +5891,77 @@ min-height: 0 !important; /* batalkan min-height: 100vh dari aturan dasar */
         </a>
     </div>
 </nav>
+<script>
+    /* Indikator menu aktif yang bergeser halus.
+       - Halaman baru: indikator diposisikan di menu aktif (sinkron, sebelum cat pertama).
+         Bila datang dari klik menu lain, animasi geser dilanjutkan dari posisi menu lama
+         (sisa durasi dihitung dari waktu klik), jadi tidak terputus walau halaman baru
+         sudah tampil.
+       - Saat menu diketuk: indikator LANGSUNG bergeser dan warna menu berganti pada
+         halaman yang masih terbuka, lalu halaman tujuan dimuat. */
+    (function () {
+        var KEY = 'navIndFrom', DUR = 300, EASE = 'cubic-bezier(.4, 0, .2, 1)';
+        var nav = document.querySelector('.mobile-bottom-nav');
+        if (!nav) return;
+        var grid = nav.querySelector('.mobile-nav-grid');
+        var ind = nav.querySelector('.mobile-nav-indicator');
+        if (!grid || !ind) return;
+
+        function xOf(el) { return el.offsetLeft + el.offsetWidth / 2 - ind.offsetWidth / 2; }
+        function setX(x) { ind.style.setProperty('--nav-ind-x', x + 'px'); }
+        function slide(from, to, delay) {
+            if (!ind.animate) return;
+            ind.animate(
+                [{ transform: 'translateX(' + from + 'px)' }, { transform: 'translateX(' + to + 'px)' }],
+                { duration: DUR, easing: EASE, delay: delay || 0 }
+            );
+        }
+
+        var act = grid.querySelector('a.mobile-nav-item.active');
+        var curX = null;
+
+        if (act) {
+            curX = xOf(act);
+            setX(curX);
+            ind.classList.add('is-on');
+            nav.classList.add('nav-ind-ready');
+
+            // Lanjutkan animasi dari menu sebelumnya (bila baru saja berpindah menu).
+            try {
+                var raw = sessionStorage.getItem(KEY);
+                sessionStorage.removeItem(KEY);
+                if (raw) {
+                    var o = JSON.parse(raw), elapsed = Date.now() - o.t;
+                    if (elapsed >= 0 && elapsed < DUR && Math.abs(o.x - curX) > 1) {
+                        slide(o.x, curX, -elapsed);
+                    }
+                }
+            } catch (e) { /* sessionStorage tidak tersedia -> tanpa lanjutan */ }
+        }
+
+        window.addEventListener('resize', function () {
+            var a = grid.querySelector('a.mobile-nav-item.active');
+            if (a) { curX = xOf(a); setX(curX); }
+        });
+
+        // Ketuk menu: geser indikator sekarang juga, sebelum halaman berpindah.
+        grid.addEventListener('click', function (e) {
+            var link = e.target.closest ? e.target.closest('a.mobile-nav-item') : null;
+            if (!link || !grid.contains(link) || curX === null) return;
+            if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+            if (link.classList.contains('active')) return;
+
+            var toX = xOf(link);
+            try { sessionStorage.setItem(KEY, JSON.stringify({ x: curX, t: Date.now() })); } catch (err) {}
+
+            grid.querySelectorAll('a.mobile-nav-item.active').forEach(function (el) { el.classList.remove('active'); });
+            link.classList.add('active');
+            setX(toX);
+            slide(curX, toX, 0);
+            curX = toX;
+        });
+    })();
+</script>
 
 <!-- ========================================================================= -->
 <!-- 3. BACKDROP OVERLAY GELAP (Z-INDEX 9999990)                               -->
@@ -6566,6 +6683,156 @@ window.__i18n = Object.assign(window.__i18n || {}, {!! json_encode([
 @yield('scripts')
 {{-- Komponen bersama: progres persen di dalam tombol unduhan (satu tempat). --}}
 @include('partials.download-progress')
+{{-- ============================================================================
+     PULL-TO-REFRESH (tarik layar ke bawah untuk memuat ulang) - khusus layar sentuh.
+     Kenapa perlu JS: isi halaman menggulir DI DALAM kanvas (main > .flex-1) dengan
+     overscroll-behavior-y: contain, sehingga browser tidak pernah menjalankan
+     pull-to-refresh bawaan. Skrip ini menggantikannya: tarik dari paling atas isi
+     halaman -> muncul indikator -> lepas setelah lewat ambang -> halaman dimuat ulang.
+     Tidak aktif bila: modal terbuka, sedang menggulir tabel ke samping, sedang di
+     dalam elemen yang sudah tergulir, atau sentuhan dimulai di input/kamera.
+     ============================================================================ --}}
+<style>
+    #ptrIndicator {
+        position: fixed;
+        left: 50%;
+        top: 0;
+        z-index: 3000;
+        width: 40px;
+        height: 40px;
+        margin-left: -20px;
+        border-radius: 50%;
+        background: #ffffff;
+        box-shadow: 0 2px 8px rgba(15, 23, 42, .18);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-60px);
+        will-change: transform, opacity;
+    }
+    #ptrIndicator::after {
+        content: "";
+        width: 22px;
+        height: 22px;
+        box-sizing: border-box;
+        border: 3px solid rgba(37, 99, 235, .2);
+        border-top-color: #2563eb;
+        border-radius: 50%;
+        transform: rotate(var(--ptr-rot, 0deg));
+    }
+    #ptrIndicator.ptr-loading::after { animation: ptrSpin .7s linear infinite; }
+    #ptrIndicator.ptr-animate { transition: transform .2s ease, opacity .2s ease; }
+    @keyframes ptrSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+</style>
+<div id="ptrIndicator" aria-hidden="true"></div>
+<script>
+(function () {
+    'use strict';
+    // Hanya layar sentuh.
+    if (!('ontouchstart' in window) && !(navigator.maxTouchPoints > 0)) return;
+
+    var THRESHOLD = 70;      // jarak tarik (px, setelah hambatan) agar refresh terpicu
+    var MAX_PULL  = 110;     // batas visual tarikan
+    var RESIST    = 0.5;     // hambatan: jari 2px = indikator 1px
+    var ind = document.getElementById('ptrIndicator');
+    if (!ind) return;
+
+    var startEl = null, startY = 0, startX = 0, pulling = false, dist = 0, busy = false, decided = false;
+
+    function topOffset() {
+        // Turun sedikit di bawah status bar / notch bila ada.
+        var probe = document.createElement('div');
+        probe.style.cssText = 'position:fixed;top:0;height:env(safe-area-inset-top,0px);visibility:hidden;pointer-events:none';
+        document.body.appendChild(probe);
+        var h = probe.offsetHeight || 0;
+        document.body.removeChild(probe);
+        return h + 8;
+    }
+
+    // Sentuhan yang tidak boleh memicu refresh (modal, input, kamera, dsb).
+    function excluded(t) {
+        if (document.body.classList.contains('modal-open')) return true;
+        return !!t.closest('input, textarea, select, [contenteditable="true"], .modal, .scanner-viewport-container, video, .dropdown-menu.show, .offcanvas.show');
+    }
+
+    // true bila halaman / area mana pun di atas titik sentuh sudah tergulir ke bawah.
+    // Berlaku untuk SEMUA tata letak: scroll window, scroll di dalam kanvas, atau
+    // scroll di wadah lain - tidak bergantung pada nama kelas tertentu.
+    function scrolledDown(t) {
+        if ((window.pageYOffset || document.documentElement.scrollTop || 0) > 0) return true;
+        for (var el = t; el && el.nodeType === 1; el = el.parentElement) {
+            if (el.scrollTop > 0) return true;
+        }
+        return false;
+    }
+
+    function setPull(px) {
+        var y = Math.min(px, MAX_PULL);
+        ind.style.opacity = Math.min(1, y / (THRESHOLD * 0.8));
+        ind.style.transform = 'translateY(' + (topOffset() + y - 40) + 'px)';
+        ind.style.setProperty('--ptr-rot', (y * 4) + 'deg');
+    }
+
+    function reset() {
+        ind.classList.add('ptr-animate');
+        ind.style.opacity = '0';
+        ind.style.transform = 'translateY(-60px)';
+        ind.classList.remove('ptr-loading');
+        setTimeout(function () { ind.classList.remove('ptr-animate'); }, 250);
+    }
+
+    document.addEventListener('touchstart', function (e) {
+        if (busy || e.touches.length !== 1) { pulling = false; return; }
+        startEl = e.target;
+        if (!startEl || startEl.nodeType !== 1 || excluded(startEl) || scrolledDown(startEl)) {
+            pulling = false; return;
+        }
+        startY = e.touches[0].clientY;
+        startX = e.touches[0].clientX;
+        pulling = true; decided = false; dist = 0;
+        ind.classList.remove('ptr-animate');
+    }, { passive: true });
+
+    document.addEventListener('touchmove', function (e) {
+        if (!pulling || busy) return;
+        var dy = e.touches[0].clientY - startY;
+        var dx = e.touches[0].clientX - startX;
+
+        if (!decided) {
+            if (Math.abs(dy) < 8 && Math.abs(dx) < 8) return;
+            // Hanya gerakan dominan vertikal ke bawah yang dihitung
+            // (geser tabel ke samping / gulir ke atas tidak ikut).
+            if (dy <= 0 || Math.abs(dx) > Math.abs(dy) || scrolledDown(startEl)) { pulling = false; return; }
+            decided = true;
+        }
+        if (scrolledDown(startEl)) { pulling = false; reset(); return; }
+
+        dist = dy * RESIST;
+        if (e.cancelable) e.preventDefault();   // cegah gulir ganda / rubber-band
+        setPull(dist);
+    }, { passive: false });
+
+    function end() {
+        if (!pulling) return;
+        pulling = false;
+        if (dist >= THRESHOLD && !busy) {
+            busy = true;
+            ind.classList.add('ptr-animate');
+            ind.style.opacity = '1';
+            ind.style.transform = 'translateY(' + (topOffset() + 20) + 'px)';
+            ind.classList.add('ptr-loading');
+            setTimeout(function () { window.location.reload(); }, 250);
+        } else {
+            reset();
+        }
+        dist = 0;
+    }
+    document.addEventListener('touchend', end, { passive: true });
+    document.addEventListener('touchcancel', end, { passive: true });
+})();
+</script>
 @stack('scripts')
 </body>
 </html>

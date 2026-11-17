@@ -407,7 +407,7 @@
     }
 
     .wali-kelas-col {
-        text-align: center !important;
+        text-align: left !important;
         white-space: normal !important;
         word-break: break-word !important;
         overflow-wrap: anywhere !important;
@@ -637,7 +637,7 @@
                         <th class="text-center py-3 px-3 text-blue-500 text-xs font-bold uppercase border-0 border-b border-gray-100" style="width: 6%;">{{ __('No') }}</th>
                         <th class="text-center py-3 px-3 text-blue-500 text-xs font-bold uppercase border-0 border-b border-gray-100" style="width: 12%;">{{ __('Kelas') }}</th>
                         <th class="text-center py-3 px-3 text-blue-500 text-xs font-bold uppercase border-0 border-b border-gray-100" style="width: 14%;">{{ __('Nama Kelas') }}</th>
-                        <th class="text-center py-3 px-3 pe-4 text-blue-500 text-xs font-bold uppercase border-0 border-b border-gray-100" style="width: 30%;">{{ __('Status Wali Kelas') }}</th>
+                        <th class="text-start py-3 px-3 pe-4 text-blue-500 text-xs font-bold uppercase border-0 border-b border-gray-100" style="width: 30%; text-align: left !important;">{{ __('Status Wali Kelas') }}</th>
                         <th class="text-center py-3 px-3 text-blue-500 text-xs font-bold uppercase border-0 border-b border-gray-100" style="width: 20%;">{{ __('Jumlah Siswa') }}</th>
                         @if($canManage)
                         <th class="text-center py-3 px-3 text-blue-500 text-xs font-bold uppercase border-0 border-b border-gray-100" style="width: 18%;">{{ __('Aksi') }}</th>
@@ -654,7 +654,7 @@
                         <td data-label="{{ __('Nama Kelas') }}" class="text-center text-nowrap fw-semibold text-dark px-3">
                             {{ $class->name }}
                         </td>
-                        <td data-label="{{ __('Status Wali Kelas') }}" class="wali-kelas-col text-center px-3 pe-4">
+                        <td data-label="{{ __('Status Wali Kelas') }}" class="wali-kelas-col text-start px-3 pe-4">
                             @if($class->teacher)
                                 {{ $class->teacher->name }}
                             @else
