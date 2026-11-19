@@ -27,14 +27,14 @@
             /* Latar halaman = foto sekolah (public/images/bg.webp) + kabut putih tipis,
                supaya halaman tidak polos tetapi teks/kamera tetap mudah dibaca
                (desktop maupun mobile) */
-            --kiosk-bg: #dbe4f0;
+            --kiosk-bg: #F0FDF4;
             --kiosk-bg-image: url('{{ asset('images/bg.webp') }}');
             --kiosk-card: rgba(255, 255, 255, 0.60);
             --kiosk-veil: rgba(255, 255, 255, 0.72);
             --kiosk-border: rgba(255, 255, 255, 0.65);
             --kiosk-text: #0f172a;
             --kiosk-muted: #5a6a80;
-            --kiosk-primary: #2563eb;
+            --kiosk-primary: #15803D;
         }
 
         html {
@@ -261,7 +261,7 @@
         }
 
         .kiosk-switch-btn.active {
-            background: rgba(37, 99, 235, 0.7);
+            background: rgba(21, 128, 61, 0.7);
             color: #ffffff;
         }
 
@@ -515,14 +515,14 @@
          - Switcher menempel di atas kamera (absolute), tidak menggeser kamera. --}}
     <style>
         :root {
-            --kb-navy: #1e3a8a;
-            --kb-navy-2: #2c4791;
-            --kb-navy-3: #3a5398;
-            --kb-navy-4: #4960a0;
+            --kb-navy: #14532D;
+            --kb-navy-2: #166534;
+            --kb-navy-3: #15803D;
+            --kb-navy-4: #16A34A;
             --kb-gold: #f59e0b;
-            --kb-body: #d6e4fa;
-            --kb-body-2: #c9dbf7;
-            --kb-body-3: #bcd2f3;
+            --kb-body: #F0FDF4;
+            --kb-body-2: #DCFCE7;
+            --kb-body-3: #DCFCE7;
 
             /* tinggi pita atas & bawah (desktop) */
             --kb-top: 124px;
@@ -566,7 +566,7 @@
             position: relative;
             flex: 0 0 var(--kb-top);
             height: var(--kb-top);
-            background: linear-gradient(100deg, #1a3480 0%, #1e3a8a 50%, #233f93 100%);
+            background: linear-gradient(100deg, #14532D 0%, #15803D 50%, #166534 100%);
             border-bottom: var(--kb-gold-h) solid var(--kb-gold);
             box-sizing: border-box;
             overflow: hidden;
@@ -596,14 +596,14 @@
             flex: 1 1 auto;
             min-height: 0;
             overflow: hidden;
-            background: linear-gradient(180deg, #dce9fb 0%, #d3e3fa 55%, #cddffa 100%);
+            background: linear-gradient(180deg, #F0FDF4 0%, #DCFCE7 55%, #BBF7D0 100%);
         }
         /* Pola titik halus, makin jelas ke arah tepi */
         .kiosk-bg__body::before {
             content: "";
             position: absolute;
             inset: 0;
-            background-image: radial-gradient(rgba(30,58,138,.16) 1.3px, transparent 1.7px);
+            background-image: radial-gradient(rgba(21,128,61,.16) 1.3px, transparent 1.7px);
             background-size: 26px 26px;
             -webkit-mask-image: radial-gradient(ellipse 55% 50% at 50% 50%, transparent 0%, #000 100%);
             mask-image: radial-gradient(ellipse 55% 50% at 50% 50%, transparent 0%, #000 100%);
@@ -618,7 +618,7 @@
             position: relative;
             flex: 0 0 var(--kb-foot);
             height: var(--kb-foot);
-            background: linear-gradient(260deg, #1a3480 0%, #1e3a8a 50%, #233f93 100%);
+            background: linear-gradient(260deg, #14532D 0%, #15803D 50%, #166534 100%);
             border-top: var(--kb-gold-h) solid var(--kb-gold);
             box-sizing: border-box;
             overflow: hidden;
@@ -657,15 +657,15 @@
             z-index: 8;
             opacity: 1;
             background: #ffffff;
-            border: 1px solid rgba(30,58,138,.15);
-            box-shadow: 0 4px 12px rgba(30,58,138,.12);
+            border: 1px solid rgba(21,128,61,.15);
+            box-shadow: 0 4px 12px rgba(21,128,61,.12);
         }
         .kiosk-switch-btn { width: 44px; height: 38px; color: var(--kb-navy); }
-        .kiosk-switch-btn:hover { background: rgba(30,58,138,.10); }
+        .kiosk-switch-btn:hover { background: rgba(21,128,61,.10); }
         .kiosk-switch-btn.active {
             background: var(--kb-navy);
             color: #ffffff;
-            box-shadow: 0 4px 12px rgba(30,58,138,.35);
+            box-shadow: 0 4px 12px rgba(21,128,61,.35);
         }
 
         /* Kotak kamera */
@@ -674,7 +674,7 @@
             border: 1px solid rgba(255,255,255,.75);
             border-radius: var(--gerbang-camera-radius);
             box-shadow:
-                0 22px 48px rgba(30,58,138,.28),
+                0 22px 48px rgba(21,128,61,.28),
                 0 0 0 8px rgba(255,255,255,.38);
         }
         .kiosk-corner { border-color: #ffffff; filter: drop-shadow(0 0 5px rgba(0,0,0,.35)); }
@@ -847,39 +847,39 @@
     <div class="kiosk-bg" aria-hidden="true">
         <div class="kiosk-bg__top">
             <svg viewBox="0 0 1086 267" preserveAspectRatio="xMaxYMid slice" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="602,0 843,0 695,267 453,267" fill="#2c4791"/>
-                <polygon points="843,0 1086,0 1086,267 695,267" fill="#3a5398"/>
-                <path d="M902,0 A130,130 0 0 0 1086,157 L1086,0 Z" fill="#4960a0"/>
+                <polygon points="602,0 843,0 695,267 453,267" fill="#166534"/>
+                <polygon points="843,0 1086,0 1086,267 695,267" fill="#15803D"/>
+                <path d="M902,0 A130,130 0 0 0 1086,157 L1086,0 Z" fill="#16A34A"/>
             </svg>
         </div>
         <div class="kiosk-bg__body">
             <svg class="kb-tl" viewBox="0 0 219 201" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="219,0 110,0 0,110 0,201 90,201" fill="#c9dbf7"/>
-                <polygon points="110,0 0,0 0,110" fill="#bcd2f3"/>
+                <polygon points="219,0 110,0 0,110 0,201 90,201" fill="#DCFCE7"/>
+                <polygon points="110,0 0,0 0,110" fill="#DCFCE7"/>
             </svg>
             <svg class="kb-tr" viewBox="0 0 171 171" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0,0 A171,171 0 0 0 171,171 L171,0 Z" fill="#c9dbf7"/>
-                <path d="M81,0 A90,90 0 0 0 171,90 L171,0 Z" fill="#bcd2f3"/>
+                <path d="M0,0 A171,171 0 0 0 171,171 L171,0 Z" fill="#DCFCE7"/>
+                <path d="M81,0 A90,90 0 0 0 171,90 L171,0 Z" fill="#DCFCE7"/>
             </svg>
             <svg class="kb-bl" viewBox="0 0 293 293" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0,0 A293,293 0 0 1 293,293 L0,293 Z" fill="#c9dbf7"/>
-                <path d="M0,133 A160,160 0 0 1 160,293 L0,293 Z" fill="#bcd2f3"/>
+                <path d="M0,0 A293,293 0 0 1 293,293 L0,293 Z" fill="#DCFCE7"/>
+                <path d="M0,133 A160,160 0 0 1 160,293 L0,293 Z" fill="#DCFCE7"/>
             </svg>
             <svg class="kb-br" viewBox="0 0 390 277" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="168,0 298,0 149,277 0,277" fill="#c9dbf7"/>
-                <polygon points="298,0 390,0 390,277 149,277" fill="#bcd2f3"/>
+                <polygon points="168,0 298,0 149,277 0,277" fill="#DCFCE7"/>
+                <polygon points="298,0 390,0 390,277 149,277" fill="#DCFCE7"/>
             </svg>
         </div>
         <div class="kiosk-bg__foot">
             <svg viewBox="0 0 602 141" preserveAspectRatio="xMinYMid slice" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="244,0 485,0 602,141 361,141" fill="#2c4791"/>
-                <polygon points="0,0 244,0 361,141 0,141" fill="#3a5398"/>
-                <path d="M0,69 A91,91 0 0 1 151,141 L0,141 Z" fill="#4960a0"/>
+                <polygon points="244,0 485,0 602,141 361,141" fill="#166534"/>
+                <polygon points="0,0 244,0 361,141 0,141" fill="#15803D"/>
+                <path d="M0,69 A91,91 0 0 1 151,141 L0,141 Z" fill="#16A34A"/>
             </svg>
             <svg class="mirror" viewBox="0 0 602 141" preserveAspectRatio="xMinYMid slice" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="244,0 485,0 602,141 361,141" fill="#2c4791"/>
-                <polygon points="0,0 244,0 361,141 0,141" fill="#3a5398"/>
-                <path d="M0,69 A91,91 0 0 1 151,141 L0,141 Z" fill="#4960a0"/>
+                <polygon points="244,0 485,0 602,141 361,141" fill="#166534"/>
+                <polygon points="0,0 244,0 361,141 0,141" fill="#15803D"/>
+                <path d="M0,69 A91,91 0 0 1 151,141 L0,141 Z" fill="#16A34A"/>
             </svg>
         </div>
     </div>
@@ -946,7 +946,7 @@
 
                 <!-- Mode Alat Scanner USB -->
                 <div id="hardwareView" class="d-none">
-                    <i class='bx bx-scan' style="font-size: 2.6rem; color: #2563eb;"></i>
+                    <i class='bx bx-scan' style="font-size: 2.6rem; color: #15803D;"></i>
                     <p class="kiosk-placeholder-text">{{ __('Scan kartu dengan alat, atau ketik NIS/NIP lalu tekan Enter') }}</p>
                     <div class="w-100 mt-2 px-1">
                         <input type="text" id="hardwareInput" class="form-control form-control-sm text-center fw-semibold font-monospace py-2" placeholder="{{ __('Ketik NIS/NIP untuk Siswa/Guru') }}" autocomplete="off">

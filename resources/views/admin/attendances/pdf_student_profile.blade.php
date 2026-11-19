@@ -26,7 +26,7 @@
         .school-title {
             font-size: 14pt;
             font-weight: bold;
-            color: #1d4ed8;
+            color: #166534;
             letter-spacing: 0.5px;
             margin: 0;
             text-transform: uppercase;
@@ -67,7 +67,7 @@
             text-align: center;
         }
         .data-table th {
-            background-color: #2563eb;
+            background-color: #15803D;
             color: #ffffff;
             font-weight: bold;
             text-transform: uppercase;
@@ -115,7 +115,7 @@
         .jk-l { color: #3B82F6 !important; font-weight: 500 !important; }
         .jk-p { color: #EF4444 !important; font-weight: 500 !important; }
         /* Judul sekolah: tetap biru (seperti asal) + normal tebal */
-        .school-title { color: #1d4ed8 !important; font-weight: bold !important; }
+        .school-title { color: #166534 !important; font-weight: bold !important; }
         /* Subjudul: hitam pekat, tebal normal */
         .school-subtitle, .report-subtitle { color: #000 !important; font-weight: 400 !important; }
         /* Waktu cetak: hitam pekat, normal */
@@ -302,7 +302,7 @@
                 @endforeach
                 <th style="width: 2.6%; background-color: #059669;">H</th>
                 <th style="width: 2.6%; background-color: #d97706;">T</th>
-                <th style="width: 2.6%; background-color: #2563eb;">S</th>
+                <th style="width: 2.6%; background-color: #15803D;">S</th>
                 <th style="width: 2.6%; background-color: #7e22ce;">I</th>
                 <th style="width: 2.6%; background-color: #e11d48;">A</th>
                 <th style="width: 4%;">%</th>
@@ -375,7 +375,7 @@
                 @endforeach
                 <th style="width: 2.6%; background-color: #059669;">H</th>
                 <th style="width: 2.6%; background-color: #d97706;">T</th>
-                <th style="width: 2.6%; background-color: #2563eb;">S</th>
+                <th style="width: 2.6%; background-color: #15803D;">S</th>
                 <th style="width: 2.6%; background-color: #7e22ce;">I</th>
                 <th style="width: 2.6%; background-color: #e11d48;">A</th>
                 <th style="width: 4%;">%</th>
@@ -431,7 +431,7 @@
                 @endfor
                 <th style="width: 2.6%; background-color: #059669;">H</th>
                 <th style="width: 2.6%; background-color: #d97706;">T</th>
-                <th style="width: 2.6%; background-color: #2563eb;">S</th>
+                <th style="width: 2.6%; background-color: #15803D;">S</th>
                 <th style="width: 2.6%; background-color: #7e22ce;">I</th>
                 <th style="width: 2.6%; background-color: #e11d48;">A</th>
                 <th style="width: 4.4%;">%</th>

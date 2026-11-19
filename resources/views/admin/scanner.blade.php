@@ -36,7 +36,7 @@
             --kiosk-border: rgba(255, 255, 255, 0.65);
             --kiosk-text: #0f172a;
             --kiosk-muted: #5a6a80;
-            --kiosk-primary: #2563eb;
+            --kiosk-primary: #15803D;
         }
 
         html {
@@ -307,9 +307,9 @@
         .kiosk-switch-btn:hover { color: #1e293b; }
 
         .kiosk-switch-btn.active {
-            background: #2563eb;
+            background: #15803D;
             color: #ffffff;
-            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+            box-shadow: 0 2px 8px rgba(21, 128, 61, 0.25);
         }
 
         /* ===== VIEWPORT SCANNER =====
@@ -606,7 +606,7 @@
 
                 <!-- Mode Alat Scanner USB -->
                 <div id="hardwareView" class="d-none">
-                    <i class='bx bx-scan' style="font-size: 2.2rem; color: #2563eb;"></i>
+                    <i class='bx bx-scan' style="font-size: 2.2rem; color: #15803D;"></i>
                     <p class="kiosk-placeholder-text">{{ __('Scan kartu dengan alat, atau ketik NIS/NIP lalu tekan Enter') }}</p>
                     <div class="w-100 mt-2 px-1">
                         <input type="text" id="hardwareInput" class="form-control form-control-sm text-center fw-semibold font-monospace py-2" placeholder="{{ __('Ketik NIS/NIP untuk Siswa/Guru') }}" autocomplete="off">

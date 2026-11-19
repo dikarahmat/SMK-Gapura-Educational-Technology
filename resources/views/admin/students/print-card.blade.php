@@ -97,10 +97,10 @@
         }
         .btn-back:hover { background-color: #f1f5f9; }
         .btn-print {
-            background-color: #1d4ed8;
+            background-color: var(--btn-cetak-kartu);
             color: #ffffff;
         }
-        .btn-print:hover { background-color: #1e40af; }
+        .btn-print:hover { background-color: var(--btn-cetak-kartu-hover); }
 
         .card-preview-wrapper {
             display: flex;

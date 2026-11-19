@@ -81,7 +81,7 @@
             }
         } catch (e) {}
 
-        return '#1e3a8a'; // Fallback warna navy asli
+        return '#14532D'; // Fallback warna hijau tua
     }
 
     /**
@@ -175,7 +175,7 @@
         const isLight = isLightColor(btnColor);
 
         if (isLight) {
-            btn.style.setProperty('--dl-swipe-bg', '#1e3a8a');
+            btn.style.setProperty('--dl-swipe-bg', '#14532D');
             btn.style.setProperty('--dl-btn-color', '#ffffff');
         } else {
             btn.style.setProperty('--dl-swipe-bg', '#ffffff');

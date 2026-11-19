@@ -163,27 +163,27 @@
 
     /* Buka Scanner Button (Royal Blue Primary) - STATIS, tidak ada hover/active perubahan */
     .btn-portal-scanner {
-        background-color: #3b62f6;
+        background-color: #15803D;
         color: #ffffff !important;
-        border-color: #3b62f6;
-        box-shadow: 0 1px 3px rgba(59, 98, 246, 0.25);
+        border-color: #15803D;
+        box-shadow: 0 1px 3px rgba(21, 128, 61, 0.25);
         -webkit-tap-highlight-color: transparent !important;
     }
     .btn-portal-scanner:active,
     .btn-portal-scanner:focus {
-        background-color: #3b62f6 !important;
-        border-color: #3b62f6 !important;
+        background-color: #15803D !important;
+        border-color: #15803D !important;
         color: #ffffff !important;
         transform: none !important;
-        box-shadow: 0 1px 3px rgba(59, 98, 246, 0.25) !important;
+        box-shadow: 0 1px 3px rgba(21, 128, 61, 0.25) !important;
     }
     @media (hover: hover) {
         .btn-portal-scanner:hover {
-            background-color: #3b62f6 !important;
-            border-color: #3b62f6 !important;
+            background-color: #15803D !important;
+            border-color: #15803D !important;
             color: #ffffff !important;
             transform: none !important;
-            box-shadow: 0 1px 3px rgba(59, 98, 246, 0.25) !important;
+            box-shadow: 0 1px 3px rgba(21, 128, 61, 0.25) !important;
         }
     }
     .btn-portal-scanner.scanner-active {
@@ -377,7 +377,7 @@
         border: none !important;
         border-radius: 0 !important;
         padding: 0.2rem;
-        color: #3b62f6;
+        color: #15803D;
         font-size: 0.80rem;
         font-weight: 600;
         text-decoration: none !important;
@@ -407,7 +407,7 @@
         align-items: center !important;
         justify-content: center !important;
     }
-        box-shadow: 0 1px 2px rgba(59, 98, 246, 0.2);
+        box-shadow: 0 1px 2px rgba(21, 128, 61, 0.2);
     }
 
     /* Card Scanner Mode Gerbang Style di Halaman Presensi Harian */
@@ -489,13 +489,13 @@
 
     /* Tombol AKTIF: biru penuh sampai ke tepi pembungkus. */
     .presensi-hari-ini-scanner-col .kiosk-switch-btn.active {
-        background: #2563eb;
+        background: #15803D;
         color: #ffffff;
         border-right-color: transparent;
     }
 
     .presensi-hari-ini-scanner-col .kiosk-switch-btn.active:hover {
-        background: #1d4ed8;
+        background: #166534;
         color: #ffffff;
     }
 
@@ -970,7 +970,7 @@
                                 <td class="text-center align-middle col-td-aksi text-nowrap">
                                     <div class="d-flex align-items-center justify-content-center w-100 text-nowrap">
                                         <a href="{{ panel_route('absensi.show', ['schoolClass' => $clsId, 'tanggal' => $tanggal ?? date('Y-m-d')]) }}" class="btn-buka-kelas text-nowrap" title="{!! __('Buka Kelas') !!}" aria-label="{!! __('Buka Kelas') !!}">
-                                            <i class='bx bx-door-open' style="font-size: 22px !important; font-weight: 400 !important; width: 24px !important; height: 24px !important; min-width: 24px !important; min-height: 24px !important; display: inline-flex; align-items: center; justify-content: center; color: #3b62f6 !important;"></i>
+                                            <i class='bx bx-door-open' style="font-size: 22px !important; font-weight: 400 !important; width: 24px !important; height: 24px !important; min-width: 24px !important; min-height: 24px !important; display: inline-flex; align-items: center; justify-content: center; color: #15803D !important;"></i>
                                         </a>
                                     </div>
                                 </td>

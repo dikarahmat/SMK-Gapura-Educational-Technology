@@ -84,7 +84,7 @@
         position: relative;
         overflow: hidden;
     }
-    .btn-submit-blue:hover { background-color: #2563eb; color: #ffffff; }
+    .btn-submit-blue:hover { background-color: #15803D; color: #ffffff; }
     .btn-submit-blue:disabled, .btn-submit-blue[aria-disabled="true"] {
         opacity: 0.65;
         cursor: not-allowed;
@@ -105,7 +105,7 @@
         left: 0;
         height: 100%;
         width: 0%;
-        background-color: #1d4ed8;
+        background-color: #166534;
         border-radius: inherit;
         z-index: 0;
         transition: width 0.15s linear;

@@ -59,9 +59,9 @@
        ikut tampil biru sebelum diklik. */
     .btn-progress.is-running,
     .btn-progress.is-done {
-        background-color: var(--btn-progress-base, #2563eb) !important;
+        background-color: var(--btn-progress-base, #15803D) !important;
         background-image: none !important;
-        border-color: var(--btn-progress-base, #2563eb) !important;
+        border-color: var(--btn-progress-base, #15803D) !important;
         color: #fff !important;
         opacity: 1 !important;
     }
@@ -72,7 +72,7 @@
         top: 0; left: 0; bottom: 0;
         width: 0%;
         border-radius: inherit;
-        background-color: var(--btn-progress-fill, #1e3a8a) !important;
+        background-color: var(--btn-progress-fill, #14532D) !important;
         background-image: none !important;
         opacity: 1;
         transition: width .2s linear;   /* pendek & linear: bar dan angka sinkron */
@@ -102,8 +102,8 @@
 
     /* Selesai: tetap biru seperti tombol normal (tanpa hijau). */
     .btn-progress.is-done {
-        background-color: var(--btn-progress-base, #2563eb) !important;
-        border-color: var(--btn-progress-base, #2563eb) !important;
+        background-color: var(--btn-progress-base, #15803D) !important;
+        border-color: var(--btn-progress-base, #15803D) !important;
         color: #fff !important;
         opacity: 1 !important;
     }

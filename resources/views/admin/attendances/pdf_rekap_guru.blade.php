@@ -11,14 +11,14 @@
         }
         .header-table { width: 100%; border-bottom: 2px solid #0f172a; padding-bottom: 8px; margin-bottom: 12px; }
         .header-table td { vertical-align: middle; }
-        .school-title { font-size: 14pt; font-weight: bold; color: #1d4ed8; letter-spacing: 0.5px; margin: 0; text-transform: uppercase; }
+        .school-title { font-size: 14pt; font-weight: bold; color: #166534; letter-spacing: 0.5px; margin: 0; text-transform: uppercase; }
         .school-subtitle { font-size: 8.5pt; color: #475569; margin-top: 2px; }
         .report-title { font-size: 11pt; font-weight: bold; text-align: center; margin-top: 4px; margin-bottom: 2px; color: #0f172a; }
         .report-subtitle { font-size: 8.5pt; text-align: center; color: #64748b; margin-bottom: 12px; }
 
         .data-table { width: 100%; table-layout: fixed; border-collapse: collapse; font-size: 8pt; }
         .data-table th, .data-table td { border: 1px solid #cbd5e1; padding: 3px 5px; text-align: center; }
-        .data-table th { background-color: #2563eb; color: #ffffff; font-weight: bold; text-transform: uppercase; font-size: 7.5pt; }
+        .data-table th { background-color: #15803D; color: #ffffff; font-weight: bold; text-transform: uppercase; font-size: 7.5pt; }
         .data-table thead { display: table-header-group; }
         /* Jangan pakai page-break-inside: avoid pada tr: DomPDF jadi memindahkan seluruh tabel ke halaman berikutnya */
         .data-table tr:nth-child(even) td { background-color: #f8fafc; }
@@ -44,9 +44,9 @@
         .badge-i { color: #7e22ce !important; font-weight: bold !important; }
         .badge-a { color: #e11d48 !important; font-weight: bold !important; }
         .badge-l { color: #94a3b8 !important; font-weight: normal !important; }
-        .jk-l { color: #3B82F6 !important; font-weight: 500 !important; }
+        .jk-l { color: #15803D !important; font-weight: 500 !important; }
         .jk-p { color: #EF4444 !important; font-weight: 500 !important; }
-        .school-title { color: #1d4ed8 !important; font-weight: bold !important; }
+        .school-title { color: #166534 !important; font-weight: bold !important; }
         .school-subtitle, .report-subtitle { color: #000 !important; font-weight: 400 !important; }
         .header-table td { color: #000 !important; font-weight: 400 !important; }
 
@@ -176,7 +176,7 @@
                 </th>
             @endforeach
             <th style="width: 2.6%; background-color: #059669;">H</th>
-            <th style="width: 2.6%; background-color: #2563eb;">S</th>
+            <th style="width: 2.6%; background-color: #15803D;">S</th>
             <th style="width: 2.6%; background-color: #7e22ce;">I</th>
             <th style="width: 2.6%; background-color: #e11d48;">A</th>
             <th style="width: 4%;">%</th>
@@ -225,7 +225,7 @@
                 <th style="padding: 2px 1px; width: {{ $wTanggal }}%;">{{ $d['label'] }}</th>
             @endforeach
             <th style="width: 2.6%; background-color: #059669;">H</th>
-            <th style="width: 2.6%; background-color: #2563eb;">S</th>
+            <th style="width: 2.6%; background-color: #15803D;">S</th>
             <th style="width: 2.6%; background-color: #7e22ce;">I</th>
             <th style="width: 2.6%; background-color: #e11d48;">A</th>
             <th style="width: 4%;">%</th>

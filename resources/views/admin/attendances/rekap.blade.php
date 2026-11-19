@@ -94,14 +94,14 @@
     }
     .period-link:active { background-color: #cbd5e1; }
     .period-link.active {
-        background-color: #2563eb !important; color: #ffffff !important; font-weight: 600;
-        box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+        background-color: #15803D !important; color: #ffffff !important; font-weight: 600;
+        box-shadow: 0 2px 6px rgba(21, 128, 61, 0.25);
     }
     .period-link.active:hover,
     .period-link.active:active,
     .period-link.active:focus,
     .period-link.active:focus-visible {
-        background-color: #2563eb !important; color: #ffffff !important;
+        background-color: #15803D !important; color: #ffffff !important;
     }
     .period-link:focus-visible {
         outline: 2px solid #2563eb; outline-offset: 2px;
@@ -129,7 +129,7 @@
         background-color: #ffffff; padding: 0.35rem 0.65rem; transition: all 0.15s ease-in-out;
         border: 1px solid #cbd5e1;
     }
-    .filter-input:focus { border-color: #3b82f6; box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15); }
+    .filter-input:focus { border-color: #15803D; box-shadow: 0 0 0 2px rgba(21, 128, 61, 0.25); }
     .filter-btn { height: 38px; font-size: 0.82rem; border-radius: var(--clean-radius); display: inline-flex; align-items: center; justify-content: center; gap: 0.35rem; font-weight: 600; }
 
     /* Banner hari libur - kompak */
@@ -282,21 +282,21 @@
     }
 
     .kehadiran-pagination-page.is-active {
-        color: #2563eb !important;
+        color: #15803D !important;
         font-weight: 700;
-        border-bottom: 2px solid #2563eb !important;
+        border-bottom: 2px solid #15803D !important;
         cursor: default;
     }
 
     .kehadiran-pagination-step:hover,
     .kehadiran-pagination-page:hover {
-        color: #2563eb !important;
+        color: #15803D !important;
         text-decoration: underline;
     }
 
     .kehadiran-pagination-step:focus-visible,
     .kehadiran-pagination-page:focus-visible {
-        outline: 2px solid #2563eb !important;
+        outline: 2px solid #15803D !important;
         outline-offset: 1px;
         border-radius: 0 !important;
     }
@@ -351,8 +351,8 @@
         min-width: 0;
         white-space: nowrap;
         isolation: isolate;
-        background-color: #2563eb !important;
-        border-color: #2563eb !important;
+        background-color: #15803D !important;
+        border-color: #15803D !important;
         color: #fff !important;
     }
     #printRekapSubmitBtn.is-done { background-color: #16a34a !important; border-color: #16a34a !important; color: #fff !important; }

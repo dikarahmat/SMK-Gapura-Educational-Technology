@@ -35,12 +35,12 @@
         min-width: 720px;
     }
     .table-enterprise thead tr > th {
-        background-color: #2563eb !important;
+        background-color: #15803D !important;
         color: #ffffff !important;
         font-weight: 700 !important;
         font-size: 0.8rem !important;
         padding: 0.8rem 1rem;
-        border-bottom: 1.5px solid #1d4ed8;
+        border-bottom: 1.5px solid #166534;
         text-transform: uppercase;
         letter-spacing: 0.03em;
         white-space: nowrap !important;
@@ -105,7 +105,7 @@
         padding: 0.12rem 0.2rem;
     }
     .aksi-quick .btn-save-quick {
-        background-color: #2563eb;
+        background-color: #15803D;
         color: #ffffff;
         border: none;
         border-radius: 6px;
@@ -121,7 +121,7 @@
         transition: background-color 0.12s ease;
     }
     .aksi-quick .btn-save-quick:hover {
-        background-color: #1d4ed8;
+        background-color: #166534;
     }
     .aksi-quick .btn-save-quick i {
         font-size: 13px !important;
@@ -132,7 +132,7 @@
         color: #ffffff !important;
     }
     .aksi-quick .btn-save-quick:focus-visible {
-        outline: 2px solid #2563eb;
+        outline: 2px solid #15803D;
         outline-offset: 2px;
     }
     /* ---- Kolom Aksi (per siswa): kompak, rapat, rata kiri ---- */
@@ -199,7 +199,7 @@
         text-transform: uppercase;
     }
     .btn-save-quick {
-        background: #2563eb;
+        background: #15803D;
         color: #ffffff;
         border: none;
         border-radius: 6px;
@@ -216,13 +216,13 @@
         transition: background-color 0.12s ease;
     }
     .btn-save-quick:disabled, .btn-save-quick[disabled] {
-        background: #2563eb !important;
+        background: #15803D !important;
         opacity: 0.45 !important;
         cursor: not-allowed !important;
         color: #ffffff !important;
     }
     .btn-save-quick:not(:disabled):hover {
-        background: #1d4ed8;
+        background: #166534;
     }
     .btn-save-quick i {
         font-size: 11px !important;
@@ -233,7 +233,7 @@
         color: #ffffff !important;
     }
     .aksi-form .btn-save-quick.btn-save-disabled, .aksi-form .btn-save-quick.disabled {
-        background: #2563eb !important;
+        background: #15803D !important;
         opacity: 0.45 !important;
         cursor: not-allowed !important;
         color: #ffffff !important;
@@ -303,9 +303,9 @@
     }
 
     .kiosk-switch-btn.active {
-        background: #2563eb;
+        background: #15803D;
         color: #ffffff;
-        box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+        box-shadow: 0 2px 8px rgba(21, 128, 61, 0.25);
     }
 
     /* Viewport / Area Scanner — SATU SUMBER GAYA: presensi-tokens.css

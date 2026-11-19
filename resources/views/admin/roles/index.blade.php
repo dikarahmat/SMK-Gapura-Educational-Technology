@@ -39,7 +39,7 @@
     }
 
     .role-card-clean.highlight-admin {
-        border-top: 3.5px solid #3b62f6;
+        border-top: 3.5px solid #15803D;
     }
 
     .role-card-clean.highlight-guru {
@@ -144,9 +144,9 @@
     }
 
     .status-full-access {
-        background: #eff6ff;
-        color: #1d4ed8;
-        border: 1px solid #bfdbfe;
+        background: #F0FDF4;
+        color: #166534;
+        border: 1px solid #DCFCE7;
     }
 
     .status-operational {

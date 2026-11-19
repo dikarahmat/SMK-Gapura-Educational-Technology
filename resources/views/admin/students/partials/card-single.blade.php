@@ -52,7 +52,7 @@
         }
     }
 @endphp
-<div style="position:relative; width:53.9mm; height:85.6mm; overflow:hidden; margin:0; padding:0; border:0; font-family:'DejaVu Sans', Verdana, Geneva, Arial, sans-serif; background:#dbeafe; -webkit-print-color-adjust:exact; print-color-adjust:exact; page-break-inside:avoid;">
+<div style="position:relative; width:53.9mm; height:85.6mm; overflow:hidden; margin:0; padding:0; border:0; font-family:'DejaVu Sans', Verdana, Geneva, Arial, sans-serif; background:#DCFCE7; -webkit-print-color-adjust:exact; print-color-adjust:exact; page-break-inside:avoid;">
 
     @if($__bg)
         <img src="{{ $__bg }}" alt="" style="position:absolute; left:0; top:0; width:53.9mm; height:85.6mm; object-fit:cover; display:block;">
@@ -67,14 +67,14 @@
 
     <div style="position:absolute; left:0; top:16.5mm; width:53.9mm; font-size:7pt; font-weight:bold; color:#0f172a; text-align:center; line-height:normal; white-space:nowrap; overflow:hidden;">{{ mb_strtoupper($studentName) }}</div>
     <div style="position:absolute; left:0; top:20.6mm; width:53.9mm; font-size:6.8pt; font-weight:bold; color:#0f172a; text-align:center; line-height:normal; white-space:nowrap; overflow:hidden;">{{ $studentNisn }}</div>
-    <div style="position:absolute; left:0; top:24.6mm; width:53.9mm; font-size:8pt; font-weight:bold; color:#1e3a8a; text-align:center; line-height:normal; white-space:nowrap; overflow:hidden;">{{ mb_strtoupper($className) }}</div>
+    <div style="position:absolute; left:0; top:24.6mm; width:53.9mm; font-size:8pt; font-weight:bold; color:#14532D; text-align:center; line-height:normal; white-space:nowrap; overflow:hidden;">{{ mb_strtoupper($className) }}</div>
 
     <div style="position:absolute; left:10.95mm; top:30.5mm; width:32mm; height:32mm; background:#ffffff;">
         @if($qrSrc)
             <img src="{{ $qrSrc }}" alt="" style="position:absolute; left:1mm; top:1mm; width:30mm; height:30mm;">
         @endif
     </div>
-    <div style="position:absolute; left:0; top:64.8mm; width:53.9mm; font-size:5pt; font-weight:bold; letter-spacing:0.4mm; color:#1e3a8a; text-align:center;">SCAN PRESENSI</div>
+    <div style="position:absolute; left:0; top:64.8mm; width:53.9mm; font-size:5pt; font-weight:bold; letter-spacing:0.4mm; color:#14532D; text-align:center;">SCAN PRESENSI</div>
 
     <div style="position:absolute; left:0; top:{{ !empty($isPdf) ? '76.5mm' : '78.6mm' }}; width:53.9mm; height:7mm; line-height:7mm; display:flex; align-items:center; justify-content:center; text-align:center; font-size:4.5pt; font-style:italic; color:#ffffff;">Tunjukkan kartu saat presensi masuk</div>
 </div>

@@ -77,7 +77,7 @@
     }
 
     .btn-green-excel {
-        background-color: #059669 !important;
+        background-color: var(--btn-import-excel) !important;
         color: #ffffff !important;
         border: none !important;
         font-weight: 600;
@@ -92,7 +92,7 @@
     .btn-green-excel:active, 
     .btn-green-excel:focus,
     .btn-green-excel:focus-visible { 
-        background-color: #047857 !important; 
+        background-color: var(--btn-import-excel-hover) !important; 
         color: #ffffff !important; 
         transform: none !important;
         box-shadow: 0 1px 2px rgba(5, 150, 105, 0.15) !important;
@@ -100,7 +100,7 @@
     }
 
     .btn-add-holiday {
-        background-color: #2563eb !important;
+        background-color: var(--btn-tambah) !important;
         color: #ffffff !important;
         border: none !important;
         font-weight: 600;
@@ -115,15 +115,15 @@
     .btn-add-holiday:active, 
     .btn-add-holiday:focus,
     .btn-add-holiday:focus-visible { 
-        background-color: #1d4ed8 !important; 
+        background-color: #166534 !important; 
         color: #ffffff !important; 
         transform: none !important; 
-        box-shadow: 0 1px 2px rgba(37, 99, 235, 0.15) !important;
+        box-shadow: 0 1px 2px rgba(21, 128, 61, 0.15) !important;
         outline: none !important;
     }
 
     .btn-download-green {
-        background-color: #059669 !important;
+        background-color: var(--btn-import-excel) !important;
         color: #ffffff !important;
         border: none !important;
         font-weight: 600;
@@ -204,12 +204,12 @@
         gap: 0.6rem;
         padding: 0.8rem 1rem;
         border-radius: 0.75rem;
-        background-color: #dbeafe;
+        background-color: #DCFCE7;
         color: #1e293b;
         font-size: 0.85rem;
         line-height: 1.5;
     }
-    .info-box i { color: #2563eb; font-size: 1.2rem; margin-top: 0.05rem; }
+    .info-box i { color: #15803D; font-size: 1.2rem; margin-top: 0.05rem; }
 
     /* Pagination Ringkas */
     .pagination-compact .pagination {

@@ -67,13 +67,13 @@
     .period-link.active:active,
     .period-link.active:focus,
     .period-link.active:focus-visible {
-        background-color: #2563eb !important;
+        background-color: #15803D !important;
         color: #ffffff !important;
         font-weight: 400;
-        box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+        box-shadow: 0 2px 6px rgba(21, 128, 61, 0.25);
     }
     .period-link:focus-visible {
-        outline: 2px solid #2563eb;
+        outline: 2px solid #15803D;
         outline-offset: 2px;
     }
 

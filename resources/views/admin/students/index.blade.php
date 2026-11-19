@@ -144,8 +144,8 @@
         justify-content: center !important;
         box-sizing: border-box !important;
         padding: 0 !important;
-        background: #64748b !important;
-        border: 1px solid #64748b !important;
+        background: var(--btn-reset) !important;
+        border: 1px solid var(--btn-reset) !important;
         border-radius: 6px !important;
         color: #ffffff !important;
         text-decoration: none !important;
@@ -163,8 +163,8 @@
 
     .btn-reset:hover,
     .btn-reset:focus-visible {
-        background: #475569 !important;
-        border-color: #475569 !important;
+        background: var(--btn-reset-hover) !important;
+        border-color: var(--btn-reset-hover) !important;
         color: #ffffff !important;
         text-decoration: none;
     }
@@ -407,9 +407,9 @@
 
     /* Matikan Cetak Kartu saat data kosong */
     .btn-cetak-kartu.is-disabled {
-        background-color: #2563eb !important;
+        background-color: #15803D !important;
         color: #ffffff !important;
-        border-color: #2563eb !important;
+        border-color: #15803D !important;
         opacity: 0.5 !important;
         cursor: not-allowed !important;
         pointer-events: none;
@@ -547,12 +547,17 @@
     }
 
     /* Warna tombol aksi */
-    .btn-solid-green { background-color: #059669 !important; color: #ffffff !important; }
-    .btn-solid-blue { background-color: #2563eb !important; color: #ffffff !important; }
-    .btn-solid-red { background-color: #dc2626 !important; color: #ffffff !important; }
+    .btn-solid-green { background-color: var(--btn-import-excel) !important; color: #ffffff !important; }
+    .btn-solid-blue { background-color: var(--btn-tambah) !important; color: #ffffff !important; }
+    .btn-solid-red { background-color: var(--btn-hapus) !important; color: #ffffff !important; }
+    .btn-cetak-kartu { background-color: var(--btn-cetak-kartu) !important; color: #ffffff !important; }
+    .btn-solid-blue:hover { background-color: var(--btn-tambah-hover) !important; }
+    .btn-solid-green:hover { background-color: var(--btn-import-excel-hover) !important; }
+    .btn-solid-red:hover { background-color: var(--btn-hapus-hover) !important; }
+    .btn-cetak-kartu:hover { background-color: var(--btn-cetak-kartu-hover) !important; }
 
     #btnImportSubmit:disabled {
-        background-color: #059669 !important;
+        background-color: var(--btn-import-excel) !important;
         color: #ffffff !important;
         opacity: .5 !important;
         cursor: not-allowed !important;
@@ -565,15 +570,15 @@
         opacity: 1 !important;
         cursor: default !important;
         pointer-events: none !important;
-        background-color: #059669 !important;
+        background-color: var(--btn-import-excel) !important;
         color: #ffffff !important;
     }
 
     #btnSaveStudent:disabled,
     #btnSaveStudent[disabled] {
-        background-color: #2563eb !important;
+        background-color: var(--btn-tambah) !important;
         color: #ffffff !important;
-        border-color: #2563eb !important;
+        border-color: var(--btn-tambah) !important;
         opacity: 0.5 !important;
         cursor: not-allowed !important;
         pointer-events: none !important;

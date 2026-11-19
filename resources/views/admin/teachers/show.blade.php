@@ -82,7 +82,7 @@
         justify-content: center;
         line-height: 1.5;
     }
-    .btn-submit-blue:hover { background-color: #2563eb; color: #ffffff; }
+    .btn-submit-blue:hover { background-color: #15803D; color: #ffffff; }
     .btn-submit-blue:disabled, .btn-submit-blue[aria-disabled="true"] {
         opacity: 0.65;
         cursor: not-allowed;

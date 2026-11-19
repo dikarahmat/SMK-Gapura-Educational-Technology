@@ -42,7 +42,7 @@
            class="dashboard-date-input" tabindex="-1" aria-hidden="true">
 
     <button type="button" class="dashboard-date-trigger" title="{{ __('Pilih tanggal') }}" aria-label="{{ __('Pilih tanggal') }}">
-        <i class='bx bx-calendar text-primary fs-3'></i>
+        <i class='bx bx-calendar text-success fs-3'></i>
     </button>
 </form>
 
@@ -111,7 +111,7 @@
         --dash-inner-bg: #ffffff;
         --dash-inner-stroke: #e2e8f0;       /* garis tipis elemen kecil   */
         --dash-line: #e5e9f0;
-        --dash-accent: #2563eb;
+        --dash-accent: #15803D;
         --dash-title-weight: 700;           /* judul section selalu bold */
     }
 
@@ -389,7 +389,7 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        background-color: var(--sc-soft, #dbeafe);
+        background-color: var(--sc-soft, #DCFCE7);
         border-radius: 14px;
         transition: transform 0.18s ease;
     }
@@ -738,7 +738,7 @@
        teks, bukan tautan). Yang tersisa adalah penanda "sedang difilter"
        (.absence-row-active) - itu status, bukan efek klik. */
     .dashboard-section .absence-row-active {
-        background-color: rgba(37, 99, 235, 0.05);
+        background-color: rgba(21, 128, 61, 0.05);
         border: 0;
         box-shadow: none;
         outline: 0;
@@ -776,7 +776,7 @@
     /* Label kecil "Aktif" pada baris yang sedang difilter */
     .dashboard-section .absence-row-active-badge {
         display: inline-block;
-        background: #2563eb;
+        background: #15803D;
         color: #ffffff;
         border-radius: 9999px;
         font-size: 0.65rem;
@@ -921,7 +921,7 @@
         }
         @media (hover: hover) {
             .dash-seg .dash-seg__btn:hover {
-                background-color: rgba(37, 99, 235, 0.06);
+                background-color: rgba(21, 128, 61, 0.06);
                 color: #0f172a;
             }
         }
@@ -938,12 +938,22 @@
         .dash-seg .dash-seg__btn--solid:focus,
         .dash-seg .dash-seg__btn.is-active:focus-visible,
         .dash-seg .dash-seg__btn--solid:focus-visible {
-            background-color: #2563eb !important;
+            background-color: #15803D !important;
             color: #ffffff !important;
         }
         .dash-seg .dash-seg__btn:focus-visible {
-            outline: 2px solid #2563eb;
+            outline: 2px solid #15803D;
             outline-offset: -2px;
+        }
+
+        /* Tombol aksi dashboard: batasi override ke .dashboard-section saja. */
+        .dashboard-section .btn-primary {
+            background-color: #15803D !important;
+            border-color: #15803D !important;
+        }
+        .dashboard-section .btn-primary:hover {
+            background-color: #166534 !important;
+            border-color: #166534 !important;
         }
 
         /* Tanggal periode grafik: teks biasa, tanpa badge/kotak. */
@@ -1079,7 +1089,7 @@
                      Khusus Guru Piket: data sekolah read-only. -->
                 @if(is_piket())
                 <div class="dash-stat-cell" title="{{ __('Data sekolah hanya dapat dilihat') }}">
-                    <strong class="dash-stat-value is-sidebar-blue">{{ number_format($totalStudents ?? 0, 0, ',', '.') }}</strong>
+<strong class="dash-stat-value is-green">{{ number_format($totalStudents ?? 0, 0, ',', '.') }}</strong>
                     <span class="dash-stat-label">{{ __('Siswa Aktif') }}</span>
                 </div>
                 @else
@@ -1087,7 +1097,7 @@
                    class="dash-stat-cell"
                    aria-label="{{ __('Buka data siswa') }}"
                    title="{{ __('Buka data siswa') }}">
-                    <strong class="dash-stat-value is-sidebar-blue">{{ number_format($totalStudents ?? 0, 0, ',', '.') }}</strong>
+                     <strong class="dash-stat-value is-green">{{ number_format($totalStudents ?? 0, 0, ',', '.') }}</strong>
                     <span class="dash-stat-label">{{ __('Siswa Aktif') }}</span>
                 </a>
                 @endif
@@ -1097,7 +1107,7 @@
                      Khusus Guru Piket: data sekolah read-only. -->
                 @if(is_piket())
                 <div class="dash-stat-cell" title="{{ __('Data sekolah hanya dapat dilihat') }}">
-                    <strong class="dash-stat-value is-yellow">{{ number_format($totalClasses ?? 0, 0, ',', '.') }}</strong>
+<strong class="dash-stat-value is-green">{{ number_format($totalClasses ?? 0, 0, ',', '.') }}</strong>
                     <span class="dash-stat-label">{{ __('Rombongan Belajar') }}</span>
                 </div>
                 @else
@@ -1105,7 +1115,7 @@
                    class="dash-stat-cell"
                    aria-label="{{ __('Buka data kelas') }}"
                    title="{{ __('Buka data kelas') }}">
-                    <strong class="dash-stat-value is-yellow">{{ number_format($totalClasses ?? 0, 0, ',', '.') }}</strong>
+                     <strong class="dash-stat-value is-green">{{ number_format($totalClasses ?? 0, 0, ',', '.') }}</strong>
                     <span class="dash-stat-label">{{ __('Rombongan Belajar') }}</span>
                 </a>
                 @endif
@@ -1154,8 +1164,8 @@
                 <a href="{{ panel_route('absensi.kiosk') }}"
                    class="dash-shortcut-item"
                    title="{{ __('Buka Mode Gerbang (Scanner QR otomatis nyala)') }}">
-                    <span class="dash-sc-icon" style="--sc-soft: #dbeafe;">
-                        <i class='bx bx-qr-scan text-primary'></i>
+<span class="dash-sc-icon" style="--sc-soft: #DCFCE7;">
+                         <i class='bx bx-qr-scan text-success'></i>
                     </span>
                     <span class="dash-sc-label">{{ __('Presensi Hari Ini') }}</span>
                 </a>
@@ -1186,8 +1196,8 @@
                 <a href="{{ panel_route('students.index') }}"
                    class="dash-shortcut-item"
                    title="{{ __('Kelola Master Data Siswa & Generate QR') }}">
-                    <span class="dash-sc-icon" style="--sc-soft: #cffafe;">
-                        <i class='bx bx-user text-info'></i>
+<span class="dash-sc-icon" style="--sc-soft: #DCFCE7;">
+                         <i class='bx bx-user text-success'></i>
                     </span>
                     <span class="dash-sc-label">{{ __('Data Siswa') }}</span>
                 </a>
@@ -1197,8 +1207,8 @@
                 <a href="{{ route('admin.guru.index') }}"
                    class="dash-shortcut-item"
                    title="{{ __('Kelola Data Guru') }}">
-                    <span class="dash-sc-icon" style="--sc-soft: #f3e8ff;">
-                        <i class='bx bx-user-pin text-purple'></i>
+<span class="dash-sc-icon" style="--sc-soft: #DCFCE7;">
+                         <i class='bx bx-user-pin text-success'></i>
                     </span>
                     <span class="dash-sc-label">{{ __('Data Guru') }}</span>
                 </a>
@@ -1574,22 +1584,22 @@
         } else {
             // Cadangan: satu garis total (perilaku lama).
             const gradient = canvasContext.createLinearGradient(0, 0, 0, 220);
-            gradient.addColorStop(0, 'rgba(37, 99, 235, 0.20)');
-            gradient.addColorStop(1, 'rgba(37, 99, 235, 0.01)');
+            gradient.addColorStop(0, 'rgba(21, 128, 61, 0.20)');
+            gradient.addColorStop(1, 'rgba(21, 128, 61, 0.01)');
             datasets = [{
                 label: {!! json_encode(__('Tingkat Kehadiran (%)')) !!},
                 data: chartData,
-                borderColor: '#2563eb',
+                borderColor: '#15803D',
                 borderWidth: 2.5,
                 backgroundColor: gradient,
                 fill: true,
                 tension: 0.35,
                 pointBackgroundColor: '#ffffff',
-                pointBorderColor: '#2563eb',
+                pointBorderColor: '#15803D',
                 pointBorderWidth: 2.5,
                 pointRadius: 4.5,
                 pointHoverRadius: 7,
-                pointHoverBackgroundColor: '#2563eb',
+                pointHoverBackgroundColor: '#15803D',
                 pointHoverBorderColor: '#ffffff',
                 pointHoverBorderWidth: 2
             }];

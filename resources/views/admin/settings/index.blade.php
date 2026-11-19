@@ -1034,10 +1034,10 @@
       + '.ck-box{background:#fff;border-radius:20px;width:100%;max-width:320px;padding:18px 18px 12px;box-shadow:0 20px 50px rgba(0,0,0,.3);font-family:inherit;}'
       + '.ck-head{display:flex;align-items:center;justify-content:center;gap:4px;font-size:44px;font-weight:700;color:#0f172a;margin-bottom:10px;}'
       + '.ck-head button{border:0;background:#eef2ff;color:#334155;border-radius:12px;padding:2px 14px;font:inherit;line-height:1.3;cursor:pointer;}'
-      + '.ck-head button.on{background:#2563eb;color:#fff;}'
+      + '.ck-head button.on{background:#15803D;color:#fff;}'
       + '.ck-dial{width:256px;height:256px;display:block;margin:0 auto;touch-action:none;user-select:none;cursor:pointer;}'
       + '.ck-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:8px;}'
-      + '.ck-actions button{border:0;background:transparent;font-weight:700;color:#2563eb;padding:8px 14px;border-radius:10px;cursor:pointer;}'
+      + '.ck-actions button{border:0;background:transparent;font-weight:700;color:#15803D;padding:8px 14px;border-radius:10px;cursor:pointer;}'
       + '.ck-actions button:hover{background:#eef2ff;}';
     var st = document.createElement('style');
     st.textContent = css;
@@ -1089,9 +1089,9 @@
             selR = R_OUT;
         }
         var sp = pos(selAngle, selR);
-        dial.appendChild(el('line', { x1: C, y1: C, x2: sp.x, y2: sp.y, stroke: '#2563eb', 'stroke-width': 2 }));
-        dial.appendChild(el('circle', { cx: C, cy: C, r: 4, fill: '#2563eb' }));
-        dial.appendChild(el('circle', { cx: sp.x, cy: sp.y, r: 19, fill: '#2563eb' }));
+        dial.appendChild(el('line', { x1: C, y1: C, x2: sp.x, y2: sp.y, stroke: '#15803D', 'stroke-width': 2 }));
+        dial.appendChild(el('circle', { cx: C, cy: C, r: 4, fill: '#15803D' }));
+        dial.appendChild(el('circle', { cx: sp.x, cy: sp.y, r: 19, fill: '#15803D' }));
 
         var i, p, label, active;
         if (mode === 'h') {

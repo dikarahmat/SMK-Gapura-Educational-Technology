@@ -74,7 +74,7 @@
     .btn-reset-rekap svg { width: 20px; height: 20px; stroke: currentColor; fill: none; }
     .btn-reset-rekap:hover,
     .btn-reset-rekap:focus-visible {
-        color: #2563eb; border-color: #2563eb; background: #f8fafc; text-decoration: none;
+        color: #15803D; border-color: #15803D; background: #f8fafc; text-decoration: none;
     }
 
     .recap-mobile-actions .btn { transition: none !important; transform: none !important; }
@@ -107,16 +107,16 @@
     }
     .period-link:active { background-color: #cbd5e1; }
     .period-link.active {
-        background-color: #2563eb !important; color: #ffffff !important; font-weight: 600;
-        box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+        background-color: #15803D !important; color: #ffffff !important; font-weight: 600;
+        box-shadow: 0 2px 6px rgba(21, 128, 61, 0.25);
     }
     .period-link.active:hover,
     .period-link.active:active,
-    .period-link.active:focus,
+.period-link.active:focus,
     .period-link.active:focus-visible {
-        background-color: #2563eb !important; color: #ffffff !important;
+        background-color: #15803D !important; color: #ffffff !important;
     }
-    .period-link:focus-visible { outline: 2px solid #2563eb; outline-offset: 2px; }
+    .period-link:focus-visible { outline: 2px solid #15803D; outline-offset: 2px; }
 
     @media (max-width: 575.98px) {
         .period-container { width: 100%; }
@@ -215,11 +215,11 @@
         text-decoration: none; background: none !important; border: none !important; box-shadow: none !important;
         border-radius: 0 !important; color: #64748b; cursor: pointer;
     }
-    .kehadiran-pagination-page.is-active { color: #2563eb !important; font-weight: 700; border-bottom: 2px solid #2563eb !important; cursor: default; }
+    .kehadiran-pagination-page.is-active { color: #15803D !important; font-weight: 700; border-bottom: 2px solid #15803D !important; cursor: default; }
     .kehadiran-pagination-step:hover,
-    .kehadiran-pagination-page:hover { color: #2563eb !important; text-decoration: underline; }
+    .kehadiran-pagination-page:hover { color: #15803D !important; text-decoration: underline; }
     .kehadiran-pagination-step:focus-visible,
-    .kehadiran-pagination-page:focus-visible { outline: 2px solid #2563eb !important; outline-offset: 1px; border-radius: 0 !important; }
+    .kehadiran-pagination-page:focus-visible { outline: 2px solid #15803D !important; outline-offset: 1px; border-radius: 0 !important; }
     .kehadiran-pagination-step.is-disabled { color: #cbd5e1; cursor: not-allowed; pointer-events: none; }
     .kehadiran-pagination-step.is-disabled:hover { color: #cbd5e1; text-decoration: none; }
     .kehadiran-pagination-ellipsis { display: inline-block; padding: 0.45rem 0.1rem; font-size: 0.95rem; color: #94a3b8; line-height: 1.2; }
@@ -228,7 +228,7 @@
     /* Progress bar di dalam tombol Unduh */
     #printRekapSubmitBtn {
         position: relative; overflow: hidden; min-width: 0; white-space: nowrap; isolation: isolate;
-        background-color: #2563eb !important; border-color: #2563eb !important; color: #fff !important;
+        background-color: #15803D !important; border-color: #15803D !important; color: #fff !important;
     }
     #printRekapSubmitBtn.is-done { background-color: #16a34a !important; border-color: #16a34a !important; color: #fff !important; }
     #printRekapSubmitBtn.is-done .btn-progress__fill { display: none; }

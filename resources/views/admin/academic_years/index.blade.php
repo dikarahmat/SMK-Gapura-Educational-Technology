@@ -16,7 +16,7 @@
 <style>
     /* KUNCI UTAMA: Tombol Tambah Tahun Ajaran agar Diam Total (Tanpa Efek Putih / Klik / Animasi) */
     .btn-add-year {
-        background-color: #3b82f6 !important;
+        background-color: #15803D !important;
         color: #ffffff !important;
         border: none !important;
         font-weight: 600;
@@ -34,10 +34,10 @@
     .btn-add-year:active, 
     .btn-add-year:focus, 
     .btn-add-year:focus-visible { 
-        background-color: #2563eb !important; 
+        background-color: #15803D !important; 
         color: #ffffff !important; 
         transform: none !important; 
-        box-shadow: 0 1px 2px rgba(59, 130, 246, 0.15) !important;
+        box-shadow: 0 1px 2px rgba(21, 128, 61, 0.15) !important;
         outline: none !important;
     }
 
@@ -110,12 +110,12 @@
         gap: 0.6rem;
         padding: 0.8rem 1rem;
         border-radius: 0.75rem;
-        background-color: #dbeafe;
+        background-color: #DCFCE7;
         color: #1e293b;
         font-size: 0.85rem;
         line-height: 1.5;
     }
-    .info-box i { color: #2563eb; font-size: 1.2rem; margin-top: 0.05rem; }
+    .info-box i { color: #15803D; font-size: 1.2rem; margin-top: 0.05rem; }
 
     .pagination-compact .pagination { margin-bottom: 0; font-size: 0.82rem; }
     .pagination-compact .page-link { padding: 0.25rem 0.6rem; }

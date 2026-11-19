@@ -21,9 +21,9 @@
 
     #btnSaveTeacher:disabled,
     #btnSaveTeacher[disabled] {
-        background-color: #2563eb !important;
+        background-color: #15803D !important;
         color: #ffffff !important;
-        border-color: #2563eb !important;
+        border-color: #15803D !important;
         cursor: not-allowed !important;
         opacity: 0.5 !important;
         box-shadow: none !important;
@@ -33,8 +33,8 @@
     #btnSaveTeacher.is-loading,
     #btnSaveTeacher[data-saving="1"] {
         opacity: 1 !important;
-        background-color: #2563eb !important;
-        border-color: #2563eb !important;
+        background-color: #15803D !important;
+        border-color: #15803D !important;
         color: #ffffff !important;
         cursor: default !important;
         pointer-events: none !important;
@@ -56,9 +56,9 @@
 
     #btnSaveTeacher.btn-progress:disabled:not(.is-running):not(.is-done):not(.is-loading):not([data-saving="1"]),
     #btnSaveTeacher.btn-progress[disabled]:not(.is-running):not(.is-done):not(.is-loading):not([data-saving="1"]) {
-        background-color: #2563eb !important;
+        background-color: #15803D !important;
         color: #ffffff !important;
-        border-color: #2563eb !important;
+        border-color: #15803D !important;
         opacity: 0.5 !important;
         cursor: not-allowed !important;
         pointer-events: none !important;
@@ -326,8 +326,8 @@
         justify-content: center !important;
         box-sizing: border-box !important;
         padding: 0 !important;
-        background: #64748b !important;
-        border: 1px solid #64748b !important;
+        background: var(--btn-reset) !important;
+        border: 1px solid var(--btn-reset) !important;
         border-radius: 6px !important;
         color: #ffffff !important;
         text-decoration: none !important;
@@ -345,8 +345,8 @@
 
     .search-and-reset-wrapper .btn-reset:hover,
     .search-and-reset-wrapper .btn-reset:focus-visible {
-        background: #475569 !important;
-        border-color: #475569 !important;
+        background: var(--btn-reset-hover) !important;
+        border-color: var(--btn-reset-hover) !important;
         color: #ffffff !important;
         text-decoration: none;
     }
@@ -397,9 +397,14 @@
         transform: scale(0.98);
     }
 
-    .btn-solid-green { background-color: #16a34a; }
-    .btn-solid-blue { background-color: #2563eb; }
-    .btn-solid-red { background-color: #dc2626; }
+    .btn-solid-green { background-color: var(--btn-import-excel); }
+    .btn-solid-blue { background-color: var(--btn-tambah); }
+    .btn-solid-red { background-color: var(--btn-hapus); }
+    .btn-cetak-kartu { background-color: var(--btn-cetak-kartu); color: #ffffff; }
+    .btn-solid-blue:hover { background-color: var(--btn-tambah-hover); }
+    .btn-solid-green:hover { background-color: var(--btn-import-excel-hover); }
+    .btn-solid-red:hover { background-color: var(--btn-hapus-hover); }
+    .btn-cetak-kartu:hover { background-color: var(--btn-cetak-kartu-hover); }
 
     .btn-row-action {
         display: inline-flex;
@@ -447,9 +452,9 @@
 
     /* Matikan Cetak Kartu saat data kosong */
     .btn-cetak-kartu.is-disabled {
-        background-color: #2563eb !important;
+        background-color: #15803D !important;
         color: #ffffff !important;
-        border-color: #2563eb !important;
+        border-color: #15803D !important;
         opacity: 0.5 !important;
         cursor: not-allowed !important;
         pointer-events: none;

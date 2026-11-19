@@ -26,7 +26,7 @@
         .school-title {
             font-size: 14pt;
             font-weight: bold;
-            color: #1d4ed8;
+            color: #166534;
             letter-spacing: 0.5px;
             margin: 0;
             text-transform: uppercase;
@@ -68,7 +68,7 @@
             text-align: center;
         }
         .data-table th {
-            background-color: #2563eb;
+            background-color: #15803D;
             color: #ffffff;
             font-weight: bold;
             text-transform: uppercase;
@@ -113,10 +113,10 @@
         .badge-i { color: #7e22ce !important; font-weight: bold !important; }
         .badge-a { color: #e11d48 !important; font-weight: bold !important; }
         .badge-l { color: #94a3b8 !important; font-weight: normal !important; }
-        .jk-l { color: #3B82F6 !important; font-weight: 500 !important; }
+        .jk-l { color: #15803D !important; font-weight: 500 !important; }
         .jk-p { color: #EF4444 !important; font-weight: 500 !important; }
-        /* Judul sekolah: tetap biru (seperti asal) + normal tebal */
-        .school-title { color: #1d4ed8 !important; font-weight: bold !important; }
+        /* Judul sekolah: tetap hijau (seperti asal) + normal tebal */
+        .school-title { color: #166534 !important; font-weight: bold !important; }
         /* Subjudul: hitam pekat, tebal normal */
         .school-subtitle, .report-subtitle { color: #000 !important; font-weight: 400 !important; }
         /* Waktu cetak: hitam pekat, normal */

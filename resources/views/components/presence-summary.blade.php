@@ -45,7 +45,7 @@
     }
     .presence-summary .sudah { color: #059669; }
     .presence-summary .belum { color: #dc2626; }
-    .presence-summary .total { color: #2563eb; }
+    .presence-summary .total { color: #15803D; }
 
     /* Responsif: di layar kecil bar tetap SATU baris (tidak wrap), item rata
        tengah terhadap layar dengan gap seragam ~12px, tidak mepet tepi layar.

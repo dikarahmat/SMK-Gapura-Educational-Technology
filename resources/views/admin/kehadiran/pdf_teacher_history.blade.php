@@ -62,7 +62,7 @@
             text-align: center;
         }
         .data-table th {
-            background-color: #2563eb;
+            background-color: #15803D;
             color: #ffffff;
             font-weight: bold;
             text-transform: uppercase;

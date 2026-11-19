@@ -300,21 +300,21 @@
     }
 
     .kehadiran-pagination-page.is-active {
-        color: #2563eb !important;
+        color: #15803D !important;
         font-weight: 700;
-        border-bottom: 2px solid #2563eb !important;
+        border-bottom: 2px solid #15803D !important;
         cursor: default;
     }
 
     .kehadiran-pagination-step:hover,
     .kehadiran-pagination-page:hover {
-        color: #2563eb !important;
+        color: #15803D !important;
         text-decoration: underline;
     }
 
     .kehadiran-pagination-step:focus-visible,
     .kehadiran-pagination-page:focus-visible {
-        outline: 2px solid #2563eb !important;
+        outline: 2px solid #15803D !important;
         outline-offset: 1px;
         border-radius: 0 !important;
     }

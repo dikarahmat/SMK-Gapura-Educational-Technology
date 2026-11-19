@@ -108,7 +108,7 @@
 <table class="presensi-card-table" style="width: 53.98mm; height: 85.6mm; border-collapse: collapse; table-layout: fixed; background-color: #ffffff; margin: 0 auto; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08); border-radius: 3.18mm; overflow: hidden;">
     <!-- 1. HEADER (11,2 mm navy) -->
     <tr>
-        <td style="height: 11.2mm; padding: 0; vertical-align: middle; background-color: #1e3a8a; border-top-left-radius: 3.18mm; border-top-right-radius: 3.18mm;">
+        <td style="height: 11.2mm; padding: 0; vertical-align: middle; background-color: #14532D; border-top-left-radius: 3.18mm; border-top-right-radius: 3.18mm;">
             <table style="width: 100%; border-collapse: collapse; table-layout: fixed;">
                 <tr>
                     <td style="width: 23%; padding: 1.5mm 0 1.5mm 4.5mm; vertical-align: middle; text-align: left;">

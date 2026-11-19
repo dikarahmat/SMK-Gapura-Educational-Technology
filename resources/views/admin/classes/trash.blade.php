@@ -105,8 +105,8 @@
 
     .trash-tab-active,
     .trash-tab-active:hover {
-        background-color: #2563eb;
-        border-color: #2563eb;
+        background-color: #15803D;
+        border-color: #15803D;
         color: #ffffff;
         cursor: default;
     }
@@ -217,7 +217,7 @@
         width: 44px;
         height: 44px;
         border-radius: 50%;
-        background-color: #2563eb;
+        background-color: #15803D;
         color: #ffffff !important;
         border: none;
         outline: none;
@@ -242,7 +242,7 @@
     }
 
     .btn-floating-scroll-down:hover {
-        background-color: #1d4ed8;
+        background-color: #166534;
         color: #ffffff !important;
         box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
     }
@@ -688,7 +688,7 @@
      * - Belum sampai bawah: ikon panah bawah, title/aria "Ke bawah".
      *   Klik = smooth scroll ke paling bawah (Zona Berbahaya).
      * - Sudah sampai bawah (jarak ke dasar container < 40px):
-     *   Ikon berputar 180¡Æ jadi panah atas (animasi 200ms), title/aria "Ke atas".
+     *   Ikon berputar 180ï¿½ï¿½ jadi panah atas (animasi 200ms), title/aria "Ke atas".
      *   Klik = smooth scroll kembali ke paling atas.
      * - Deteksi scroll menggunakan listener pada container scrollbar (.flex-1)
      *   dengan passive: true dan window.requestAnimationFrame.

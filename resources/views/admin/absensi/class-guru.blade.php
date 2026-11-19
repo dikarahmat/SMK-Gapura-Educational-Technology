@@ -40,12 +40,12 @@
     .table-responsive { -webkit-overflow-scrolling: touch; overflow-x: auto; }
     .table-guru { min-width: 720px; }
     .table-guru thead tr > th {
-        background-color: #2563eb !important;
+        background-color: #15803D !important;
         color: #ffffff !important;
         font-weight: 700 !important;
         font-size: 0.8rem !important;
         padding: 0.8rem 1rem;
-        border-bottom: 1.5px solid #1d4ed8;
+        border-bottom: 1.5px solid #166534;
         text-transform: uppercase;
         letter-spacing: 0.03em;
         white-space: nowrap !important;
@@ -54,9 +54,9 @@
     }
     .table-guru thead tr > th:first-child {
         border-top-left-radius: 0 !important;
-        background-color: #2563eb !important;
+        background-color: #15803D !important;
     }
-    .table-guru thead tr > th:last-child  { border-top-right-radius: 8px !important; background-color: #2563eb !important; }
+    .table-guru thead tr > th:last-child  { border-top-right-radius: 8px !important; background-color: #15803D !important; }
     .table-guru thead tr > th.th-nama { text-align: left !important; padding-left: 0.75rem; }
 
     .table-guru tbody td {
@@ -112,7 +112,7 @@
     .aksi-form select.select-quick-status option { font-size: 11px; text-transform: uppercase; }
 
     .btn-save-quick {
-        background: #2563eb;
+        background: #15803D;
         color: #ffffff;
         border: none;
         border-radius: 6px;
@@ -126,14 +126,14 @@
         cursor: pointer;
         transition: background-color 0.12s ease;
     }
-    .btn-save-quick:not(:disabled):hover { background: #1d4ed8; }
+    .btn-save-quick:not(:disabled):hover { background: #166534; }
     .btn-save-quick:disabled {
-        background: #2563eb !important;
+        background: #15803D !important;
         opacity: 0.45 !important;
         cursor: not-allowed !important;
     }
     .btn-save-quick i { font-size: 13px !important; color: #ffffff !important; }
-    .btn-save-quick:focus-visible { outline: 2px solid #2563eb; outline-offset: 2px; }
+    .btn-save-quick:focus-visible { outline: 2px solid #15803D; outline-offset: 2px; }
 
     /* ===== MOBILE: tabel tidak tertumpuk, digeser horizontal ===== */
     @media (max-width: 767.98px) {

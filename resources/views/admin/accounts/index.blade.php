@@ -75,8 +75,8 @@
 
     /* ===== Tombol Tambah ===== */
     .akun-btn-tambah {
-        background-color: var(--primary-blue, #3b62f6);
-        border: 1px solid var(--primary-blue, #3b62f6);
+        background-color: var(--primary-blue, #15803D);
+        border: 1px solid var(--primary-blue, #15803D);
         color: #ffffff; font-weight: 600; font-size: .85rem;
         letter-spacing: .03em; text-transform: uppercase;
         border-radius: var(--clean-radius, 6px);
@@ -84,8 +84,8 @@
         display: inline-flex; align-items: center; justify-content: center;
     }
     .akun-btn-tambah:hover, .akun-btn-tambah:focus-visible {
-        background-color: var(--primary-blue-hover, #2563eb);
-        border-color: var(--primary-blue-hover, #2563eb); color: #ffffff;
+        background-color: var(--primary-blue-hover, #166534);
+        border-color: var(--primary-blue-hover, #166534); color: #ffffff;
     }
     @media (max-width: 767.98px) {
         .app-header-right { width: 100%; }
@@ -98,7 +98,7 @@
        Label role tetap uppercase (bawaan layout). */
     .akun-name { font-weight: 400; color: #0f172a; text-transform: none !important; }
     .akun-role { font-size: .85rem; font-weight: 400; }
-    .akun-role.is-admin, .akun-role-static-value.is-admin { color: #1d4ed8; }
+    .akun-role.is-admin, .akun-role-static-value.is-admin { color: #166534; }
     .akun-role.is-guru, .akun-role-static-value.is-guru { color: #15803d; }
     .akun-role.is-piket, .akun-role-static-value.is-piket { color: #b45309; }
     .akun-status { display: inline-flex; align-items: center; gap: .4rem; font-size: .85rem; font-weight: 400; color: #0f172a; }
@@ -165,8 +165,8 @@
         border: 0; background: transparent; color: #64748b; cursor: pointer;
         transition: background-color .15s ease, color .15s ease;
     }
-    .akun-password-toggle:hover, .akun-password-toggle:focus-visible { background-color: rgba(59,98,246,.12); color: #3b62f6; }
-    .akun-password-toggle:focus-visible { outline: 2px solid #3b62f6; outline-offset: 2px; }
+    .akun-password-toggle:hover, .akun-password-toggle:focus-visible { background-color: rgba(21,128,61,.12); color: #15803D; }
+    .akun-password-toggle:focus-visible { outline: 2px solid #15803D; outline-offset: 2px; }
 
     /* ===== Hapus: checkbox + tombol ===== */
     .hapus-check { display: flex; gap: .5rem; align-items: flex-start; margin-bottom: .35rem; font-size: .8rem; }

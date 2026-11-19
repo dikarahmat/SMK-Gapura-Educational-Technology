@@ -8,12 +8,12 @@
 
 :root {
     /* Brand Colors (Nilai awal asli) */
-    --presensi-primary: #1e3a8a;       /* Navy asli - Header Kartu, Sidebar */
-    --presensi-primary-hover: #172554;
-    --presensi-primary-light: #eff6ff;
-    --primary-blue: #3b62f6;           /* Biru utama tombol & aksen */
-    --primary-blue-hover: #2563eb;
-    --bg-canvas: #3b62f6;              /* Latar kanvas aplikasi */
+    --presensi-primary: #14532D;       /* Hijau tua - Header Kartu, Sidebar */
+    --presensi-primary-hover: #166534;
+    --presensi-primary-light: #F0FDF4;
+    --primary-blue: #15803D;           /* Hijau utama tombol & aksen */
+    --primary-blue-hover: #166534;
+    --bg-canvas: #14532D;              /* Latar kanvas aplikasi */
     --presensi-accent: #f59e0b;        /* Orange - Garis Aksen Header Tetap */
     --presensi-accent-hover: #d97706;  /* Amber Dark */
     --presensi-accent-light: #fffbeb;  /* Warm Light */
@@ -96,7 +96,7 @@
     background-color: var(--presensi-primary-hover) !important;
     border-color: var(--presensi-primary-hover) !important;
     color: #ffffff !important;
-    box-shadow: 0 4px 12px rgba(30, 58, 138, 0.25);
+    box-shadow: 0 4px 12px rgba(20, 83, 45, 0.25);
 }
 
 /* ==========================================================================
@@ -276,7 +276,7 @@
     transition: background-color 0.2s ease, opacity 0.2s ease !important;
 }
 .btn-download-blue:hover {
-    background-color: #2563eb !important;
+    background-color: #15803D !important;
     color: #ffffff !important;
     border: none !important;
     outline: none !important;
@@ -403,10 +403,10 @@
 }
 
 .pagination-arrow-btn:hover:not(.is-disabled) {
-    background-color: #2563eb !important;
+    background-color: #15803D !important;
     color: #ffffff !important;
-    border-color: #2563eb !important;
-    box-shadow: 0 3px 8px rgba(37, 99, 235, 0.28) !important;
+    border-color: #15803D !important;
+    box-shadow: 0 3px 8px rgba(21, 128, 61, 0.28) !important;
     transform: translateY(-1px) !important;
 }
 
@@ -1301,9 +1301,9 @@
     /* Catatan: :hover segmented ada di blok @media (hover: hover) and
        (pointer: fine) pada bagian (k) di bawah, agar tidak menempel di HP. */
     body .dash-seg .dash-seg__btn.is-active,
-    body .dash-seg .dash-seg__btn--solid { background-color: #2563eb; color: #ffffff; }
+    body .dash-seg .dash-seg__btn--solid { background-color: #15803D; color: #ffffff; }
     body .dash-seg .dash-seg__btn.is-active:hover,
-    body .dash-seg .dash-seg__btn--solid:hover { background-color: #1d4ed8; color: #ffffff; }
+    body .dash-seg .dash-seg__btn--solid:hover { background-color: #166534; color: #ffffff; }
     /* Tanggal periode: TEKS BIAS, tanpa kontainer (badge/bg-light/rounded-pill/
        px-2/py-1 Bootstrap dibatalkan), rata kanan, sejajar dengan segmented. */
     body .dashboard-box .chart-header-actions .dash-period,

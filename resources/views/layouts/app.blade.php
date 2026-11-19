@@ -155,9 +155,9 @@
             left: 0;
             width: 36px;
             height: 3px;
-            background: #2563eb;
+            background: #15803D;
             border-radius: 1.5px;
-            box-shadow: 0 0 8px rgba(37, 99, 235, .6);
+            box-shadow: 0 0 8px rgba(21, 128, 61, .6);
             pointer-events: none;
             z-index: 3;
             opacity: 0;
@@ -172,7 +172,7 @@
             width: 64px;
             height: 52px;
             margin-left: -32px;
-            background: linear-gradient(to bottom, rgba(37, 99, 235, .22), transparent);
+            background: linear-gradient(to bottom, rgba(21, 128, 61, .22), transparent);
             clip-path: polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%);
             filter: blur(2px);
         }
@@ -195,13 +195,13 @@
                di rentang 72-80px yang diminta: cukup untuk ikon + highlight. */
             --sidebar-width-collapsed: 76px;
             --sidebar-gap: 10px;
-            --primary-blue: #3b62f6;
-            --primary-blue-hover: #2563eb;
+            --primary-blue: #15803D;
+            --primary-blue-hover: #166534;
             /* Alias untuk kompatibilitas halaman admin yang memakai var(--blue) */
-            --blue: #3b62f6;
-            --blue-hover: #2563eb;
+            --blue: #15803D;
+            --blue-hover: #166534;
             --text-dark: #1e293b;
-            --bg-canvas: #3b62f6;
+            --bg-canvas: #14532D;
             --bottom-nav-height: 56px;
             --bottom-nav-h: 56px; /* Alias untuk konsistensi naming */
 
@@ -226,14 +226,14 @@
             padding: 0 !important;
             height: 100%;
             min-height: 100vh;
-            /* WARNA SAMA PERSIS dengan sidebar (#3b62f6). Sebelumnya warna
-               kanvas memakai utility arbitrary-value Tailwind (hex 044ABA)
+/* WARNA SAMA PERSIS dengan sidebar (#14532D). Sebelumnya warna
+           kanvas memakai utility arbitrary-value Tailwind (hex 044ABA)
                yang HANYA aktif bila utility-nya ter-generate oleh build Vite.
                Build lokal tidak menghasilkannya (no-op), tapi build
                production menghasilkannya -> muncul garis/belah biru yang
                lebih gelap di tepi sidebar. Sekarang warna kanvas di-hardcode
                di sini supaya identik di semua environment. */
-            background-color: #3b62f6 !important;
+            background-color: #14532D !important;
             color: var(--text-dark);
             overflow: hidden !important;
             overflow-x: hidden !important;
@@ -247,7 +247,7 @@
            supaya tidak menimpa <body class="app-canvas"> dan media query mobile
            html,body{background:white!important} bisa menang. */
         body > .app-canvas {
-            background-color: #3b62f6 !important;
+            background-color: #14532D !important;
         }
 
         /* ==========================================================================
@@ -629,10 +629,10 @@
         }
 
         .pagination-arrow-btn:hover:not(.is-disabled) {
-            background-color: #2563eb !important;
+            background-color: #15803D !important;
             color: #ffffff !important;
-            border-color: #2563eb !important;
-            box-shadow: 0 3px 8px rgba(37, 99, 235, 0.28) !important;
+            border-color: #15803D !important;
+            box-shadow: 0 3px 8px rgba(21, 128, 61, 0.28) !important;
             transform: translateY(-1px) !important;
         }
 
@@ -748,7 +748,7 @@
             border-radius: 0 !important;
             border: none !important;
             box-sizing: border-box !important;
-            background-color: #3b62f6 !important;
+            background-color: #14532D !important;
             overflow: hidden;
         }
 
@@ -934,25 +934,25 @@ min-height: 0 !important; /* batalkan min-height: 100vh dari aturan dasar */
 
         @media (hover: hover) {
             .mobile-nav-item:not(.active):hover {
-                color: #2563eb !important;
+                color: #15803D !important;
             }
             .mobile-nav-item:not(.active):hover .mobile-nav-icon {
                 transform: translateY(-1px);
-                color: #2563eb !important;
+                color: #15803D !important;
             }
         }
 
         .mobile-nav-item.active {
-            color: #2563eb !important;
+            color: #15803D !important;
         }
 
         .mobile-nav-item.active .mobile-nav-icon {
-            color: #2563eb !important;
+            color: #15803D !important;
         }
 
         .mobile-nav-item.active .mobile-nav-label {
             font-weight: 700 !important;
-            color: #2563eb !important;
+            color: #15803D !important;
         }
 
         /* Efek lampu menyorot ke bawah pada item aktif (dua lapis) */
@@ -964,9 +964,9 @@ min-height: 0 !important; /* batalkan min-height: 100vh dari aturan dasar */
             transform: translateX(-50%) !important;
             width: 36px !important;
             height: 3px !important;
-            background: #2563eb !important;
+            background: #15803D !important;
             border-radius: 1.5px !important;
-            box-shadow: 0 0 8px rgba(37, 99, 235, 0.6) !important;
+            box-shadow: 0 0 8px rgba(21, 128, 61, 0.6) !important;
             pointer-events: none !important;
             z-index: 3 !important;
             opacity: 1 !important;
@@ -980,7 +980,7 @@ min-height: 0 !important; /* batalkan min-height: 100vh dari aturan dasar */
             transform: translateX(-50%) !important;
             width: 64px !important;
             height: 52px !important;
-            background: linear-gradient(to bottom, rgba(37, 99, 235, 0.22), transparent) !important;
+            background: linear-gradient(to bottom, rgba(21, 128, 61, 0.22), transparent) !important;
             clip-path: polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%) !important;
             filter: blur(2px) !important;
             pointer-events: none !important;
@@ -1023,13 +1023,13 @@ min-height: 0 !important; /* batalkan min-height: 100vh dari aturan dasar */
             height: 66px !important;
             min-width: 66px !important;
             min-height: 66px !important;
-            background-color: #2563eb !important;
+            background-color: #15803D !important;
             border-radius: 50% !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
             text-decoration: none !important;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35) !important;
+            box-shadow: 0 4px 12px rgba(21, 128, 61, 0.35) !important;
             z-index: 10 !important;
             transition: transform 0.15s ease !important;
         }
@@ -1039,7 +1039,7 @@ min-height: 0 !important; /* batalkan min-height: 100vh dari aturan dasar */
         }
 
         .mobile-nav-fab.active {
-            background-color: #1d4ed8 !important;
+            background-color: #166534 !important;
         }
 
         .mobile-nav-fab-icon {
@@ -1348,7 +1348,7 @@ min-height: 0 !important; /* batalkan min-height: 100vh dari aturan dasar */
         @media (min-width: 768px) {
             .content-scroll-wrapper {
                 padding: var(--sidebar-gap, 10px) !important;
-                background-color: #3b62f6 !important;
+                background-color: #14532D !important;
             }
 
             main,
@@ -1528,13 +1528,13 @@ min-height: 0 !important; /* batalkan min-height: 100vh dari aturan dasar */
             }
 
             .mobile-top-hamburger:hover {
-                color: #2563eb !important;
+                color: #15803D !important;
                 background: transparent !important;
             }
 
             .mobile-top-hamburger:active {
                 transform: scale(0.92) !important;
-                color: #1d4ed8 !important;
+                color: #166534 !important;
                 background: transparent !important;
             }
 
@@ -1595,13 +1595,13 @@ min-height: 0 !important; /* batalkan min-height: 100vh dari aturan dasar */
 
             /* Hover hanya mengubah warna ikon - tidak ada background/border. */
             .mobile-top-hamburger:hover {
-                color: #2563eb !important;
+                color: #15803D !important;
                 background: transparent !important;
             }
 
             .mobile-top-hamburger:active {
                 transform: scale(0.92) !important;
-                color: #1d4ed8 !important;
+                color: #166534 !important;
             }
 
             /* Ukuran ikon identik dengan versi mobile. */
@@ -1625,7 +1625,7 @@ min-height: 0 !important; /* batalkan min-height: 100vh dari aturan dasar */
             }
 
             .mobile-top-hamburger:focus-visible i {
-                outline: 2px solid #2563eb !important;
+                outline: 2px solid #15803D !important;
                 outline-offset: 2px !important;
                 border-radius: 3px !important;
             }
@@ -1811,11 +1811,11 @@ min-height: 0 !important; /* batalkan min-height: 100vh dari aturan dasar */
            fokus input login (rgba(59,98,246,.12)). */
         .search-box-wrap:focus-within {
             border-radius: var(--clean-radius) !important;
-            box-shadow: 0 0 0 3px rgba(59, 98, 246, 0.12) !important;
+            box-shadow: 0 0 0 3px rgba(21, 128, 61, 0.12) !important;
         }
 
         .search-box-wrap > .form-control:focus {
-            border-color: #2563eb !important;
+            border-color: #15803D !important;
             box-shadow: none !important;
         }
 
@@ -1858,7 +1858,7 @@ min-height: 0 !important; /* batalkan min-height: 100vh dari aturan dasar */
         .search-box-wrap > .btn:focus-visible,
         .search-box-wrap > .btn:active {
             background: transparent !important;
-            color: #2563eb !important;
+            color: #15803D !important;
             box-shadow: none !important;
             opacity: 1 !important;
             visibility: visible !important;
@@ -1930,14 +1930,14 @@ min-height: 0 !important; /* batalkan min-height: 100vh dari aturan dasar */
 
         .nav-link.active {
             background-color: #ffffff !important;
-            color: #3b62f6 !important;
+            color: #15803D !important;
             font-weight: 700 !important;
             border-radius: 12px !important;
             box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08) !important;
         }
 
         .nav-link.active i {
-            color: #3b62f6 !important;
+            color: #15803D !important;
             font-weight: 700;
         }
 
@@ -1981,7 +1981,7 @@ min-height: 0 !important; /* batalkan min-height: 100vh dari aturan dasar */
         -------------------------------------------------------------------------- */
         @media (hover: hover) {
             .app-sidebar-drawer .nav-link:not(.active):hover {
-                background-color: rgba(255, 255, 255, 0.16) !important;
+                background-color: rgba(255, 255, 255, 0.10) !important;
                 color: #ffffff !important;
                 box-shadow: none !important;
             }
@@ -1994,7 +1994,7 @@ min-height: 0 !important; /* batalkan min-height: 100vh dari aturan dasar */
         /* Fokus keyboard mendapat perlakuan yang sama dengan hover, tapi tetap
            memerlukan indikator fokus yang jelas (outline putih). */
         .app-sidebar-drawer .nav-link:not(.active):focus-visible {
-            background-color: rgba(255, 255, 255, 0.16) !important;
+            background-color: rgba(255, 255, 255, 0.10) !important;
             color: #ffffff !important;
             outline: 2px solid #ffffff !important;
             outline-offset: -2px !important;
@@ -2008,12 +2008,12 @@ min-height: 0 !important; /* batalkan min-height: 100vh dari aturan dasar */
 
         /* Menu AKTIF tidak boleh berubah karena hover/fokus - dikunci ulang.
            Warna teks & ikon memakai BIRU TEMA yang sudah ada
-           (--primary-blue = #3b62f6, sama dengan latar sidebar), bukan biru
-           default Bootstrap, supaya menu aktif unmistakably milik tema ini.
-           Rasio kontras #3b62f6 di atas putih = 4.9:1 (melewati ambang 4.5:1). */
+(--primary-blue = #15803D, sama dengan latar sidebar), bukan biru
+            default Bootstrap, supaya menu aktif unmistakably milik tema ini.
+            Rasio kontras #15803D di atas putih = 4.9:1 (melewati ambang 4.5:1). */
         .app-sidebar-drawer .nav-link.active,
         .app-sidebar-drawer .nav-link.active i {
-            color: var(--primary-blue, #3b62f6) !important;
+            color: var(--primary-blue, #15803D) !important;
         }
 
         .app-sidebar-drawer .nav-link.active {
@@ -2023,11 +2023,11 @@ min-height: 0 !important; /* batalkan min-height: 100vh dari aturan dasar */
         @media (hover: hover) {
             .app-sidebar-drawer .nav-link.active:hover {
                 background-color: #ffffff !important;
-                color: var(--primary-blue, #3b62f6) !important;
+                color: var(--primary-blue, #15803D) !important;
                 box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.15) !important;
             }
             .app-sidebar-drawer .nav-link.active:hover i {
-                color: var(--primary-blue, #3b62f6) !important;
+                color: var(--primary-blue, #15803D) !important;
             }
         }
 
@@ -2211,7 +2211,7 @@ min-height: 0 !important; /* batalkan min-height: 100vh dari aturan dasar */
             height: 34px;
             min-width: 34px;
             border-radius: 50%;
-            background-color: #0033cc;
+            background-color: #14532D;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -2322,7 +2322,7 @@ min-height: 0 !important; /* batalkan min-height: 100vh dari aturan dasar */
 
         .app-sidebar-drawer .sidebar-account-item:focus-visible {
             background-color: #f1f5f9;
-            outline: 2px solid #3b62f6;
+            outline: 2px solid #15803D;
             outline-offset: -2px;
         }
 
@@ -2397,7 +2397,7 @@ min-height: 0 !important; /* batalkan min-height: 100vh dari aturan dasar */
         }
 
         .app-sidebar-drawer .sidebar-locale-btn.is-active {
-            background-color: #3b62f6;
+            background-color: #15803D;
             color: #ffffff;
         }
 
@@ -2704,11 +2704,10 @@ min-height: 0 !important; /* batalkan min-height: 100vh dari aturan dasar */
             height: 100% !important;
             max-height: 100% !important;
             min-height: 0 !important;
-            background-color: #3b62f6 !important;
+background-color: #14532D !important;
         }
 
         @media (max-width: 1023.98px) {
-            /* Ramping sedikit di layar kecil agar konten tetap punya ruang napas */
             .sidebar-brand {
                 padding: 1rem 1rem 0.75rem 1rem !important;
             }
@@ -3425,23 +3424,23 @@ min-height: 0 !important; /* batalkan min-height: 100vh dari aturan dasar */
 
         /* Halaman aktif: biru tema, tebal, garis bawah tipis. */
         .kehadiran-pagination-page.is-active {
-            color: #2563eb !important;
+            color: #15803D !important;
             font-weight: 700;
-            border-bottom: 2px solid #2563eb !important;
+            border-bottom: 2px solid #15803D !important;
             cursor: default;
         }
 
         /* Hover: hanya warna teks, tanpa bentuk muncul. */
         .kehadiran-pagination-step:hover,
         .kehadiran-pagination-page:hover {
-            color: #2563eb !important;
+            color: #15803D !important;
             text-decoration: underline;
         }
 
         /* Fokus keyboard: outline tipis pada TEKS saja. */
         .kehadiran-pagination-step:focus-visible,
         .kehadiran-pagination-page:focus-visible {
-            outline: 2px solid #2563eb !important;
+            outline: 2px solid #15803D !important;
             outline-offset: 1px;
             border-radius: 0 !important;
         }
@@ -3740,9 +3739,9 @@ min-height: 0 !important; /* batalkan min-height: 100vh dari aturan dasar */
             /* Aksen biru untuk dialog NON-hapus (mis. "Aktifkan Tahun Ajaran?").
                Nilainya persis sama dengan palet biru yang sudah dipakai aplikasi
                (tombol btn-primary / kartu dashboard), jadi tidak ada warna baru. */
-            --app-dialog-blue: #2563eb;
-            --app-dialog-blue-dark: #1d4ed8;
-            --app-dialog-blue-soft: #dbeafe;
+            --app-dialog-blue: #15803D;
+            --app-dialog-blue-dark: #166534;
+            --app-dialog-blue-soft: #DCFCE7;
             --app-dialog-gray-bg: #f8fafc;
             --app-dialog-gray-border: #e2e8f0;
             --app-dialog-gray-text: #64748b;
@@ -5591,17 +5590,17 @@ min-height: 0 !important; /* batalkan min-height: 100vh dari aturan dasar */
         }
         .period-link:active { background-color: #cbd5e1; }
         .period-link.active {
-            background-color: #2563eb !important; color: #ffffff !important; font-weight: 600;
-            box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+            background-color: #15803D !important; color: #ffffff !important; font-weight: 600;
+            box-shadow: 0 2px 6px rgba(21, 128, 61, 0.25);
         }
         .period-link.active:hover,
         .period-link.active:active,
         .period-link.active:focus,
         .period-link.active:focus-visible {
-            background-color: #2563eb !important; color: #ffffff !important;
+            background-color: #15803D !important; color: #ffffff !important;
         }
         .period-link:focus-visible {
-            outline: 2px solid #2563eb; outline-offset: 2px;
+            outline: 2px solid #15803D; outline-offset: 2px;
         }
         .rekap-filter-submit:hover {
             background: var(--clean-hover) !important;
@@ -5724,13 +5723,144 @@ min-height: 0 !important; /* batalkan min-height: 100vh dari aturan dasar */
             box-shadow: none !important;
             padding: 0 !important;
         }
+
+        /* ==========================================================================
+           OVERRIDE BOOTSTRAP PRIMER → HIJAU (dimuat setelah Bootstrap)
+           Semua elemen yang memakai btn-primary, text-primary, bg-primary,
+           border-primary, .page-link aktif, .nav-pills .active, focus ring,
+           dll. di seluruh aplikasi diubah ke hijau tema.
+           ========================================================================== */
+        :root {
+            --bs-primary: #15803D !important;
+            --bs-primary-rgb: 21, 128, 61 !important;
+            --bs-primary-bg-subtle: #F0FDF4 !important;
+            --bs-primary-border-subtle: #DCFCE7 !important;
+            --bs-link-color: #15803D !important;
+        }
+
+        /* ==========================================================================
+           TOKEN WARNA TOMBOL AKSI PER FUNGSI (satu sumber kebenaran)
+           Digunakan oleh semua halaman: Presensi Siswa, Presensi Guru,
+           Data Siswa, Data Guru, Data Kelas, Hari Libur, dan lain-lain.
+           ========================================================================== */
+        :root {
+            --btn-tambah: #15803D;
+            --btn-tambah-hover: #166534;
+            --btn-cetak-kartu: #0F766E;
+            --btn-cetak-kartu-hover: #115E59;
+            --btn-import-excel: #65A30D;
+            --btn-import-excel-hover: #4D7C0F;
+            --btn-hapus: #DC2626;
+            --btn-hapus-hover: #B91C1C;
+            --btn-reset: #0284C7;
+            --btn-reset-hover: #0369A1;
+            --btn-mode-gerbang: #15803D;
+            --btn-mode-gerbang-hover: #166534;
+            --btn-buka-scanner: #0F766E;
+            --btn-buka-scanner-hover: #115E59;
+        }
+
+        .btn-primary {
+            background-color: #15803D !important;
+            border-color: #15803D !important;
+            color: #ffffff !important;
+        }
+        .btn-primary:hover,
+        .btn-primary:focus,
+        .btn-primary:active,
+        .btn-primary.active,
+        .btn-primary.show {
+            background-color: #166534 !important;
+            border-color: #166534 !important;
+            color: #ffffff !important;
+        }
+        .btn-primary:focus-visible {
+            box-shadow: 0 0 0 0.2rem rgba(21, 128, 61, 0.25) !important;
+        }
+        .btn-outline-primary {
+            color: #15803D !important;
+            border-color: #15803D !important;
+        }
+        .btn-outline-primary:hover,
+        .btn-outline-primary:active,
+        .btn-outline-primary.active {
+            background-color: #15803D !important;
+            color: #ffffff !important;
+            border-color: #15803D !important;
+        }
+        .bg-primary {
+            background-color: #15803D !important;
+        }
+        .text-primary {
+            color: #15803D !important;
+        }
+        .border-primary {
+            border-color: #15803D !important;
+        }
+        .badge.bg-primary {
+            background-color: #15803D !important;
+            color: #ffffff !important;
+        }
+        .page-link {
+            color: #15803D !important;
+        }
+        .page-link:hover {
+            color: #166534 !important;
+            background-color: #F0FDF4 !important;
+        }
+        .page-item.active .page-link {
+            background-color: #15803D !important;
+            border-color: #15803D !important;
+            color: #ffffff !important;
+        }
+        .nav-pills .nav-link.active,
+        .nav-pills .show > .nav-link {
+            background-color: #15803D !important;
+            color: #ffffff !important;
+        }
+        .dropdown-item.active,
+        .dropdown-item:active {
+            background-color: #15803D !important;
+            color: #ffffff !important;
+        }
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #15803D !important;
+            box-shadow: 0 0 0 0.2rem rgba(21, 128, 61, 0.25) !important;
+        }
+        .form-check-input:checked {
+            background-color: #15803D !important;
+            border-color: #15803D !important;
+        }
+        .form-switch .form-check-input:checked {
+            background-color: #15803D !important;
+        }
+        .progress-bar {
+            background-color: #15803D !important;
+        }
+        .alert-primary {
+            background-color: #F0FDF4 !important;
+            border-color: #DCFCE7 !important;
+            color: #14532D !important;
+        }
+        a {
+            color: #15803D !important;
+        }
+        a:hover {
+            color: #166534 !important;
+        }
+        .text-info,
+        .bg-info,
+        .alert-info {
+            /* Info disamakan dengan primer hijau agar konsisten */
+        }
     </style>
 </head>
 <!-- Catatan: utility arbitrary-value Tailwind untuk warna kanvas (hex 044ABA)
      SENGAJA DIHAPUS dari class body & wrapper. Utility seperti ini hanya aktif
      bila ter-generate build Vite, dan hasilnya berbeda antara build lokal vs
      production (Railway) sehingga memunculkan garis/belah biru gelap di tepi
-     sidebar. Warna kanvas kini di-hardcode #3b62f6 (sama persis dengan
+     sidebar. Warna kanvas kini di-hardcode #14532D (sama persis dengan
      sidebar) lewat CSS di dalam <head>, jadi identik di semua environment. -->
 <body class="app-canvas m-0 p-0" x-data="{ sidebarOpen: false }">
 
@@ -6717,8 +6847,8 @@ window.__i18n = Object.assign(window.__i18n || {}, {!! json_encode([
         width: 22px;
         height: 22px;
         box-sizing: border-box;
-        border: 3px solid rgba(37, 99, 235, .2);
-        border-top-color: #2563eb;
+        border: 3px solid rgba(21, 128, 61, .2);
+        border-top-color: #15803D;
         border-radius: 50%;
         transform: rotate(var(--ptr-rot, 0deg));
     }

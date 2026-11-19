@@ -28,7 +28,7 @@
             padding: 7px 14px;
             border: 0;
             border-radius: 6px;
-            background: #1f8a70;
+            background: var(--btn-cetak-kartu);
             color: #fff;
             font: inherit;
             cursor: pointer;
