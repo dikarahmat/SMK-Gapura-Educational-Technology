@@ -535,9 +535,17 @@
         font-size: 0.875rem;
         color: #0f172a;
     }
+    /* Pesan salah urutan: tepat di bawah kolom yang salah (di dalam .schedule-cell) */
     .schedule-error {
-        grid-column: 1 / -1;
+        color: #dc2626 !important;
+        font-weight: 600;
+        font-size: 0.78rem;
+        line-height: 1.3;
+        margin-top: 4px;
     }
+    /* Baris yang punya pesan: sejajar atas supaya nama hari tetap sejajar dengan kolomnya */
+    .schedule-row:has(.time-client-error) { align-items: start; }
+    .schedule-row:has(.time-client-error) .schedule-day { padding-top: 8px; }
 
     /* HP dan tablet kecil: tiap hari jadi satu blok 2 kolom, label muncul di atas input */
     @media (max-width: 767.98px) {
@@ -746,11 +754,11 @@
                             <!-- 6. NIP Kepala Sekolah -->
                             <div class="identitas-field">
                                 <label class="form-label small fw-semibold" for="headmaster_nip">{{ __('NIP Kepala Sekolah') }}</label>
-                                <input type="text" name="headmaster_nip" id="headmaster_nip" inputmode="numeric" pattern="[0-9]*" maxlength="18" class="form-control rounded-3 @error('headmaster_nip') is-invalid @enderror" value="{{ old('headmaster_nip', $settings['headmaster_nip'] ?? '') }}" placeholder="{{ __('18 digit angka tanpa spasi') }}">
+                                <input type="text" name="headmaster_nip" id="headmaster_nip" inputmode="numeric" pattern="[0-9]*" maxlength="18" class="form-control rounded-3 @error('headmaster_nip') is-invalid @enderror" value="{{ old('headmaster_nip', $settings['headmaster_nip'] ?? '') }}" placeholder="{{ __('16 atau 18 digit angka tanpa spasi') }}">
                                 @error('headmaster_nip')
                                 <div class="text-danger small mt-1">{{ $message }}</div>
                                 @enderror
-                                <div id="nipClientError" class="text-danger small mt-1" style="display:none;">{{ __('NIP harus 18 digit angka.') }}</div>
+                                <div id="nipClientError" class="text-danger small mt-1" style="display:none;">{{ __('NIP harus 16 atau 18 digit angka.') }}</div>
                             </div>
                         </div>
                     </div>
@@ -940,6 +948,19 @@
             return parts.length === 2 ? (parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10)) : NaN;
         }
 
+        // Pesan salah urutan hilang begitu jam di baris itu diganti.
+        scheduleRows.forEach(function (row) {
+            row.querySelectorAll('input[data-clock]').forEach(function (input) {
+                input.addEventListener('change', function () {
+                    row.querySelectorAll('.time-client-error').forEach(function (el) { el.remove(); });
+                    scheduleFields.forEach(function (field) {
+                        var el = row.querySelector('input[name$="[' + field + ']"]');
+                        if (el) el.classList.remove('is-invalid');
+                    });
+                });
+            });
+        });
+
         // 4. Validasi klien sebelum submit. Server tetap memvalidasi ulang;
         //    ini hanya agar pesan muncul tepat di bawah baris hari yang salah.
         var form = document.querySelector('.settings-mobile-form');
@@ -975,7 +996,7 @@
                     ok = false;
                 }
 
-                if (nip && nip.value !== '' && !/^[0-9]{18}$/.test(nip.value)) {
+                if (nip && nip.value !== '' && !/^([0-9]{16}|[0-9]{18})$/.test(nip.value)) {
                     tandai(nip);
                     if (nipErr) nipErr.style.display = '';
                 }
@@ -1000,23 +1021,44 @@
                     var checkOut = scheduleToMinutes(values.check_out_time);
                     var checkOutLimit = scheduleToMinutes(values.check_out_limit_time);
 
-                    if (!(checkIn < lateLimit && lateLimit < checkOut && checkOut <= checkOutLimit)) {
-                        var target = row.querySelector('input[name$="[check_out_time]"]');
+                    // Tandai HANYA kolom yang salah (pasangan pertama yang tidak urut).
+                    var salahField = null, salahPesan = '';
+                    if (!(checkIn < lateLimit)) {
+                        salahField = 'late_limit_time';
+                        salahPesan = {!! json_encode(__('Batas Keterlambatan harus lebih besar dari Jam Masuk.')) !!};
+                    } else if (!(lateLimit < checkOut)) {
+                        salahField = 'check_out_time';
+                        salahPesan = {!! json_encode(__('Jam Pulang harus lebih besar dari Batas Keterlambatan.')) !!};
+                    } else if (!(checkOut <= checkOutLimit)) {
+                        salahField = 'check_out_limit_time';
+                        salahPesan = {!! json_encode(__('Batas Waktu Pulang tidak boleh lebih kecil dari Jam Pulang.')) !!};
+                    }
+
+                    if (salahField) {
+                        var target = row.querySelector('input[name$="[' + salahField + ']"]');
                         if (target) {
                             tandai(target);
                             var errDiv = document.createElement('div');
                             errDiv.className = 'text-danger small time-client-error schedule-error';
-                            errDiv.textContent = {!! json_encode(__('Urutan jam harus Masuk < Batas Keterlambatan < Jam Pulang <= Batas Waktu Pulang.')) !!};
-                            row.appendChild(errDiv);
+                            errDiv.textContent = salahPesan;
+                            var cell = target.closest('.schedule-cell');
+                            (cell || row).appendChild(errDiv);
                         }
                     }
                 });
 
                 if (!ok) {
+                    // Hentikan submit sepenuhnya: jangan sampai handler lain (mis. overlay
+                    // loading di layout) ikut jalan. Langsung arahkan ke kolom yang salah.
                     e.preventDefault();
-                    alert({!! json_encode(__('Data belum bisa disimpan. Periksa isian yang bertanda merah.')) !!});
+                    e.stopImmediatePropagation();
+                    e.stopPropagation();
+                    var pertama = form.querySelector('.is-invalid');
+                    if (pertama && pertama.scrollIntoView) {
+                        pertama.scrollIntoView({ block: 'center', behavior: 'smooth' });
+                    }
                 }
-            });
+            }, true);
         }
     });
     </script>
@@ -1034,10 +1076,10 @@
       + '.ck-box{background:#fff;border-radius:20px;width:100%;max-width:320px;padding:18px 18px 12px;box-shadow:0 20px 50px rgba(0,0,0,.3);font-family:inherit;}'
       + '.ck-head{display:flex;align-items:center;justify-content:center;gap:4px;font-size:44px;font-weight:700;color:#0f172a;margin-bottom:10px;}'
       + '.ck-head button{border:0;background:#eef2ff;color:#334155;border-radius:12px;padding:2px 14px;font:inherit;line-height:1.3;cursor:pointer;}'
-      + '.ck-head button.on{background:#15803D;color:#fff;}'
+      + '.ck-head button.on{background:#2563eb;color:#fff;}'
       + '.ck-dial{width:256px;height:256px;display:block;margin:0 auto;touch-action:none;user-select:none;cursor:pointer;}'
       + '.ck-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:8px;}'
-      + '.ck-actions button{border:0;background:transparent;font-weight:700;color:#15803D;padding:8px 14px;border-radius:10px;cursor:pointer;}'
+      + '.ck-actions button{border:0;background:transparent;font-weight:700;color:#2563eb;padding:8px 14px;border-radius:10px;cursor:pointer;}'
       + '.ck-actions button:hover{background:#eef2ff;}';
     var st = document.createElement('style');
     st.textContent = css;
@@ -1089,9 +1131,9 @@
             selR = R_OUT;
         }
         var sp = pos(selAngle, selR);
-        dial.appendChild(el('line', { x1: C, y1: C, x2: sp.x, y2: sp.y, stroke: '#15803D', 'stroke-width': 2 }));
-        dial.appendChild(el('circle', { cx: C, cy: C, r: 4, fill: '#15803D' }));
-        dial.appendChild(el('circle', { cx: sp.x, cy: sp.y, r: 19, fill: '#15803D' }));
+        dial.appendChild(el('line', { x1: C, y1: C, x2: sp.x, y2: sp.y, stroke: '#2563eb', 'stroke-width': 2 }));
+        dial.appendChild(el('circle', { cx: C, cy: C, r: 4, fill: '#2563eb' }));
+        dial.appendChild(el('circle', { cx: sp.x, cy: sp.y, r: 19, fill: '#2563eb' }));
 
         var i, p, label, active;
         if (mode === 'h') {
