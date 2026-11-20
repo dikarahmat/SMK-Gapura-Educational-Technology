@@ -62,8 +62,8 @@ function normalizeCameraError(err, tahap) {
 }
 
 /* ================= SUARA BEEP (audio/beep.mp3 milik sekolah) =================
-   SATU-SATUNYA beep yang dipakai semua scanner. Hanya file beep.mp3, tanpa
-   suara lain dalam bentuk apa pun (tanpa Web Audio/oscillator/cadangan). */
+   Beep dipakai semua scanner dan menjadi fallback halaman kiosk bila
+   speechSynthesis tidak tersedia. Bila suara dimatikan, beep ikut diredam. */
 function playBeep() {
     const beep = document.getElementById('beepSound');
     if (!beep) return;
@@ -140,13 +140,24 @@ function playBeepSound() { playBeep(); }
        sudah absen, kartu tidak dikenal, kode ngawur, error 4xx/5xx;
      - gagal jaringan / timeout / respons bukan JSON (blok catch);
      - kode kosong (status null -> tanpa notifikasi & tanpa getar).
-   SEMUA hasil berbunyi beep dengan nada yang sama persis (audio/beep.mp3):
-   tidak ada nada baru, tidak ada perubahan frekuensi/durasi/volume, dan
-   tidak ada bunyi ganda (satu pemanggilan per scan).
+   Halaman kiosk memakai TTS (KioskSpeech) untuk membacakan nama + status.
+   Bila TTS tidak tersedia, beep.mp3 lama menjadi fallback. Bila suara
+   dimatikan, semua bunyi termasuk beep diredam.
    Hasil non-sukses tetap mendapat getar seperti sebelumnya.
    Dipanggil SEBELUM render hasil, sehingga bunyi keluar bersamaan notifikasi. */
 function feedbackScan(status, body) {
-    playBeep();
+    let handledBySpeech = false;
+
+    if (window.KioskSpeech && typeof window.KioskSpeech.announceScan === 'function') {
+        try {
+            handledBySpeech = window.KioskSpeech.announceScan(status, body) === true;
+        } catch (e) {
+            handledBySpeech = false;
+        }
+    }
+
+    if (!handledBySpeech) playBeep();
+
     if (status === null || status === undefined) return; // kode kosong: beep saja
     if (status === 200 && body && body.success) return;  // sukses: tanpa getar
     vibrateOnScanFail();

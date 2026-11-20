@@ -667,6 +667,10 @@
             color: #ffffff;
             box-shadow: 0 4px 12px rgba(21,128,61,.35);
         }
+        .kiosk-sound-toggle.is-muted {
+            color: #b91c1c;
+            background: rgba(185,28,28,.08);
+        }
 
         /* Kotak kamera */
         .scanner-viewport-container,
@@ -913,13 +917,16 @@
     <main class="kiosk-main">
         <div class="kiosk-card-box">
 
-            <!-- Switcher Pill: kecil & transparan di atas kamera -->
+            <!-- Switcher Pill: kamera | alat scan | speaker -->
             <div class="kiosk-switcher" role="tablist" aria-label="Metode input presensi">
                 <button type="button" id="btnTabCamera" class="kiosk-switch-btn active" onclick="switchMode('camera')" role="tab" aria-selected="true">
                     <i class='bx bx-camera'></i>
                 </button>
                 <button type="button" id="btnTabHardware" class="kiosk-switch-btn" onclick="switchMode('hardware')" role="tab" aria-selected="false">
                     <i class='bx bx-barcode-reader'></i>
+                </button>
+                <button type="button" id="btnSoundToggle" class="kiosk-switch-btn kiosk-sound-toggle" title="Matikan Suara" aria-label="Matikan Suara" aria-pressed="false">
+                    <i class='bx bx-volume-full'></i>
                 </button>
             </div>
 
@@ -983,6 +990,8 @@
     </main>
 
     <audio id="beepSound" src="{{ asset('audio/beep.mp3') }}" preload="auto"></audio>
+
+    <script src="{{ asset('js/kiosk-speech.js') }}?v={{ file_exists(public_path('js/kiosk-speech.js')) ? filemtime(public_path('js/kiosk-speech.js')) : config('app.version', '1') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
