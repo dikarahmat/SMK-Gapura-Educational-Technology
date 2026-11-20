@@ -52,7 +52,7 @@
         }
     }
 @endphp
-<div style="position:relative; width:53.9mm; height:85.6mm; overflow:hidden; margin:0; padding:0; border:0; font-family:'DejaVu Sans', Verdana, Geneva, Arial, sans-serif; background:#DCFCE7; -webkit-print-color-adjust:exact; print-color-adjust:exact; page-break-inside:avoid;">
+<div style="position:relative; width:53.9mm; height:85.6mm; overflow:hidden; margin:0; padding:0; border:0; font-family:'DejaVu Sans', Verdana, Geneva, Arial, sans-serif; background:#dcefe2; -webkit-print-color-adjust:exact; print-color-adjust:exact; page-break-inside:avoid;">
 
     @if($__bg)
         <img src="{{ $__bg }}" alt="" style="position:absolute; left:0; top:0; width:53.9mm; height:85.6mm; object-fit:cover; display:block;">

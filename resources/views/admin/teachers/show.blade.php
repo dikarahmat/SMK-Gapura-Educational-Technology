@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('title', __('Detail Guru'))
 @section('page_title', __('Detail Guru'))
@@ -265,7 +265,7 @@
                 </div>
 
                 <!-- Tombol download (tepat di bawah kartu, selebar box, di luar kp-card-box) -->
-                <a href="{{ panel_route('guru.download-card', $teacher->id) }}" class="btn-download-green btn-progress" id="btnDownloadCard" data-download data-no-download data-dl-progress>{{ __('Download Kartu Presensi') }}</a>
+                <a href="{{ panel_route('guru.download-card', $teacher->id) }}" class="btn-download-cetak btn-progress" id="btnDownloadCard" data-download data-no-download data-dl-progress>{{ __('Download Kartu Presensi') }}</a>
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('title', __('Data Siswa'))
 @section('page_title', __('Data Siswa'))
@@ -1174,7 +1174,7 @@
                         <div class="mb-2">
                             {{ __('NISN boleh dikosongkan. Siswa tanpa NISN tetap mendapat QR Code.') }}
                         </div>
-                        <a href="{{ route('admin.students.template') }}" class="btn-download-green w-100" data-download data-no-download data-dl-progress>{{ __('Unduh Template Excel') }}</a>
+                        <a href="{{ route('admin.students.template') }}" class="btn-download-import w-100" data-download data-no-download data-dl-progress>{{ __('Unduh Template Excel') }}</a>
                     </div>
                     <label class="form-label small fw-semibold">{{ __('Pilih File Excel') }}</label>
                     <input type="file" name="file_excel" class="form-control rounded-3 @error('file_excel') is-invalid @enderror" accept=".xlsx,.xls,.csv" required>
@@ -1182,7 +1182,7 @@
                 </div>
                 <div class="modal-footer border-top-0">
                     <button type="button" class="btn btn-light rounded-3 px-3 fw-semibold" data-bs-dismiss="modal">{{ __('Batal') }}</button>
-                    <button type="submit" class="btn-download-green px-4" id="btnImportSubmit" disabled>{{ __('Unggah & Import') }}</button>
+                    <button type="submit" class="btn-download-import px-4" id="btnImportSubmit" disabled>{{ __('Unggah & Import') }}</button>
                 </div>
                 <div id="importMessage" class="px-3 pb-3 small d-none" style="min-height:1.2rem;"></div>
             </form>

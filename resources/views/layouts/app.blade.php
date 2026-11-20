@@ -5744,20 +5744,46 @@ background-color: #14532D !important;
            Data Siswa, Data Guru, Data Kelas, Hari Libur, dan lain-lain.
            ========================================================================== */
         :root {
-            --btn-tambah: #15803D;
-            --btn-tambah-hover: #166534;
-            --btn-cetak-kartu: #0F766E;
-            --btn-cetak-kartu-hover: #115E59;
-            --btn-import-excel: #65A30D;
-            --btn-import-excel-hover: #4D7C0F;
+            --btn-tambah: #16A34A;
+            --btn-tambah-hover: #15803D;
+            --btn-cetak-kartu: #DB2777;
+            --btn-cetak-kartu-hover: #BE185D;
+            --btn-import-excel: #FACC15;
+            --btn-import-excel-hover: #EAB308;
             --btn-hapus: #DC2626;
             --btn-hapus-hover: #B91C1C;
-            --btn-reset: #0284C7;
-            --btn-reset-hover: #0369A1;
-            --btn-mode-gerbang: #15803D;
-            --btn-mode-gerbang-hover: #166534;
-            --btn-buka-scanner: #0F766E;
-            --btn-buka-scanner-hover: #115E59;
+            --btn-reset: #2563EB;
+            --btn-reset-hover: #1D4ED8;
+            --btn-mode-gerbang: #2563EB;
+            --btn-mode-gerbang-hover: #1D4ED8;
+            --btn-buka-scanner: #7C3AED;
+            --btn-buka-scanner-hover: #6D28D9;
+        }
+
+        /* Tombol aksi: Download Kartu Presensi (Cetak Kartu) -> pink; Import Excel -> kuning. */
+        .btn-download-cetak {
+            background-color: var(--btn-cetak-kartu) !important;
+            color: #ffffff !important;
+            border: none !important;
+            font-weight: 600;
+            border-radius: var(--clean-radius, 8px) !important;
+        }
+        .btn-download-cetak:hover {
+            background-color: var(--btn-cetak-kartu-hover) !important;
+            color: #ffffff !important;
+            border-color: var(--btn-cetak-kartu-hover) !important;
+        }
+        .btn-download-import {
+            background-color: var(--btn-import-excel) !important;
+            color: #1F2937 !important;
+            border: none !important;
+            font-weight: 600;
+            border-radius: var(--clean-radius, 8px) !important;
+        }
+        .btn-download-import:hover {
+            background-color: var(--btn-import-excel-hover) !important;
+            color: #1F2937 !important;
+            border-color: var(--btn-import-excel-hover) !important;
         }
 
         .btn-primary {

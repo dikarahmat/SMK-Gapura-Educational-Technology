@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('title', __('Hari Libur'))
 @section('page_title', __('Hari Libur & Cuti'))
@@ -444,7 +444,7 @@
                             <div class="mb-2">
                                 {{ __('Format kolom file Excel:') }} <strong>{{ __('Tanggal, Keterangan') }}</strong> {{ __('(.xlsx atau .csv)') }}
                             </div>
-                            <a href="{{ panel_route('holidays.template') }}" class="btn-download-green w-100" data-download data-no-download data-dl-progress>{{ __('Unduh Template Excel') }}</a>
+                            <a href="{{ panel_route('holidays.template') }}" class="btn-download-import w-100" data-download data-no-download data-dl-progress>{{ __('Unduh Template Excel') }}</a>
                         </div>
                         <div class="mb-2">
                             <label class="form-label small fw-semibold">{{ __('Pilih File Excel') }}</label>
@@ -455,7 +455,7 @@
                     </div>
                     <div class="modal-footer border-top-0 pt-0">
                         <button type="button" class="btn btn-light rounded-3 px-3 fw-semibold" data-bs-dismiss="modal" id="btnBatalImportHoliday">{{ __('Batal') }}</button>
-                        <button type="submit" id="submitImportBtn" class="btn-download-green px-4 btn-progress" data-import data-dl-progress disabled style="opacity: 0.45; cursor: not-allowed; background-color: #059669 !important;">{{ __('Unggah & Import') }}</button>
+                        <button type="submit" id="submitImportBtn" class="btn-download-import px-4 btn-progress" data-import data-dl-progress disabled style="opacity: 0.45; cursor: not-allowed; background-color: #059669 !important;">{{ __('Unggah & Import') }}</button>
                     </div>
                 </form>
             </div>

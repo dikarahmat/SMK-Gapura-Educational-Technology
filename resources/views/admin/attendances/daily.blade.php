@@ -135,66 +135,66 @@
         }
     }
 
-    /* Mode Gerbang Button (Green) - STATIS, tidak ada hover/active perubahan */
+    /* Mode Gerbang Button = biru #2563EB; hover #1D4ED8; Teks putih. */
     .btn-portal-gate {
-        background-color: #16a34a;
+        background-color: #2563EB;
         color: #ffffff !important;
-        border-color: #16a34a;
+        border-color: #2563EB;
         box-shadow: 0 1px 2px rgba(22, 163, 74, 0.2);
         -webkit-tap-highlight-color: transparent !important;
     }
     .btn-portal-gate:active,
     .btn-portal-gate:focus {
-        background-color: #16a34a !important;
-        border-color: #16a34a !important;
+        background-color: #2563EB !important;
+        border-color: #2563EB !important;
         color: #ffffff !important;
         transform: none !important;
         box-shadow: 0 1px 2px rgba(22, 163, 74, 0.2) !important;
     }
     @media (hover: hover) {
         .btn-portal-gate:hover {
-            background-color: #16a34a !important;
-            border-color: #16a34a !important;
+            background-color: #1D4ED8 !important;
+            border-color: #1D4ED8 !important;
             color: #ffffff !important;
             transform: none !important;
             box-shadow: 0 1px 2px rgba(22, 163, 74, 0.2) !important;
         }
     }
 
-    /* Buka Scanner Button (Royal Blue Primary) - STATIS, tidak ada hover/active perubahan */
+    /* Buka Scanner Button = ungu #7C3AED; hover #6D28D9. Teks putih. */
     .btn-portal-scanner {
-        background-color: #15803D;
+        background-color: #7C3AED;
         color: #ffffff !important;
-        border-color: #15803D;
+        border-color: #7C3AED;
         box-shadow: 0 1px 3px rgba(21, 128, 61, 0.25);
         -webkit-tap-highlight-color: transparent !important;
     }
     .btn-portal-scanner:active,
     .btn-portal-scanner:focus {
-        background-color: #15803D !important;
-        border-color: #15803D !important;
+        background-color: #7C3AED !important;
+        border-color: #7C3AED !important;
         color: #ffffff !important;
         transform: none !important;
         box-shadow: 0 1px 3px rgba(21, 128, 61, 0.25) !important;
     }
     @media (hover: hover) {
         .btn-portal-scanner:hover {
-            background-color: #15803D !important;
-            border-color: #15803D !important;
+            background-color: #7C3AED !important;
+            border-color: #7C3AED !important;
             color: #ffffff !important;
             transform: none !important;
             box-shadow: 0 1px 3px rgba(21, 128, 61, 0.25) !important;
         }
     }
     .btn-portal-scanner.scanner-active {
-        background-color: #ef4444 !important;
-        border-color: #ef4444 !important;
+        background-color: #7C3AED !important;
+        border-color: #7C3AED !important;
         color: #ffffff !important;
-        box-shadow: 0 1px 3px rgba(239, 68, 68, 0.25);
+        box-shadow: 0 1px 3px rgba(21, 128, 61, 0.25);
     }
     .btn-portal-scanner.scanner-active:hover {
-        background-color: #dc2626 !important;
-        border-color: #dc2626 !important;
+        background-color: #6D28D9 !important;
+        border-color: #6D28D9 !important;
         box-shadow: 0 4px 8px rgba(239, 68, 68, 0.35);
     }
 

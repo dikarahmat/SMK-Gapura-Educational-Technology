@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('title', is_admin() ? __('Dashboard Admin') : (is_piket() ? __('Dashboard Guru Piket') : __('Dashboard Guru')))
 @section('page_title', is_admin() ? __('Dashboard Administrator') : (is_piket() ? __('DASHBOARD GURU PIKET') : __('DASHBOARD GURU')))
@@ -42,7 +42,7 @@
            class="dashboard-date-input" tabindex="-1" aria-hidden="true">
 
     <button type="button" class="dashboard-date-trigger" title="{{ __('Pilih tanggal') }}" aria-label="{{ __('Pilih tanggal') }}">
-        <i class='bx bx-calendar text-success fs-3'></i>
+        <i class='bx bx-calendar text-primary fs-3'></i>
     </button>
 </form>
 
@@ -111,7 +111,7 @@
         --dash-inner-bg: #ffffff;
         --dash-inner-stroke: #e2e8f0;       /* garis tipis elemen kecil   */
         --dash-line: #e5e9f0;
-        --dash-accent: #15803D;
+        --dash-accent: #2563eb;
         --dash-title-weight: 700;           /* judul section selalu bold */
     }
 
@@ -389,7 +389,7 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        background-color: var(--sc-soft, #DCFCE7);
+        background-color: var(--sc-soft, #dbeafe);
         border-radius: 14px;
         transition: transform 0.18s ease;
     }
@@ -472,6 +472,17 @@
     /* Angka Kehadiran Hari Ini: font tebal SAMA persis dengan angka Data Sekolah. */
     .dashboard-section .dash-att-figure {
         margin-bottom: 0.25rem;
+    }
+
+    /* Angka kehadiran TIDAK BOLEH pecah ke baris baru (mis. 557 jadi 55 / 7),
+       berapa pun jumlah digitnya. Tetap satu baris & sejajar dengan label. */
+    .dashboard-section .dash-absence-grid .dash-att-figure,
+    .dashboard-section .dash-absence-grid .dash-att-value {
+        white-space: nowrap !important;
+        word-break: keep-all !important;
+        overflow-wrap: normal !important;
+        letter-spacing: -0.04em;
+        max-width: 100%;
     }
 
     /* ==================================================================
@@ -609,7 +620,7 @@
         }
         /* Angka: 20px di mobile. */
         .dashboard-section .dash-absence-grid .dash-att-value {
-            font-size: 1.25rem !important;   /* 20px */
+            font-size: clamp(1rem, 5.6vw, 1.25rem) !important;   /* maks 20px, mengecil di layar sempit */
             line-height: 1.1;
         }
         /* Label: 11px di mobile, nowrap untuk mencegah "Terlambat" pecah baris.
@@ -738,7 +749,7 @@
        teks, bukan tautan). Yang tersisa adalah penanda "sedang difilter"
        (.absence-row-active) - itu status, bukan efek klik. */
     .dashboard-section .absence-row-active {
-        background-color: rgba(21, 128, 61, 0.05);
+        background-color: rgba(37, 99, 235, 0.05);
         border: 0;
         box-shadow: none;
         outline: 0;
@@ -776,7 +787,7 @@
     /* Label kecil "Aktif" pada baris yang sedang difilter */
     .dashboard-section .absence-row-active-badge {
         display: inline-block;
-        background: #15803D;
+        background: #2563eb;
         color: #ffffff;
         border-radius: 9999px;
         font-size: 0.65rem;
@@ -921,7 +932,7 @@
         }
         @media (hover: hover) {
             .dash-seg .dash-seg__btn:hover {
-                background-color: rgba(21, 128, 61, 0.06);
+                background-color: rgba(37, 99, 235, 0.06);
                 color: #0f172a;
             }
         }
@@ -938,22 +949,12 @@
         .dash-seg .dash-seg__btn--solid:focus,
         .dash-seg .dash-seg__btn.is-active:focus-visible,
         .dash-seg .dash-seg__btn--solid:focus-visible {
-            background-color: #15803D !important;
+            background-color: #2563eb !important;
             color: #ffffff !important;
         }
         .dash-seg .dash-seg__btn:focus-visible {
-            outline: 2px solid #15803D;
+            outline: 2px solid #2563eb;
             outline-offset: -2px;
-        }
-
-        /* Tombol aksi dashboard: batasi override ke .dashboard-section saja. */
-        .dashboard-section .btn-primary {
-            background-color: #15803D !important;
-            border-color: #15803D !important;
-        }
-        .dashboard-section .btn-primary:hover {
-            background-color: #166534 !important;
-            border-color: #166534 !important;
         }
 
         /* Tanggal periode grafik: teks biasa, tanpa badge/kotak. */
@@ -1064,6 +1065,28 @@
             transition: none;
         }
     }
+    /* ------------------------------------------------------------------
+       MOBILE (HP): tab Harian/Mingguan/Bulanan & teks periode diperkecil,
+       tinggi grafik dibuat ringkas (240px) tapi label & legenda dirapikan.
+       ------------------------------------------------------------------ */
+    @media (max-width: 640px) {
+        body .chart-canvas-wrap {
+            height: 240px !important;
+        }
+        body .chart-mode-toggle.dash-seg .dash-seg__btn {
+            height: 26px;
+            min-height: 26px;
+            padding: 0 0.5rem;
+            font-size: 0.58rem;
+            letter-spacing: 0.02em;
+        }
+        body .dash-period {
+            font-size: 0.62rem !important;
+        }
+        body .chart-header-actions {
+            gap: 0.5rem !important;
+        }
+    }
 </style>
 @endpush
 
@@ -1089,7 +1112,7 @@
                      Khusus Guru Piket: data sekolah read-only. -->
                 @if(is_piket())
                 <div class="dash-stat-cell" title="{{ __('Data sekolah hanya dapat dilihat') }}">
-<strong class="dash-stat-value is-green">{{ number_format($totalStudents ?? 0, 0, ',', '.') }}</strong>
+                    <strong class="dash-stat-value is-sidebar-blue">{{ number_format($totalStudents ?? 0, 0, ',', '.') }}</strong>
                     <span class="dash-stat-label">{{ __('Siswa Aktif') }}</span>
                 </div>
                 @else
@@ -1097,7 +1120,7 @@
                    class="dash-stat-cell"
                    aria-label="{{ __('Buka data siswa') }}"
                    title="{{ __('Buka data siswa') }}">
-                     <strong class="dash-stat-value is-green">{{ number_format($totalStudents ?? 0, 0, ',', '.') }}</strong>
+                    <strong class="dash-stat-value is-sidebar-blue">{{ number_format($totalStudents ?? 0, 0, ',', '.') }}</strong>
                     <span class="dash-stat-label">{{ __('Siswa Aktif') }}</span>
                 </a>
                 @endif
@@ -1107,7 +1130,7 @@
                      Khusus Guru Piket: data sekolah read-only. -->
                 @if(is_piket())
                 <div class="dash-stat-cell" title="{{ __('Data sekolah hanya dapat dilihat') }}">
-<strong class="dash-stat-value is-green">{{ number_format($totalClasses ?? 0, 0, ',', '.') }}</strong>
+                    <strong class="dash-stat-value is-yellow">{{ number_format($totalClasses ?? 0, 0, ',', '.') }}</strong>
                     <span class="dash-stat-label">{{ __('Rombongan Belajar') }}</span>
                 </div>
                 @else
@@ -1115,7 +1138,7 @@
                    class="dash-stat-cell"
                    aria-label="{{ __('Buka data kelas') }}"
                    title="{{ __('Buka data kelas') }}">
-                     <strong class="dash-stat-value is-green">{{ number_format($totalClasses ?? 0, 0, ',', '.') }}</strong>
+                    <strong class="dash-stat-value is-yellow">{{ number_format($totalClasses ?? 0, 0, ',', '.') }}</strong>
                     <span class="dash-stat-label">{{ __('Rombongan Belajar') }}</span>
                 </a>
                 @endif
@@ -1164,8 +1187,8 @@
                 <a href="{{ panel_route('absensi.kiosk') }}"
                    class="dash-shortcut-item"
                    title="{{ __('Buka Mode Gerbang (Scanner QR otomatis nyala)') }}">
-<span class="dash-sc-icon" style="--sc-soft: #DCFCE7;">
-                         <i class='bx bx-qr-scan text-success'></i>
+                    <span class="dash-sc-icon" style="--sc-soft: #dbeafe;">
+                        <i class='bx bx-qr-scan text-primary'></i>
                     </span>
                     <span class="dash-sc-label">{{ __('Presensi Hari Ini') }}</span>
                 </a>
@@ -1196,8 +1219,8 @@
                 <a href="{{ panel_route('students.index') }}"
                    class="dash-shortcut-item"
                    title="{{ __('Kelola Master Data Siswa & Generate QR') }}">
-<span class="dash-sc-icon" style="--sc-soft: #DCFCE7;">
-                         <i class='bx bx-user text-success'></i>
+                    <span class="dash-sc-icon" style="--sc-soft: #cffafe;">
+                        <i class='bx bx-user text-info'></i>
                     </span>
                     <span class="dash-sc-label">{{ __('Data Siswa') }}</span>
                 </a>
@@ -1207,8 +1230,8 @@
                 <a href="{{ route('admin.guru.index') }}"
                    class="dash-shortcut-item"
                    title="{{ __('Kelola Data Guru') }}">
-<span class="dash-sc-icon" style="--sc-soft: #DCFCE7;">
-                         <i class='bx bx-user-pin text-success'></i>
+                    <span class="dash-sc-icon" style="--sc-soft: #f3e8ff;">
+                        <i class='bx bx-user-pin text-purple'></i>
                     </span>
                     <span class="dash-sc-label">{{ __('Data Guru') }}</span>
                 </a>
@@ -1269,7 +1292,7 @@
                 <div>
                     <div class="d-flex align-items-center justify-content-between gap-2 pb-3 mb-3">
                         <div class="d-flex align-items-center gap-2 min-w-0">
-                            <span class="fw-bold text-dark text-truncate dashboard-box-title" style="font-size: 0.9rem;">{{ $chartTitle ?? 'Grafik Garis Kehadiran Mingguan' }}</span>
+                            <span class="fw-bold text-dark text-truncate dashboard-box-title" style="font-size: 0.9rem;">{{ __('Grafik Kehadiran per Rombel') }}</span>
                         </div>
 
                         <div class="d-flex align-items-center gap-2 flex-shrink-0 chart-header-actions">
@@ -1302,6 +1325,13 @@
                         <div class="chart-canvas-wrap" style="position: relative; height: 300px; width: 100%;">
                             <canvas id="attendanceLineChart"></canvas>
                         </div>
+                        {{-- Legenda warna batang (mode batang tunggal). Otomatis
+                             disembunyikan bila grafik memakai batang bertumpuk. --}}
+                        <div id="barThresholdLegend" class="d-flex flex-wrap justify-content-center gap-3 pt-3 text-secondary fw-semibold" style="font-size: 0.72rem;">
+                            <span class="d-inline-flex align-items-center gap-1"><span style="width:9px;height:9px;border-radius:50%;background:#16a34a;display:inline-block;"></span>{{ __('90% ke atas') }}</span>
+                            <span class="d-inline-flex align-items-center gap-1"><span style="width:9px;height:9px;border-radius:50%;background:#f59e0b;display:inline-block;"></span>{{ __('75% - 89%') }}</span>
+                            <span class="d-inline-flex align-items-center gap-1"><span style="width:9px;height:9px;border-radius:50%;background:#ef4444;display:inline-block;"></span>{{ __('Di bawah 75%') }}</span>
+                        </div>
                     </div>
                 </div>
 
@@ -1314,7 +1344,7 @@
                         @php
                             $__dashTotal = $chartTotalText ?? 'Total: ' . count($chartValues ?? []) . ' Hari';
                         @endphp
-                        <span class="text-truncate"><strong class="text-dark">{{ __('Garis Tren Kehadiran') }}</strong> <span class="d-none d-sm-inline">({{ $chartScopeText ?? 'Per hari, 7 hari terakhir' }})</span></span>
+                        <span class="text-truncate"><strong class="text-dark">{{ __('Kehadiran per Rombel') }}</strong> <span class="d-none d-sm-inline">({{ $chartScopeText ?? 'Per hari, 7 hari terakhir' }})</span></span>
                     </div>
                     <span class="fw-semibold text-dark flex-shrink-0 text-nowrap">{{ $__dashTotal }}</span>
                 </div>
@@ -1549,170 +1579,299 @@
             chartData = chartLabels.map(function () { return 0; });
         }
 
-        const isMulti = rawDatasets.length > 0;
-        // Hanya satu titik di sumbu X (mode harian): titik dibuat lebih besar
-        // supaya tiap rombel tetap terlihat walau tidak ada garis penghubung.
-        const singlePoint = chartLabels.length === 1;
-        const canvasContext = ctx.getContext('2d');
-        let datasets;
+        // =====================================================================
+        // GRAFIK KEHADIRAN PER ROMBEL (harian / mingguan / bulanan)
+        // Sumbu X = rombel, jadi dipakai batang.
+        //  - $chartStatus (dari controller) -> batang BERTUMPUK per status,
+        //    tiap rombel = 100% (hadir, terlambat, izin, sakit, alpa, belum).
+        //  - Bila kosong -> batang tunggal berwarna sesuai persen hadir.
+        // =====================================================================
+        const statusRows = {!! json_encode($chartStatus ?? []) !!};
 
-        if (isMulti) {
-            // Satu garis per rombel. Warna dibuat otomatis dengan sudut hue
-            // "golden angle" supaya 20+ rombel tetap mudah dibedakan.
-            datasets = rawDatasets.map(function (ds, i) {
-                ds = ds || {};
-                const color = ds.color || ('hsl(' + Math.round((i * 137.508) % 360) + ', 65%, 45%)');
-                let data = Array.isArray(ds.data) ? ds.data.map(toNum) : [];
-                if (data.length !== chartLabels.length) {
-                    data = chartLabels.map(function () { return 0; });
-                }
-                return {
-                    label: ds.label || ds.name || ({!! json_encode(__('Rombel')) !!} + ' ' + (i + 1)),
-                    data: data,
-                    borderColor: color,
-                    backgroundColor: color,
-                    borderWidth: 2,
-                    fill: false,
-                    tension: 0.3,
-                    pointBackgroundColor: '#ffffff',
-                    pointBorderColor: color,
-                    pointBorderWidth: 1.5,
-                    pointRadius: singlePoint ? 5 : 2.5,
-                    pointHoverRadius: 6
-                };
-            });
-        } else {
-            // Cadangan: satu garis total (perilaku lama).
-            const gradient = canvasContext.createLinearGradient(0, 0, 0, 220);
-            gradient.addColorStop(0, 'rgba(21, 128, 61, 0.20)');
-            gradient.addColorStop(1, 'rgba(21, 128, 61, 0.01)');
-            datasets = [{
-                label: {!! json_encode(__('Tingkat Kehadiran (%)')) !!},
-                data: chartData,
-                borderColor: '#15803D',
-                borderWidth: 2.5,
-                backgroundColor: gradient,
-                fill: true,
-                tension: 0.35,
-                pointBackgroundColor: '#ffffff',
-                pointBorderColor: '#15803D',
-                pointBorderWidth: 2.5,
-                pointRadius: 4.5,
-                pointHoverRadius: 7,
-                pointHoverBackgroundColor: '#15803D',
-                pointHoverBorderColor: '#ffffff',
-                pointHoverBorderWidth: 2
-            }];
+        function roundRectPath(c, x, y, w, h, r, append) {
+            r = Math.max(0, Math.min(r, w / 2, h / 2));
+            if (!append) { c.beginPath(); }
+            c.moveTo(x + r, y);
+            c.arcTo(x + w, y, x + w, y + h, r);
+            c.arcTo(x + w, y + h, x, y + h, r);
+            c.arcTo(x, y + h, x, y, r);
+            c.arcTo(x, y, x + w, y, r);
+            c.closePath();
         }
 
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: chartLabels,
-                datasets: datasets
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                interaction: {
-                    mode: 'index',
-                    intersect: false
+        // Batang: hanya ujung ATAS yang membulat tipis, bawah datar.
+        function topRoundPath(c, x, y, w, h, r) {
+            r = Math.max(0, Math.min(r, w / 2, h));
+            c.moveTo(x, y + h);
+            c.lineTo(x, y + r);
+            c.arcTo(x, y, x + r, y, r);
+            c.lineTo(x + w - r, y);
+            c.arcTo(x + w, y, x + w, y + r, r);
+            c.lineTo(x + w, y + h);
+            c.closePath();
+        }
+
+        function renderRombelBar() {
+            const FONT = "'Plus Jakarta Sans', sans-serif";
+            const hasStatus = Array.isArray(statusRows) && statusRows.length > 0;
+            const legendEl = document.getElementById('barThresholdLegend');
+            const isNarrow = window.innerWidth < 640;
+            const RADIUS = isNarrow ? 3 : 5;
+            // Lebar batang = 80% x 80% slot kategori, maksimal THICK px.
+            const CAT_PCT = 0.8;
+            const BAR_PCT = 0.8;
+            const THICK = isNarrow ? 18 : 34;
+            let labels, datasets, rates;
+
+            if (hasStatus) {
+                // Legenda ambang warna hanya untuk batang tunggal.
+                if (legendEl) { legendEl.remove(); }
+
+                let STATUS = [
+                    { key: 'hadir',     label: {!! json_encode(__('Hadir')) !!},     color: '#22c55e' },
+                    { key: 'terlambat', label: {!! json_encode(__('Terlambat')) !!}, color: '#f59e0b' },
+                    { key: 'izin',      label: {!! json_encode(__('Izin')) !!},      color: '#3b82f6' },
+                    { key: 'sakit',     label: {!! json_encode(__('Sakit')) !!},     color: '#8b5cf6' },
+                    { key: 'alpa',      label: {!! json_encode(__('Alpa')) !!},      color: '#ef4444' },
+                    { key: 'belum',     label: isNarrow ? {!! json_encode(__('Belum')) !!} : {!! json_encode(__('Belum Presensi')) !!}, color: '#e2e8f0' }
+                ];
+                // "Belum presensi" hanya tampil kalau memang ada datanya.
+                STATUS = STATUS.filter(function (st) {
+                    return st.key !== 'belum' || statusRows.some(function (r) { return toNum(r.belum) > 0; });
+                });
+
+                labels = statusRows.map(function (r) { return r.label || r.name || '-'; });
+                const totals = statusRows.map(function (r) {
+                    return STATUS.reduce(function (sum, st) { return sum + toNum(r[st.key]); }, 0);
+                });
+                // Persen kehadiran (hadir + terlambat) untuk label di atas batang.
+                rates = statusRows.map(function (r, i) {
+                    return totals[i] > 0 ? Math.round((toNum(r.hadir) + toNum(r.terlambat)) / totals[i] * 100) : 0;
+                });
+
+                // Tinggi batang = persen per status (tiap rombel total 100%),
+                // jadi rombel berbeda ukuran tetap sebanding. Jumlah asli
+                // disimpan di "counts" untuk tooltip. Nilai 0 -> null supaya
+                // tidak menggambar potongan kosong.
+                datasets = STATUS.map(function (st) {
+                    return {
+                        label: st.label,
+                        counts: statusRows.map(function (r) { return toNum(r[st.key]); }),
+                        data: statusRows.map(function (r, i) {
+                            const pct = totals[i] > 0 ? Math.round(toNum(r[st.key]) / totals[i] * 1000) / 10 : 0;
+                            return pct > 0 ? pct : null;
+                        }),
+                        backgroundColor: st.color,
+                        borderWidth: 0,
+                        borderRadius: 0,
+                        maxBarThickness: THICK,
+                        barPercentage: BAR_PCT,
+                        categoryPercentage: CAT_PCT
+                    };
+                });
+            } else {
+                labels = chartLabels.slice();
+                let values = chartData.slice();
+                // Bentuk lama: satu dataset per rombel, tiap dataset 1 nilai.
+                if (rawDatasets.length > 0 && chartLabels.length === 1) {
+                    labels = rawDatasets.map(function (ds, i) {
+                        return (ds && (ds.label || ds.name)) || ('#' + (i + 1));
+                    });
+                    values = rawDatasets.map(function (ds) {
+                        return toNum(ds && Array.isArray(ds.data) ? ds.data[0] : 0);
+                    });
+                }
+                rates = values;
+                datasets = [{
+                    label: {!! json_encode(__('Tingkat Kehadiran')) !!},
+                    data: values,
+                    backgroundColor: values.map(function (v) {
+                        return v >= 90 ? '#22c55e' : (v >= 75 ? '#f59e0b' : '#ef4444');
+                    }),
+                    borderRadius: { topLeft: RADIUS, topRight: RADIUS, bottomLeft: 0, bottomRight: 0 },
+                    borderSkipped: false,
+                    maxBarThickness: THICK,
+                    barPercentage: BAR_PCT,
+                    categoryPercentage: CAT_PCT
+                }];
+            }
+
+            // Sorotan kolom lembut di belakang batang yang sedang di-hover.
+            const hoverColumn = {
+                id: 'hoverColumn',
+                beforeDatasetsDraw: function (chart) {
+                    const active = chart.tooltip && chart.tooltip.getActiveElements
+                        ? chart.tooltip.getActiveElements() : [];
+                    if (!active.length) { return; }
+                    const area = chart.chartArea;
+                    const step = area.width / chart.data.labels.length;
+                    const cx = chart.scales.x.getPixelForValue(active[0].index);
+                    const c = chart.ctx;
+                    c.save();
+                    c.fillStyle = 'rgba(148, 163, 184, 0.13)';
+                    roundRectPath(c, cx - step / 2 + 2, area.top - 6, step - 4, area.height + 6, 12);
+                    c.fill();
+                    c.restore();
+                }
+            };
+
+            // Jalur abu lembut di belakang batang tunggal (gaya "progress").
+            const barTrack = {
+                id: 'barTrack',
+                beforeDatasetsDraw: function (chart) {
+                    if (hasStatus) { return; }
+                    const area = chart.chartArea;
+                    const c = chart.ctx;
+                    c.save();
+                    c.fillStyle = '#f1f5f9';
+                    chart.getDatasetMeta(0).data.forEach(function (bar) {
+                        c.beginPath();
+                        topRoundPath(c, bar.x - bar.width / 2, area.top, bar.width, area.height, RADIUS);
+                        c.fill();
+                    });
+                    c.restore();
+                }
+            };
+
+            // Batang bertumpuk dipotong jadi SATU bentuk utuh (ujung atas
+            // membulat tipis, bawah datar, segmen di dalamnya rata), lalu persen
+            // kehadiran digambar di atas tiap batang (disembunyikan bila sempit).
+            const barShape = {
+                id: 'barShape',
+                beforeDatasetsDraw: function (chart) {
+                    if (!hasStatus) { return; }
+                    const area = chart.chartArea;
+                    const step = area.width / chart.data.labels.length;
+                    const w = Math.min(THICK, step * CAT_PCT * BAR_PCT);
+                    const c = chart.ctx;
+                    c.save();
+                    c.beginPath();
+                    chart.data.labels.forEach(function (lbl, i) {
+                        const cx = chart.scales.x.getPixelForValue(i);
+                        topRoundPath(c, cx - w / 2, area.top, w, area.height, RADIUS);
+                    });
+                    c.clip();
                 },
-                plugins: {
-                    legend: {
-                        // Legenda hanya perlu saat banyak garis (per rombel).
-                        // Klik nama rombel untuk menyembunyikan / menampilkan garisnya.
-                        display: isMulti,
-                        position: 'bottom',
-                        labels: {
+                afterDatasetsDraw: function (chart) {
+                    if (hasStatus) { chart.ctx.restore(); }
+                    const area = chart.chartArea;
+                    if (area.width / chart.data.labels.length < 36) { return; }
+                    const c = chart.ctx;
+                    c.save();
+                    c.font = '700 11px ' + FONT;
+                    c.textAlign = 'center';
+                    c.textBaseline = 'bottom';
+                    chart.data.labels.forEach(function (lbl, i) {
+                        const v = rates[i] || 0;
+                        c.fillStyle = v >= 90 ? '#16a34a' : (v >= 75 ? '#d97706' : '#dc2626');
+                        c.fillText(v + '%', chart.scales.x.getPixelForValue(i), area.top - 8);
+                    });
+                    c.restore();
+                }
+            };
+
+            // Label persen di atas batang hanya muat di layar lebar; di HP
+            // ruang atas dipersempit supaya batang lebih tinggi.
+            const wrapW = ctx.parentNode ? ctx.parentNode.clientWidth : window.innerWidth;
+            const showRates = (wrapW / Math.max(1, labels.length)) >= 36;
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: { labels: labels, datasets: datasets },
+                plugins: [hoverColumn, barTrack, barShape],
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    layout: { padding: { top: showRates ? 24 : 8 } },
+                    animation: {
+                        duration: 800,
+                        easing: 'easeOutQuart',
+                        delay: function (context) {
+                            return context.type === 'data' && context.mode === 'default'
+                                ? context.dataIndex * 35 : 0;
+                        }
+                    },
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                        legend: {
+                            display: hasStatus,
+                            position: 'bottom',
+                            labels: {
+                                usePointStyle: true,
+                                pointStyle: 'circle',
+                                boxWidth: isNarrow ? 6 : 8,
+                                boxHeight: isNarrow ? 6 : 8,
+                                padding: isNarrow ? 8 : 16,
+                                color: '#334155',
+                                font: { family: FONT, size: isNarrow ? 10 : 11, weight: '600' }
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: '#0f172a',
+                            titleColor: '#ffffff',
+                            bodyColor: '#cbd5e1',
+                            footerColor: '#ffffff',
+                            titleFont: { family: FONT, size: 12, weight: '700' },
+                            bodyFont: { family: FONT, size: 11, weight: '500' },
+                            footerFont: { family: FONT, size: 11, weight: '700' },
+                            padding: 12,
+                            cornerRadius: 12,
+                            boxPadding: 4,
                             usePointStyle: true,
-                            pointStyle: 'circle',
-                            boxWidth: 8,
-                            boxHeight: 8,
-                            padding: 12,
-                            color: '#334155',
-                            font: {
-                                family: "'Plus Jakarta Sans', sans-serif",
-                                size: 11,
-                                weight: '600'
-                            }
-                        }
-                    },
-                    tooltip: {
-                        backgroundColor: '#1e293b',
-                        titleColor: '#ffffff',
-                        bodyColor: '#cbd5e1',
-                        padding: 10,
-                        cornerRadius: 8,
-                        displayColors: isMulti,
-                        // Rombel dengan persen tertinggi tampil paling atas.
-                        itemSort: function (a, b) {
-                            return b.parsed.y - a.parsed.y;
-                        },
-                        callbacks: {
-                            label: function (context) {
-                                if (isMulti) {
+                            displayColors: hasStatus,
+                            filter: function (item) {
+                                return !hasStatus || item.dataset.counts[item.dataIndex] > 0;
+                            },
+                            callbacks: {
+                                label: function (context) {
+                                    if (hasStatus) {
+                                        return ' ' + context.dataset.label + ': ' +
+                                            context.dataset.counts[context.dataIndex] +
+                                            ' (' + context.parsed.y + '%)';
+                                    }
                                     return context.dataset.label + ': ' + context.parsed.y + '%';
+                                },
+                                footer: function (items) {
+                                    if (!hasStatus || !items.length) { return ''; }
+                                    return {!! json_encode(__('Kehadiran')) !!} + ': ' + rates[items[0].dataIndex] + '%';
                                 }
-                                return {!! json_encode(__('Tingkat Kehadiran')) !!} + ': ' + context.parsed.y + '%';
                             }
                         }
-                    }
-                },
-                scales: {
-                    x: {
-                        grid: {
-                            display: false
-                        },
-                        /* Garis sumbu X DIMATIKAN: kalau tetap digambar, garis
-                           itu menempel tepat di garis tren 0% dan terlihat
-                           seperti garis nyasar di area label. */
-                        border: {
-                            display: false
-                        },
-                        ticks: {
-                            color: '#475569',
-                            font: {
-                                family: "'Plus Jakarta Sans', sans-serif",
-                                size: 12,
-                                weight: '600'
-                            },
-                            /* Jarak label sumbu X dari area gambar, supaya
-                               garis tren tidak pernah menyentuh labelnya. */
-                            padding: 12,
-                            /* Sumbu X = nama rombel: semua rombel harus tampil. */
-                            autoSkip: false,
-                            maxRotation: 60
-                        }
                     },
-                    y: {
-                        min: 0,
-                        max: 100,
-                        grid: {
-                            color: '#f1f5f9'
+                    scales: {
+                        x: {
+                            stacked: hasStatus,
+                            grid: { display: false },
+                            border: { display: false },
+                            ticks: {
+                                color: '#475569',
+                                font: { family: FONT, size: isNarrow ? 10 : 12, weight: '600' },
+                                padding: isNarrow ? 4 : 8,
+                                autoSkip: false,
+                                maxRotation: isNarrow ? 0 : 60,
+                                minRotation: 0
+                            }
                         },
-                        /* Garis sumbu Y juga dimatikan (cuma grid + label
-                           persen yang tampil). */
-                        border: {
-                            display: false
-                        },
-                        ticks: {
-                            stepSize: 25,
-                            color: '#64748b',
-                            font: {
-                                family: "'Plus Jakarta Sans', sans-serif",
-                                size: 11,
-                                weight: '500'
-                            },
-                            callback: function (val) {
-                                return val + '%';
-                            },
-                            padding: 8
+                        y: {
+                            stacked: hasStatus,
+                            min: 0,
+                            max: 100,
+                            grid: { color: '#eef2f7', borderDash: [4, 4] },
+                            border: { display: false },
+                            ticks: {
+                                stepSize: 25,
+                                color: '#94a3b8',
+                                font: { family: FONT, size: isNarrow ? 9 : 11, weight: '500' },
+                                callback: function (val) { return val + '%'; },
+                                padding: isNarrow ? 4 : 8
+                            }
                         }
                     }
                 }
-            }
-        });
+            });
+        }
+
+        renderRombelBar();
     });
 </script>
 @endpush

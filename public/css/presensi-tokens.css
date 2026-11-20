@@ -1288,7 +1288,7 @@
         margin: 0;
         border: 0 !important;                     /* hapus pemisah antar item */
         background-color: transparent;
-        color: #334155;
+        color: #15803D;
         font-size: 0.65rem;
         font-weight: 700;
         letter-spacing: 0.03em;
@@ -1301,9 +1301,9 @@
     /* Catatan: :hover segmented ada di blok @media (hover: hover) and
        (pointer: fine) pada bagian (k) di bawah, agar tidak menempel di HP. */
     body .dash-seg .dash-seg__btn.is-active,
-    body .dash-seg .dash-seg__btn--solid { background-color: #15803D; color: #ffffff; }
+    body .dash-seg .dash-seg__btn--solid { background-color: #16A34A; color: #ffffff; }
     body .dash-seg .dash-seg__btn.is-active:hover,
-    body .dash-seg .dash-seg__btn--solid:hover { background-color: #166534; color: #ffffff; }
+    body .dash-seg .dash-seg__btn--solid:hover { background-color: #15803D; color: #ffffff; }
     /* Tanggal periode: TEKS BIAS, tanpa kontainer (badge/bg-light/rounded-pill/
        px-2/py-1 Bootstrap dibatalkan), rata kanan, sejajar dengan segmented. */
     body .dashboard-box .chart-header-actions .dash-period,

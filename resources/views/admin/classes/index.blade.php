@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @php
     // Admin dan guru memakai view ini dengan tampilan yang sama.
@@ -860,7 +860,7 @@
                             {{ __('Format kolom file Excel:') }} <strong>{{ __('Nama Kelas') }}, {{ __('Tingkat (7/8/9)') }}</strong> (.xlsx {{ __('atau') }} .csv)
                         </div>
                         @if($templateRoute)
-                        <a href="{{ $templateRoute }}" class="btn-download-green w-100" data-download data-dl-progress>{{ __('Unduh Template Excel') }}</a>
+                        <a href="{{ $templateRoute }}" class="btn-download-import w-100" data-download data-dl-progress>{{ __('Unduh Template Excel') }}</a>
                         @endif
                     </div>
                     <label class="form-label small fw-semibold">{{ __('Pilih File Excel') }}</label>
@@ -868,7 +868,7 @@
                 </div>
                 <div class="modal-footer border-top-0">
                     <button type="button" class="btn btn-light rounded-3 px-3 fw-semibold" data-bs-dismiss="modal">{{ __('Batal') }}</button>
-                    <button type="submit" class="btn-download-green px-4" data-import data-dl-progress>{{ __('Unggah & Import') }}</button>
+                    <button type="submit" class="btn-download-import px-4" data-import data-dl-progress>{{ __('Unggah & Import') }}</button>
                 </div>
             </form>
         </div>
