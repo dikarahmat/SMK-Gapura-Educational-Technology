@@ -3,20 +3,25 @@
 
     var MUTE_STORAGE_KEY = 'kioskSpeechMuted';
     var BEEP_END_TIMEOUT_MS = 800;
+    var PENDING_MAX_AGE_MS = 6000;
 
     var synth = window.speechSynthesis;
     var supported = !!(synth && window.SpeechSynthesisUtterance);
+
+    // Default: suara AKTIF. Hanya mute kalau user sengaja mematikan (tersimpan '1').
     var muted = false;
     var idVoices = [];
     var voice = null;
     var unlocked = false;
     var speakToken = 0;
     var beepToken = 0;
+    var pending = null; // { text, at } kalau speak() sempat ditolak browser
 
     try {
         muted = window.localStorage.getItem(MUTE_STORAGE_KEY) === '1';
     } catch (e) {}
 
+    /* ================= VOICE (otomatis: Google / perempuan) ================= */
     function normalizeLang(lang) {
         return String(lang || '').toLowerCase().replace(/_/g, '-');
     }
@@ -80,39 +85,34 @@
         }
     }
 
-    function titleCase(value) {
-        return String(value || '').trim().replace(/\S+/g, function (word) {
-            return word.toLowerCase().replace(/(^|[-'.])([a-z\u00C0-\u024F])/g, function (match, separator, character) {
-                return separator + character.toUpperCase();
-            });
-        });
-    }
-
-    function withName(name, detail) {
-        detail = String(detail || '').trim();
-        if (!name) return detail;
-        if (!detail) return name;
-        return name + ', ' + detail;
-    }
-
+    /* ================= KALIMAT SUARA (TANPA NAMA SISWA) ================= */
     function asSentence(text) {
         var value = String(text || '').trim().replace(/\s+/g, ' ');
         if (!value) return '';
+        value = value.charAt(0).toUpperCase() + value.slice(1);
         return /[.!?]$/.test(value) ? value : value + '.';
     }
 
-    function stripNamePrefix(message, rawName) {
-        var text = String(message || '').trim();
-        if (!text || !rawName) return text;
+    function escapeRegExp(str) {
+        return String(str).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
 
-        var prefixes = ['Siswa atas nama ' + rawName, 'Guru atas nama ' + rawName];
-        for (var i = 0; i < prefixes.length; i++) {
-            if (text.toLowerCase().indexOf(prefixes[i].toLowerCase()) === 0) {
-                return text.slice(prefixes[i].length).trim();
-            }
+    // Buang nama siswa/guru dari pesan overlay supaya tidak ikut dibacakan.
+    function removeName(message, rawName) {
+        var text = String(message || '');
+
+        if (rawName) {
+            var re = new RegExp('(siswa|guru)?\\s*(atas nama)?\\s*' + escapeRegExp(rawName), 'ig');
+            text = text.replace(re, ' ');
         }
 
-        return text;
+        // Kalau masih ada "atas nama" (nama tidak diketahui), ambil mulai dari kata kerja statusnya.
+        if (/atas nama/i.test(text)) {
+            var m = text.match(/\b(sudah|belum|tidak|gagal|baru)\b[\s\S]*$/i);
+            text = m ? m[0] : '';
+        }
+
+        return text.replace(/\s+/g, ' ').replace(/^[\s,.:;\-]+/, '').trim();
     }
 
     function isUnrecognizedQrMessage(message) {
@@ -122,51 +122,62 @@
                value.indexOf('tidak valid') !== -1;
     }
 
+    // status = kode HTTP (200/404/dst atau null), body = JSON dari server.
     function buildAnnouncement(status, body) {
         body = body || {};
 
-        var student = body.student || body.teacher || {};
-        var rawName = student.name || '';
-        var name = rawName ? titleCase(rawName) : '';
+        var person = body.student || body.teacher || {};
+        var rawName = String(person.name || '').trim();
         var message = String(body.message || '').trim();
         var lower = message.toLowerCase();
+        var type = String(body.type || '').toLowerCase();
 
+        // Berhasil
         if (status === 200 && body.success) {
-            if (body.type === 'completed') return asSentence(withName(name, 'sudah presensi masuk dan pulang'));
-            if (body.is_late) return asSentence(withName(name, 'terlambat'));
-            if (body.type === 'check_out') return asSentence(withName(name, 'presensi pulang berhasil'));
-            return asSentence(withName(name, 'hadir'));
+            if (type === 'completed') return 'Sudah presensi masuk dan pulang.';
+            if (body.is_late) return 'Terlambat.';
+            if (type === 'check_out') return 'Presensi pulang berhasil.';
+            return 'Hadir.';
         }
 
-        if (name) {
-            if (lower.indexOf('belum presensi masuk') !== -1) {
-                return asSentence(withName(name, 'belum presensi masuk hari ini'));
-            }
-
-            if (lower.indexOf('sudah melakukan presensi') !== -1 ||
-                lower.indexOf('baru saja melakukan presensi masuk') !== -1) {
-                return asSentence(withName(name, 'sudah presensi'));
-            }
-
-            if (lower.indexOf('tidak ada jadwal presensi') !== -1) {
-                return asSentence(withName(name, 'hari ini tidak ada jadwal presensi'));
-            }
-
-            return asSentence(withName(name, stripNamePrefix(message, rawName) || 'presensi gagal'));
+        // Libur (libur nasional / libur sekolah)
+        if (body.is_holiday || type.indexOf('libur') !== -1 || type.indexOf('holiday') !== -1 ||
+            /\blibur\b/.test(lower)) {
+            return 'Hari ini libur, tidak ada presensi.';
         }
 
-        if (lower.indexOf('tidak ada jadwal presensi') !== -1) {
+        // Sabtu / Minggu / tidak ada jadwal
+        if (body.is_weekend || type === 'weekend' || type === 'sabtu' || type === 'minggu' ||
+            lower.indexOf('tidak ada jadwal presensi') !== -1) {
             return 'Hari ini tidak ada jadwal presensi.';
         }
 
+        // Belum presensi masuk
+        if (lower.indexOf('belum presensi masuk') !== -1) {
+            return 'Belum presensi masuk hari ini.';
+        }
+
+        // Sudah presensi / duplikat
+        if (lower.indexOf('sudah melakukan presensi') !== -1 ||
+            lower.indexOf('baru saja melakukan presensi') !== -1 ||
+            lower.indexOf('sudah presensi') !== -1) {
+            return 'Sudah presensi.';
+        }
+
+        // QR / kartu tidak dikenali
         if (status === 404 || isUnrecognizedQrMessage(message)) {
             return 'QR code tidak dikenali.';
         }
 
-        if (message) return asSentence(message);
-        return 'Terjadi kendala koneksi ke server, coba lagi.';
+        // Fallback: bacakan pesan overlay, nama dibuang.
+        var cleaned = removeName(message, rawName);
+        if (cleaned) return asSentence(cleaned);
+
+        if (!status || status >= 500) return 'Terjadi kendala koneksi ke server, coba lagi.';
+        return 'Presensi gagal.';
     }
 
+    /* ================= BEEP ================= */
     function getBeep() {
         return document.getElementById('beepSound');
     }
@@ -228,11 +239,14 @@
         }
     }
 
+    /* ================= TTS ================= */
     function speak(text, delayMs) {
         if (!supported || muted) return;
 
         var message = String(text || '').trim();
         if (!message) return;
+
+        if (!voice) refreshVoices();
 
         var token = ++speakToken;
         var delay = Math.max(0, Number(delayMs) || 40);
@@ -251,15 +265,43 @@
 
                     if (voice) utterance.voice = voice;
 
+                    // Browser menolak karena belum ada interaksi: simpan, ucapkan saat unlock.
+                    utterance.onerror = function (ev) {
+                        if (ev && ev.error === 'not-allowed') {
+                            pending = { text: message, at: Date.now() };
+                        }
+                    };
+
                     synth.speak(utterance);
                 } catch (e) {}
             }, delay);
         } catch (e) {}
     }
 
+    function flushPending() {
+        if (!pending) return;
+        var item = pending;
+        pending = null;
+        if (muted) return;
+        if (Date.now() - item.at > PENDING_MAX_AGE_MS) return;
+        speak(item.text, 0);
+    }
+
+    /* ================= UNLOCK OTOMATIS ================= */
+    var UNLOCK_EVENTS = ['pointerdown', 'touchstart', 'keydown', 'click'];
+
+    function removeUnlockListeners() {
+        for (var i = 0; i < UNLOCK_EVENTS.length; i++) {
+            document.removeEventListener(UNLOCK_EVENTS[i], unlockSpeech, true);
+        }
+    }
+
     function unlockSpeech() {
-        if (!supported || unlocked) return;
+        if (!supported) return;
+        if (unlocked) { flushPending(); return; }
+
         unlocked = true;
+        removeUnlockListeners();
         refreshVoices();
 
         try {
@@ -268,11 +310,30 @@
             utterance.volume = 0;
             synth.speak(utterance);
         } catch (e) {}
+
+        flushPending();
     }
 
-    window.addEventListener('pointerdown', unlockSpeech, { once: true, passive: true });
-    window.addEventListener('keydown', unlockSpeech, { once: true });
+    // Interaksi pertama di mana saja (klik, sentuh, keyboard, tombol Layar Penuh) membuka kunci.
+    for (var i = 0; i < UNLOCK_EVENTS.length; i++) {
+        document.addEventListener(UNLOCK_EVENTS[i], unlockSpeech, { capture: true, passive: true });
+    }
 
+    // Kalau halaman sudah pernah diberi interaksi (reload, flag Chrome), langsung unlock.
+    function tryAutoUnlock() {
+        try {
+            if (navigator.userActivation && navigator.userActivation.hasBeenActive) {
+                unlockSpeech();
+            }
+        } catch (e) {}
+    }
+
+    tryAutoUnlock();
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', tryAutoUnlock);
+    }
+
+    /* ================= TOMBOL SPEAKER (mute / unmute) ================= */
     function updateToggleButton() {
         var button = document.getElementById('btnSoundToggle');
         if (!button) return;
@@ -297,6 +358,7 @@
 
         if (muted) {
             speakToken++;
+            pending = null;
             try { if (supported) synth.cancel(); } catch (e) {}
         } else {
             unlockSpeech();
@@ -320,35 +382,30 @@
         updateToggleButton();
     }
 
-    function announceScan(status, body) {
-        if (muted) return true;
-        if (!supported) return false;
-        if (status === null || status === undefined) return false;
-
-        var text = buildAnnouncement(status, body);
-        if (!text) return false;
-
-        if (muted) {
-            playBeepOnly();
-        } else {
-            playBeepThenSpeak(text);
-        }
-
-        return true;
-    }
-
     bindControls();
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', bindControls);
     }
 
-    document.addEventListener('click', function (event) {
-        // Panel Settings Sudah Dihapus - abaikan klik di luar
-    });
+    /* ================= TITIK MASUK DARI scanner.js ================= */
+    // Beep SELALU bunyi. Speaker aktif = beep lalu TTS. Speaker mute = beep saja.
+    function announceScan(status, body) {
+        // Kode kosong / tanpa hasil: beep saja
+        if (status === null || status === undefined) {
+            playBeepOnly();
+            return true;
+        }
 
-    document.addEventListener('keydown', function (event) {
-        if (event.key === 'Escape') return;
-    });
+        var text = buildAnnouncement(status, body);
+
+        if (muted || !supported || !text) {
+            playBeepOnly();
+            return true;
+        }
+
+        playBeepThenSpeak(text);
+        return true;
+    }
 
     window.KioskSpeech = {
         supported: supported,
@@ -362,7 +419,7 @@
         getVoices: function () { return idVoices.slice(); },
         getResolvedVoice: function () { return voice; },
         getRate: function () { return 0.95; },
-        isBeepBeforeSpeech: function () { return false; },
+        isBeepBeforeSpeech: function () { return true; },
         refreshVoices: refreshVoices
     };
 

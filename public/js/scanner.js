@@ -62,8 +62,8 @@ function normalizeCameraError(err, tahap) {
 }
 
 /* ================= SUARA BEEP (audio/beep.mp3 milik sekolah) =================
-   Beep dipakai semua scanner dan menjadi fallback halaman kiosk bila
-   speechSynthesis tidak tersedia. Bila suara dimatikan, beep ikut diredam. */
+   Beep dipakai semua scanner dan menjadi fallback halaman yang tidak memuat
+   kiosk-speech.js. Di halaman kiosk, beep selalu bunyi (dikelola KioskSpeech). */
 function playBeep() {
     const beep = document.getElementById('beepSound');
     if (!beep) return;
@@ -134,29 +134,31 @@ function vibrateOnScanFail() {
 
 function playBeepSound() { playBeep(); }
 
-/* ============== SATU TITIK PUSAT UMpan BALIK PER SCAN ==============
+/* ============== SATU TITIK PUSAT UMPAN BALIK PER SCAN ==============
    Dipanggil TEPAT SATU KALI untuk tiap kali user memindai:
      - hasil diterima dari server: Hadir, Terlambat, Presensi Pulang,
        sudah absen, kartu tidak dikenal, kode ngawur, error 4xx/5xx;
      - gagal jaringan / timeout / respons bukan JSON (blok catch);
-     - kode kosong (status null -> tanpa notifikasi & tanpa getar).
-   Halaman kiosk memakai TTS (KioskSpeech) untuk membacakan nama + status.
-   Bila TTS tidak tersedia, beep.mp3 lama menjadi fallback. Bila suara
-   dimatikan, semua bunyi termasuk beep diredam.
+     - kode kosong (status null -> beep saja, tanpa getar).
+
+   Halaman kiosk (memuat kiosk-speech.js): KioskSpeech.announceScan() yang
+   mengatur semuanya -> beep SELALU bunyi; speaker aktif = beep lalu suara
+   status (TANPA nama siswa); speaker mute = beep saja.
+   Halaman lain (tanpa KioskSpeech): beep.mp3 seperti biasa.
    Hasil non-sukses tetap mendapat getar seperti sebelumnya.
    Dipanggil SEBELUM render hasil, sehingga bunyi keluar bersamaan notifikasi. */
 function feedbackScan(status, body) {
-    let handledBySpeech = false;
+    let handled = false;
 
     if (window.KioskSpeech && typeof window.KioskSpeech.announceScan === 'function') {
         try {
-            handledBySpeech = window.KioskSpeech.announceScan(status, body) === true;
+            handled = window.KioskSpeech.announceScan(status, body) === true;
         } catch (e) {
-            handledBySpeech = false;
+            handled = false;
         }
     }
 
-    if (!handledBySpeech) playBeep();
+    if (!handled) playBeep();
 
     if (status === null || status === undefined) return; // kode kosong: beep saja
     if (status === 200 && body && body.success) return;  // sukses: tanpa getar
@@ -278,7 +280,7 @@ function processCode(token) {
     })
     .then(res => res.json().then(data => ({ status: res.status, body: data })))
     .then(({ status, body }) => {
-        // SATU beep per scan untuk SEMUA hasil (Hadir, Terlambat, sudah absen,
+        // SATU umpan balik per scan untuk SEMUA hasil (Hadir, Terlambat, sudah absen,
         // kartu tidak dikenal, kode ngawur, error server) — bersamaan notifikasi.
         feedbackScan(status, body);
         handleScanResult(status, body);
@@ -289,7 +291,7 @@ function processCode(token) {
             success: false,
             message: (window.__i18n && window.__i18n.connection_error) || 'Terjadi kendala koneksi ke server, coba lagi'
         };
-        // SATU beep per scan (gagal jaringan/timeout/respons tak terbaca) + getar.
+        // SATU umpan balik per scan (gagal jaringan/timeout/respons tak terbaca) + getar.
         feedbackScan(500, failBody);
         // HASIL 5: Error server/jaringan -> Lingkaran MERAH + TANDA SERU (!) putih
         handleScanResult(500, failBody);
