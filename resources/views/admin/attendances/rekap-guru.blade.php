@@ -56,25 +56,25 @@
         height: 38px;
         padding: 0 1rem;
     }
-    .btn-green-excel { background-color: #059669; }
-    .btn-red-pdf { background-color: #ef4444; }
-    .btn-green-excel:hover, .btn-green-excel:active, .btn-green-excel:focus, .btn-green-excel:focus-visible { background-color: #059669 !important; color: #ffffff !important; transform: none !important; box-shadow: none !important; outline: none; }
-    .btn-red-pdf:hover, .btn-red-pdf:active, .btn-red-pdf:focus, .btn-red-pdf:focus-visible { background-color: #ef4444 !important; color: #ffffff !important; transform: none !important; box-shadow: none !important; outline: none; }
+    .btn-green-excel { background-color: var(--action-excel); }
+    .btn-red-pdf { background-color: var(--action-pdf); }
+    .btn-green-excel:hover, .btn-green-excel:active, .btn-green-excel:focus, .btn-green-excel:focus-visible { background-color: var(--action-excel-hover) !important; color: #ffffff !important; transform: none !important; box-shadow: none !important; outline: none; }
+    .btn-red-pdf:hover, .btn-red-pdf:active, .btn-red-pdf:focus, .btn-red-pdf:focus-visible { background-color: var(--action-pdf-hover) !important; color: #ffffff !important; transform: none !important; box-shadow: none !important; outline: none; }
 
     /* Tombol Reset: kotak 38x38 */
     .btn-reset-rekap {
         display: inline-flex; align-items: center; justify-content: center;
         box-sizing: border-box; flex-shrink: 0;
         width: 38px; height: 38px; padding: 0;
-        background: #ffffff; border: 1px solid #cbd5e1; border-radius: var(--clean-radius, 6px);
-        color: #64748b; text-decoration: none; outline: none;
+        background: var(--btn-refresh); border: 1px solid var(--btn-refresh); border-radius: var(--clean-radius, 6px);
+        color: #ffffff; text-decoration: none; outline: none;
         transition: none !important;
         -webkit-tap-highlight-color: transparent;
     }
     .btn-reset-rekap svg { width: 20px; height: 20px; stroke: currentColor; fill: none; }
     .btn-reset-rekap:hover,
     .btn-reset-rekap:focus-visible {
-        color: #15803D; border-color: #15803D; background: #f8fafc; text-decoration: none;
+        color: #ffffff; border-color: var(--btn-refresh-hover); background: var(--btn-refresh-hover); text-decoration: none;
     }
 
     .recap-mobile-actions .btn { transition: none !important; transform: none !important; }
@@ -107,16 +107,16 @@
     }
     .period-link:active { background-color: #cbd5e1; }
     .period-link.active {
-        background-color: #15803D !important; color: #ffffff !important; font-weight: 600;
-        box-shadow: 0 2px 6px rgba(21, 128, 61, 0.25);
+        background-color: var(--color-primary) !important; color: #ffffff !important; font-weight: 600;
+        box-shadow: 0 2px 6px rgba(var(--color-primary-rgb), 0.25);
     }
     .period-link.active:hover,
     .period-link.active:active,
-.period-link.active:focus,
+    .period-link.active:focus,
     .period-link.active:focus-visible {
-        background-color: #15803D !important; color: #ffffff !important;
+        background-color: var(--color-primary-hover) !important; color: #ffffff !important;
     }
-    .period-link:focus-visible { outline: 2px solid #15803D; outline-offset: 2px; }
+    .period-link:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
 
     @media (max-width: 575.98px) {
         .period-container { width: 100%; }
@@ -134,7 +134,7 @@
         background-color: #ffffff; padding: 0.35rem 0.65rem; transition: all 0.15s ease-in-out;
         border: 1px solid #cbd5e1;
     }
-    .filter-input:focus { border-color: #3b82f6; box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15); }
+    .filter-input:focus { border-color: var(--color-primary); box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb), 0.15); }
 
     /* Tables */
     .table-responsive { -webkit-overflow-scrolling: touch; overflow-x: auto; width: 100%; }
@@ -165,7 +165,7 @@
        Pakai ID + !important supaya tidak kalah dari CSS global yang
        memaksa warna thead th. Class dipasang di <th> DAN <span> di dalamnya. */
     #daftar-rekap .table-matrix .clr-h { color: #16a34a !important; }
-    #daftar-rekap .table-matrix .clr-s { color: #2563eb !important; }
+    #daftar-rekap .table-matrix .clr-s { color: var(--presensi-sakit) !important; }
     #daftar-rekap .table-matrix .clr-i { color: #7e22ce !important; }
     #daftar-rekap .table-matrix .clr-a { color: #ef4444 !important; }
     #daftar-rekap .table-matrix .clr-pct { color: #212529 !important; }
@@ -175,7 +175,7 @@
 
     /* Status Colors */
     .cell-present { color: #16a34a !important; font-weight: 700; }
-    .cell-sick { color: #2563eb !important; font-weight: 700; }
+    .cell-sick { color: var(--presensi-sakit) !important; font-weight: 700; }
     .cell-permission { color: #7e22ce !important; font-weight: 700; }
     .cell-alpha { color: #ef4444 !important; font-weight: 700; }
     .cell-holiday { color: #64748b !important; font-weight: 600; }
@@ -192,7 +192,7 @@
     .rekap-legend-item strong { font-size: 0.9rem; font-weight: 700; }
 
     .rekap-jk { font-size: 0.82rem; font-weight: 500; line-height: 1.2; }
-    .rekap-jk.is-laki { color: #3B82F6 !important; font-weight: 500 !important; }
+    .rekap-jk.is-laki { color: var(--color-primary) !important; font-weight: 500 !important; }
     .rekap-jk.is-perempuan { color: #EF4444 !important; font-weight: 500 !important; }
 
     #daftar-rekap { display: block; height: auto; min-height: 0; margin-bottom: 0 !important; }
@@ -215,11 +215,11 @@
         text-decoration: none; background: none !important; border: none !important; box-shadow: none !important;
         border-radius: 0 !important; color: #64748b; cursor: pointer;
     }
-    .kehadiran-pagination-page.is-active { color: #15803D !important; font-weight: 700; border-bottom: 2px solid #15803D !important; cursor: default; }
+    .kehadiran-pagination-page.is-active { color: var(--color-primary) !important; font-weight: 700; border-bottom: 2px solid var(--color-primary) !important; cursor: default; }
     .kehadiran-pagination-step:hover,
-    .kehadiran-pagination-page:hover { color: #15803D !important; text-decoration: underline; }
+    .kehadiran-pagination-page:hover { color: var(--color-primary-hover) !important; text-decoration: underline; }
     .kehadiran-pagination-step:focus-visible,
-    .kehadiran-pagination-page:focus-visible { outline: 2px solid #15803D !important; outline-offset: 1px; border-radius: 0 !important; }
+    .kehadiran-pagination-page:focus-visible { outline: 2px solid var(--color-primary) !important; outline-offset: 1px; border-radius: 0 !important; }
     .kehadiran-pagination-step.is-disabled { color: #cbd5e1; cursor: not-allowed; pointer-events: none; }
     .kehadiran-pagination-step.is-disabled:hover { color: #cbd5e1; text-decoration: none; }
     .kehadiran-pagination-ellipsis { display: inline-block; padding: 0.45rem 0.1rem; font-size: 0.95rem; color: #94a3b8; line-height: 1.2; }
@@ -228,9 +228,9 @@
     /* Progress bar di dalam tombol Unduh */
     #printRekapSubmitBtn {
         position: relative; overflow: hidden; min-width: 0; white-space: nowrap; isolation: isolate;
-        background-color: #15803D !important; border-color: #15803D !important; color: #fff !important;
+        background-color: var(--color-primary) !important; border-color: var(--color-primary) !important; color: #fff !important;
     }
-    #printRekapSubmitBtn.is-done { background-color: #16a34a !important; border-color: #16a34a !important; color: #fff !important; }
+    #printRekapSubmitBtn.is-done { background-color: var(--status-hadir) !important; border-color: var(--status-hadir) !important; color: #fff !important; }
     #printRekapSubmitBtn.is-done .btn-progress__fill { display: none; }
 
     #printRekapModal .dl-actions > .btn { flex: 1 1 0; min-width: 0; white-space: nowrap; text-align: center; }

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    @include('partials.theme')
     <meta charset="UTF-8">
     <title>{{ $title }}</title>
     <style>
@@ -26,7 +27,7 @@
         .school-title {
             font-size: 14pt;
             font-weight: bold;
-            color: #166534;
+            color: {{ config('theme.primary') }};
             letter-spacing: 0.5px;
             margin: 0;
             text-transform: uppercase;
@@ -67,7 +68,7 @@
             text-align: center;
         }
         .data-table th {
-            background-color: #15803D;
+            background-color: {{ config('theme.primary') }};
             color: #ffffff;
             font-weight: bold;
             text-transform: uppercase;
@@ -88,7 +89,7 @@
 
         .badge-h { color: #059669; font-weight: bold; }
         .badge-t { color: #d97706; font-weight: bold; }
-        .badge-s { color: #2563eb; font-weight: bold; }
+        .badge-s { color: {{ config('theme.status.sakit') }}; font-weight: bold; }
         .badge-i { color: #7e22ce; font-weight: bold; }
         .badge-a { color: #e11d48; font-weight: bold; }
         .badge-l { color: #94a3b8; }
@@ -96,7 +97,7 @@
         /* Kolom JK: L biru cerah, P merah cerah — sama dengan tampilan web Rekap
            (.rekap-jk). Huruf medium, TIDAK bold, dan ukuran font tidak
            diubah supaya tinggi baris & paginasi PDF tetap sama. */
-        .jk-l { color: #3B82F6; font-weight: 500; }
+        .jk-l { color: var(--color-primary); font-weight: 500; }
         .jk-p { color: #EF4444; font-weight: 500; }
 
         /* ==== GLOBAL TEXT RESET: semua teks jadi hitam pekat, tebal dibuat normal ==== */
@@ -108,14 +109,14 @@
         th { color: #ffffff !important; font-weight: bold !important; }
         .badge-h { color: #059669 !important; font-weight: bold !important; }
         .badge-t { color: #d97706 !important; font-weight: bold !important; }
-        .badge-s { color: #2563eb !important; font-weight: bold !important; }
+        .badge-s { color: {{ config('theme.status.sakit') }} !important; font-weight: bold !important; }
         .badge-i { color: #7e22ce !important; font-weight: bold !important; }
         .badge-a { color: #e11d48 !important; font-weight: bold !important; }
         .badge-l { color: #94a3b8 !important; font-weight: normal !important; }
-        .jk-l { color: #3B82F6 !important; font-weight: 500 !important; }
+        .jk-l { color: var(--color-primary) !important; font-weight: 500 !important; }
         .jk-p { color: #EF4444 !important; font-weight: 500 !important; }
         /* Judul sekolah: tetap biru (seperti asal) + normal tebal */
-        .school-title { color: #166534 !important; font-weight: bold !important; }
+        .school-title { color: {{ config('theme.primary') }} !important; font-weight: bold !important; }
         /* Subjudul: hitam pekat, tebal normal */
         .school-subtitle, .report-subtitle { color: #000 !important; font-weight: 400 !important; }
         /* Waktu cetak: hitam pekat, normal */
@@ -168,7 +169,7 @@
         /* Warna keterangan sama dengan warna status di tabel */
         .pdf-legend .lg-h { color: #059669 !important; }
         .pdf-legend .lg-t { color: #d97706 !important; }
-        .pdf-legend .lg-s { color: #2563eb !important; }
+        .pdf-legend .lg-s { color: {{ config('theme.status.sakit') }} !important; }
         .pdf-legend .lg-i { color: #7e22ce !important; }
         .pdf-legend .lg-a { color: #e11d48 !important; }
         .pdf-legend .lg-l { color: #94a3b8 !important; }
@@ -302,7 +303,7 @@
                 @endforeach
                 <th style="width: 2.6%; background-color: #059669;">H</th>
                 <th style="width: 2.6%; background-color: #d97706;">T</th>
-                <th style="width: 2.6%; background-color: #15803D;">S</th>
+                <th style="width: 2.6%; background-color: {{ config('theme.status.sakit') }};">S</th>
                 <th style="width: 2.6%; background-color: #7e22ce;">I</th>
                 <th style="width: 2.6%; background-color: #e11d48;">A</th>
                 <th style="width: 4%;">%</th>
@@ -375,7 +376,7 @@
                 @endforeach
                 <th style="width: 2.6%; background-color: #059669;">H</th>
                 <th style="width: 2.6%; background-color: #d97706;">T</th>
-                <th style="width: 2.6%; background-color: #15803D;">S</th>
+                <th style="width: 2.6%; background-color: {{ config('theme.status.sakit') }};">S</th>
                 <th style="width: 2.6%; background-color: #7e22ce;">I</th>
                 <th style="width: 2.6%; background-color: #e11d48;">A</th>
                 <th style="width: 4%;">%</th>
@@ -431,7 +432,7 @@
                 @endfor
                 <th style="width: 2.6%; background-color: #059669;">H</th>
                 <th style="width: 2.6%; background-color: #d97706;">T</th>
-                <th style="width: 2.6%; background-color: #15803D;">S</th>
+                <th style="width: 2.6%; background-color: {{ config('theme.status.sakit') }};">S</th>
                 <th style="width: 2.6%; background-color: #7e22ce;">I</th>
                 <th style="width: 2.6%; background-color: #e11d48;">A</th>
                 <th style="width: 4.4%;">%</th>

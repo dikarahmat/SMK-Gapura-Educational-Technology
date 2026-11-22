@@ -14,7 +14,7 @@
 @section('content')
 <div class="flex items-start gap-4">
     <div class="relative flex-1">
-        <button id="modeToggleBtn" class="w-full inline-flex items-center justify-between rounded-md border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 hover:border-blue-500 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors">
+        <button id="modeToggleBtn" class="w-full inline-flex items-center justify-between rounded-md border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 hover:border-primary hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors">
             <span>Mode Siswa</span>
             <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10h4a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2zm11 5a2 2 0 0 1-4 0 2 2 0 0 1 4 0z"/></svg>
         </button>

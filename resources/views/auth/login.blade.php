@@ -23,6 +23,9 @@
 
     <link rel="icon" type="image/webp" href="{{ \App\Models\Setting::getLogoUrl() }}">
 
+    <!-- ===== TEMA WARNA TERPUSAT: CSS variable SEBELUM CSS lain ===== -->
+    @include('partials.theme')
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -31,10 +34,10 @@
 
     <style>
         :root {
-            --blue: #15803D;
-            --blue-dark: #166534;
-            --navy: #14532D;
-            --sky: #DCFCE7;
+            --blue: var(--color-primary);
+            --blue-dark: var(--color-primary-700);
+            --navy: var(--color-primary);
+            --sky: var(--color-primary-100);
             --text-main: #0f172a;
             --text-muted: #64748b;
             --page-bg: #faf8ff;
@@ -72,7 +75,7 @@
             overflow: hidden;
             color: #fff;
             text-align: center;
-            background: linear-gradient(180deg, #14532D 0%, #14532D 30%, #15803D 100%);
+            background: linear-gradient(180deg, var(--color-primary-900) 0%, var(--color-primary-900) 30%, var(--color-primary) 100%);
             user-select: none;
         }
 
@@ -93,7 +96,7 @@
         }
         .brand-panel::after {
             background:
-                radial-gradient(ellipse 60% 45% at 100% 0%, rgba(220, 252, 231, .20) 0, transparent 70%),
+                radial-gradient(ellipse 60% 45% at 100% 0%, rgba(147, 197, 253, .20) 0, transparent 70%),
                 radial-gradient(ellipse 55% 40% at 0% 100%, rgba(255, 255, 255, .07) 0, transparent 70%);
         }
 
@@ -153,7 +156,7 @@
             font-weight: 400;
             line-height: 1.6;
             letter-spacing: .01em;
-            color: rgba(220, 252, 231, .85);
+            color: rgba(219, 234, 254, .85);
         }
         .brand-chips {
             display: flex;
@@ -176,7 +179,7 @@
             letter-spacing: .02em;
             color: rgba(255, 255, 255, .92);
         }
-        .chip i { font-size: 28px; color: #DCFCE7; }
+        .chip i { font-size: 28px; color: var(--color-primary-100); }
 
         /* ===================== PANEL KANAN (FORM) ===================== */
         .form-panel {
@@ -188,8 +191,8 @@
             padding: 3rem;
             overflow: hidden;
             background:
-                radial-gradient(circle at 100% 0%, rgba(220, 252, 231, .22) 0, transparent 42%),
-                radial-gradient(circle at 0% 100%, rgba(220, 252, 231, .55) 0, transparent 40%),
+                radial-gradient(circle at 100% 0%, rgba(165, 180, 252, .22) 0, transparent 42%),
+                radial-gradient(circle at 0% 100%, rgba(219, 234, 254, .55) 0, transparent 40%),
                 #fff;
         }
         .form-wrap {
@@ -205,7 +208,7 @@
             border-radius: 24px;
             padding: 2.25rem;
             border: 1px solid #f1f5f9;
-            box-shadow: 0 25px 50px -12px rgba(20, 83, 45, .16);
+            box-shadow: 0 25px 50px -12px rgba(30, 58, 138, .16);
         }
 
         .form-heading {
@@ -348,13 +351,11 @@
             letter-spacing: .02em;
             color: #fff;
             cursor: pointer;
-            background: linear-gradient(90deg, #15803D, #166534);
-            box-shadow: 0 10px 22px rgba(21, 128, 61, .28);
+            background: linear-gradient(90deg, var(--color-primary), var(--color-primary-700));             box-shadow: 0 10px 22px rgba(var(--color-primary-rgb), .28);
             transition: box-shadow .2s, transform .15s, background .15s;
         }
         .btn-submit-action:hover {
-            background: linear-gradient(90deg, #166534, #15803D);
-            box-shadow: 0 12px 28px rgba(21, 128, 61, .4);
+            background: linear-gradient(90deg, var(--color-primary-700), var(--color-primary-900));             box-shadow: 0 12px 28px rgba(var(--color-primary-rgb), .4);
         }
         .btn-submit-action:active { transform: scale(.99); }
         .btn-submit-action:disabled { opacity: .85; cursor: not-allowed; }
@@ -488,7 +489,7 @@
                 padding: 1.5rem;
                 border: 0;
                 border-radius: 28px 28px 24px 24px;
-                box-shadow: 0 20px 25px -5px rgba(20, 83, 45, .10), 0 8px 10px -6px rgba(20, 83, 45, .10);
+                box-shadow: 0 20px 25px -5px rgba(0, 74, 198, .10), 0 8px 10px -6px rgba(0, 74, 198, .10);
             }
 
             .form-heading { font-size: 24px; letter-spacing: -.02em; }

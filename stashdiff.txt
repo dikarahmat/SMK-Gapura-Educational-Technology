@@ -1,0 +1,7 @@
+﻿git : fatal: bad revision 'stash@'
+At line:1 char:1
++ git diff stash@{1} -- resources/views/admin/kiosk.blade.php 2>&1 | ou ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (fatal: bad revision 'stash@':String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 

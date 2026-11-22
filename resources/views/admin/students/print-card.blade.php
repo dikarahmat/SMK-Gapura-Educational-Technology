@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    @include('partials.theme')
+    @include('partials.theme')
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ __('Kartu Presensi Siswa') }} - {{ $schoolName ?? \App\Models\Setting::getSchoolName() }}</title>
@@ -97,10 +99,10 @@
         }
         .btn-back:hover { background-color: #f1f5f9; }
         .btn-print {
-            background-color: var(--btn-cetak-kartu);
+            background-color: var(--btn-print_card);
             color: #ffffff;
         }
-        .btn-print:hover { background-color: var(--btn-cetak-kartu-hover); }
+        .btn-print:hover { background-color: var(--btn-print_card-hover); }
 
         .card-preview-wrapper {
             display: flex;

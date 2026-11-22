@@ -832,9 +832,9 @@ class AttendanceController extends Controller
                 $status = 'Hadir';
             }
             $statusColor = match ($status) {
-                'Hadir' => '#059669',
-                'Sakit' => '#2563eb',
-                'Izin' => '#7e22ce',
+                'Hadir' => config('theme.status.hadir'),
+                'Sakit' => config('theme.status.sakit'),
+                'Izin' => config('theme.status.izin'),
                 'Alfa' => '#dc2626',
                 default => '#6b7280',
             };

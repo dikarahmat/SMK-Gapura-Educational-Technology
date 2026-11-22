@@ -23,6 +23,8 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    @include('partials.theme')
+    @include('partials.theme')
     <meta charset="UTF-8">
     <title>{{ __('Cetak Kartu Presensi Siswa') }} - {{ $schoolName ?? '' }}</title>
     <style>

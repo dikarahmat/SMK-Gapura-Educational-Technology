@@ -21,7 +21,7 @@
     }
     .badge-hadir { background-color: #10b981; color: #ffffff; }
     .badge-terlambat { background-color: #f59e0b; color: #ffffff; }
-    .badge-sakit { background-color: #3b82f6; color: #ffffff; }
+    .badge-sakit { background-color: var(--presensi-sakit); color: #ffffff; }
     .badge-izin { background-color: #8b5cf6; color: #ffffff; }
     .badge-alfa { background-color: #ef4444; color: #ffffff; }
     .badge-belum { background-color: #94a3b8; color: #ffffff; }
@@ -35,12 +35,12 @@
         min-width: 720px;
     }
     .table-enterprise thead tr > th {
-        background-color: #15803D !important;
+        background-color: var(--color-primary) !important;
         color: #ffffff !important;
         font-weight: 700 !important;
         font-size: 0.8rem !important;
         padding: 0.8rem 1rem;
-        border-bottom: 1.5px solid #166534;
+        border-bottom: 1.5px solid var(--color-primary-hover);
         text-transform: uppercase;
         letter-spacing: 0.03em;
         white-space: nowrap !important;
@@ -105,7 +105,7 @@
         padding: 0.12rem 0.2rem;
     }
     .aksi-quick .btn-save-quick {
-        background-color: #15803D;
+        background-color: var(--color-primary);
         color: #ffffff;
         border: none;
         border-radius: 6px;
@@ -121,7 +121,7 @@
         transition: background-color 0.12s ease;
     }
     .aksi-quick .btn-save-quick:hover {
-        background-color: #166534;
+        background-color: var(--color-primary-hover);
     }
     .aksi-quick .btn-save-quick i {
         font-size: 13px !important;
@@ -132,7 +132,7 @@
         color: #ffffff !important;
     }
     .aksi-quick .btn-save-quick:focus-visible {
-        outline: 2px solid #15803D;
+        outline: 2px solid var(--color-primary);
         outline-offset: 2px;
     }
     /* ---- Kolom Aksi (per siswa): kompak, rapat, rata kiri ---- */
@@ -199,7 +199,7 @@
         text-transform: uppercase;
     }
     .btn-save-quick {
-        background: #15803D;
+        background: var(--btn-save);
         color: #ffffff;
         border: none;
         border-radius: 6px;
@@ -216,13 +216,13 @@
         transition: background-color 0.12s ease;
     }
     .btn-save-quick:disabled, .btn-save-quick[disabled] {
-        background: #15803D !important;
+        background: var(--btn-save) !important;
         opacity: 0.45 !important;
         cursor: not-allowed !important;
         color: #ffffff !important;
     }
     .btn-save-quick:not(:disabled):hover {
-        background: #166534;
+        background: var(--btn-save-hover);
     }
     .btn-save-quick i {
         font-size: 11px !important;
@@ -233,7 +233,7 @@
         color: #ffffff !important;
     }
     .aksi-form .btn-save-quick.btn-save-disabled, .aksi-form .btn-save-quick.disabled {
-        background: #15803D !important;
+        background: var(--color-primary) !important;
         opacity: 0.45 !important;
         cursor: not-allowed !important;
         color: #ffffff !important;
@@ -303,9 +303,8 @@
     }
 
     .kiosk-switch-btn.active {
-        background: #15803D;
-        color: #ffffff;
-        box-shadow: 0 2px 8px rgba(21, 128, 61, 0.25);
+        background: var(--color-primary);
+        color: #ffffff;         box-shadow: 0 2px 8px rgba(var(--color-primary-rgb), 0.25);
     }
 
     /* Viewport / Area Scanner — SATU SUMBER GAYA: presensi-tokens.css
@@ -482,7 +481,7 @@
 
     .presensi-badge.hadir     { color: #059669 !important; } /* hijau */
     .presensi-badge.terlambat { color: #d97706 !important; } /* oranye */
-    .presensi-badge.sakit     { color: #2563eb !important; } /* biru */
+    .presensi-badge.sakit     { color: var(--presensi-sakit) !important; } /* biru */
     .presensi-badge.izin      { color: #7e22ce !important; } /* ungu */
     .presensi-badge.alfa      { color: #dc2626 !important; } /* merah */
     .presensi-badge.belum     { color: #475569 !important; } /* abu-abu */

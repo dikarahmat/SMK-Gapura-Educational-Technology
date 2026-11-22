@@ -53,7 +53,7 @@ class StudentTemplateExport implements FromArray, WithHeadings, ShouldAutoSize, 
                 'font' => ['bold' => true, 'color' => ['argb' => 'FFFFFFFF']],
                 'fill' => [
                     'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                    'startColor' => ['argb' => 'FF2563EB'],
+                    'startColor' => ['argb' => 'FF' . (new \App\Support\Theme(config('theme')))->primary()],
                 ],
             ],
         ];

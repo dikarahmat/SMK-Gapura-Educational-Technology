@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Setting;
+use App\Support\Theme;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
@@ -128,12 +129,12 @@ class TeacherAttendanceExport extends DefaultValueBinder implements FromArray, S
 
         $sheet->mergeCells("A1:{$lastCol}1");
         $sheet->mergeCells("A2:{$lastCol}2");
-        $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(14)->setColor(new Color('1D4ED8'));
+        $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(14)->setColor(new Color((new Theme(config('theme')))->primary700Argb()));
         $sheet->getStyle('A2')->getFont()->setSize(10)->setColor(new Color('475569'));
 
         $header = "A4:{$lastCol}4";
         $sheet->getStyle($header)->getFont()->setBold(true)->setColor(new Color('FFFFFF'));
-        $sheet->getStyle($header)->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('2563EB');
+        $sheet->getStyle($header)->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB((new Theme(config('theme')))->primaryArgb());
         $sheet->getStyle($header)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER)->setVertical(Alignment::VERTICAL_CENTER);
 
         if ($this->dataEndRow >= $this->dataStartRow) {

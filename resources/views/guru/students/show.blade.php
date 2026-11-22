@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', __('Detail Guru'))
 @section('page_title', __('Detail Guru'))
@@ -29,25 +29,25 @@
     }
 
     .btn-download-green {
-        background-color: #10b981;
-        color: #ffffff;
-        font-weight: 600;
-        font-size: 0.9rem;
-        border-radius: var(--clean-radius, 8px);
-        border: none;
-        padding: 0.75rem 1rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.4rem;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        text-decoration: none;
-        width: 100%;
-        min-height: 42px;
-        box-shadow: 0 4px 6px rgba(16, 185, 129, 0.2);
+        background-color: var(--action-excel) !important;
+        color: #ffffff !important;
+        font-weight: 600 !important;
+        font-size: 0.9rem !important;
+        border-radius: var(--clean-radius, 8px) !important;
+        border: none !important;
+        padding: 0.75rem 1rem !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 0.4rem !important;
+        cursor: pointer !important;
+        transition: background-color 0.2s ease, opacity 0.2s ease !important;
+        text-decoration: none !important;
+        width: 100% !important;
+        min-height: 42px !important;
+        box-shadow: 0 4px 6px rgba(var(--action-excel-rgb), 0.2) !important;
     }
-    .btn-download-green:hover { background-color: #059669; color: #ffffff; box-shadow: 0 6px 8px rgba(16, 185, 129, 0.3); }
+    .btn-download-green:hover { background-color: var(--action-excel-hover) !important; color: #ffffff !important; box-shadow: 0 6px 8px rgba(var(--action-excel-rgb), 0.3) !important; }
 
     .kp-card-box {
         width: calc(53.9mm * 1.6);

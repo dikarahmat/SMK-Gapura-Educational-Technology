@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', __('Detail Guru'))
 @section('page_title', __('Detail Guru'))
@@ -42,8 +42,8 @@
     }
 
     .form-control:focus, .form-select:focus {
-        border-color: #3b82f6;
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        border-color: var(--color-primary);
+        box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.15);
     }
 
     .form-control.is-invalid,
@@ -69,7 +69,7 @@
     }
 
     .btn-submit-blue {
-        background-color: #3b82f6;
+        background-color: var(--btn-save);
         color: #ffffff;
         font-weight: 600;
         font-size: 0.9rem;
@@ -82,7 +82,7 @@
         justify-content: center;
         line-height: 1.5;
     }
-    .btn-submit-blue:hover { background-color: #15803D; color: #ffffff; }
+    .btn-submit-blue:hover { background-color: var(--btn-save-hover); color: #ffffff; }
     .btn-submit-blue:disabled, .btn-submit-blue[aria-disabled="true"] {
         opacity: 0.65;
         cursor: not-allowed;
@@ -108,25 +108,25 @@
 
     /* Tombol download: selebar isi box */
     .btn-download-green {
-        background-color: #10b981;
-        color: #ffffff;
-        font-weight: 600;
-        font-size: 0.9rem;
-        border-radius: var(--clean-radius, 8px);
-        border: none;
-        padding: 0.75rem 1rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.4rem;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        text-decoration: none;
-        width: 100%;
-        min-height: 42px;
-        box-shadow: 0 4px 6px rgba(16, 185, 129, 0.2);
+        background-color: var(--action-excel) !important;
+        color: #ffffff !important;
+        font-weight: 600 !important;
+        font-size: 0.9rem !important;
+        border-radius: var(--clean-radius, 8px) !important;
+        border: none !important;
+        padding: 0.75rem 1rem !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 0.4rem !important;
+        cursor: pointer !important;
+        transition: background-color 0.2s ease, opacity 0.2s ease !important;
+        text-decoration: none !important;
+        width: 100% !important;
+        min-height: 42px !important;
+        box-shadow: 0 4px 6px rgba(var(--action-excel-rgb), 0.2) !important;
     }
-    .btn-download-green:hover { background-color: #059669; color: #ffffff; box-shadow: 0 6px 8px rgba(16, 185, 129, 0.3); }
+    .btn-download-green:hover { background-color: var(--action-excel-hover) !important; color: #ffffff !important; box-shadow: 0 6px 8px rgba(var(--action-excel-rgb), 0.3) !important; }
 
     /* Preview kartu CR80 (53.9mm x 85.6mm) yang SKALANYA mengikuti lebar box.
        Skala dihitung JS (--kp-scale) supaya kartu selalu utuh, tidak terpotong
@@ -265,7 +265,7 @@
                 </div>
 
                 <!-- Tombol download (tepat di bawah kartu, selebar box, di luar kp-card-box) -->
-                <a href="{{ panel_route('guru.download-card', $teacher->id) }}" class="btn-download-cetak btn-progress" id="btnDownloadCard" data-download data-no-download data-dl-progress>{{ __('Download Kartu Presensi') }}</a>
+                <a href="{{ panel_route('guru.download-card', $teacher->id) }}" class="btn-download-green btn-progress" id="btnDownloadCard" data-download data-no-download data-dl-progress>{{ __('Download Kartu Presensi') }}</a>
             </div>
         </div>
     </div>

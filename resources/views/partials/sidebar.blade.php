@@ -493,42 +493,7 @@
 
     .sidebar-dropdown-chevron { font-size: 1.1rem; flex-shrink: 0; }
     .sidebar-dropdown-toggle[aria-expanded="true"] .sidebar-dropdown-chevron { transform: rotate(180deg); }
-
-    /* ====================================================================
-       MENU UTAMA (level 1)
-       Aktif   : latar PUTIH, teks + ikon + chevron HIJAU TUA (#15803D).
-       Hover   : (tidak aktif) rgba(255,255,255,.10), teks + ikon putih.
-       Selector sengaja spesifik + !important supaya tidak ditimpa CSS layout
-       (penyebab ikon hilang: ikon hijau di atas pil hijau).
-       ==================================================================== */
-    .sidebar-container .sidebar-menu-scroll .nav-pills > .nav-item > a.nav-link.active,
-    .sidebar-container .sidebar-menu-scroll .nav-pills > .nav-item > a.nav-link.active:hover,
-    .sidebar-container .sidebar-menu-scroll .nav-pills > .nav-item > a.nav-link.active:focus,
-    .sidebar-container .sidebar-menu-scroll .nav-pills > .nav-item > a.nav-link.active:focus-visible,
-    .sidebar-container .sidebar-menu-scroll .nav-pills > .nav-item > a.nav-link.active:active {
-        background: #FFFFFF !important;
-        background-color: #FFFFFF !important;
-        color: #15803D !important;
-        box-shadow: 0 1px 2px rgba(0,0,0,.10) !important;
-    }
-    .sidebar-container .sidebar-menu-scroll .nav-pills > .nav-item > a.nav-link.active i,
-    .sidebar-container .sidebar-menu-scroll .nav-pills > .nav-item > a.nav-link.active i::before,
-    .sidebar-container .sidebar-menu-scroll .nav-pills > .nav-item > a.nav-link.active .sidebar-nav-label,
-    .sidebar-container .sidebar-menu-scroll .nav-pills > .nav-item > a.nav-link.active .sidebar-dropdown-chevron {
-        color: #15803D !important;
-        fill: #15803D !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-    }
-
-    .sidebar-container .sidebar-menu-scroll .nav-pills > .nav-item > a.nav-link:not(.active):hover {
-        background: rgba(255,255,255,.10) !important;
-        color: #FFFFFF !important;
-    }
-    .sidebar-container .sidebar-menu-scroll .nav-pills > .nav-item > a.nav-link:not(.active):hover i,
-    .sidebar-container .sidebar-menu-scroll .nav-pills > .nav-item > a.nav-link:not(.active):hover .sidebar-nav-label {
-        color: #FFFFFF !important;
-    }
+    .sidebar-dropdown-toggle.active .sidebar-dropdown-chevron { color: var(--bs-primary); }
 
     .sidebar-submenu { margin: .25rem .75rem .25rem 1rem; gap: 2px; flex-wrap: nowrap; min-width: 0; }
     .sidebar-submenu-link {
@@ -541,7 +506,7 @@
     .sidebar-submenu-link i { flex-shrink: 0; }
     .sidebar-submenu-link .sidebar-nav-label { overflow: hidden; text-overflow: ellipsis; }
     .sidebar-submenu-link:hover { background: rgba(255,255,255,.12); color: #fff; }
-    .sidebar-submenu-link.is-active { background: rgba(255,255,255,.15); color: #fff; }
+    .sidebar-submenu-link.is-active { background: rgba(255,255,255,.2); color: #fff; }
 
     .sidebar-submenu-link,
     .sidebar-submenu-link:visited,
@@ -552,11 +517,7 @@
     .sidebar-submenu-link.is-active,
     .sidebar-submenu-link.is-active:focus,
     .sidebar-submenu-link.is-active:active,
-    .sidebar-submenu-link.is-active:hover { color: #fff !important; background: rgba(255,255,255,.15); }
-
-    /* Submenu aktif: ikon + teks tetap putih */
-    .sidebar-submenu-link.is-active i,
-    .sidebar-submenu-link.is-active .sidebar-nav-label { color: #fff !important; }
+    .sidebar-submenu-link.is-active:hover { color: #fff !important; background: rgba(255,255,255,.2); }
 
     .sidebar-menu-scroll .nav-link:focus,
     .sidebar-menu-scroll .nav-link:focus-visible,
@@ -602,7 +563,7 @@
         width: 4px; height: 4px; margin-left: -2px; border-radius: 50%;
         background: rgba(255,255,255,.85);
     }
-    .sidebar-container.is-rail .sidebar-dropdown-toggle.active::after { background: #15803D; }
+    .sidebar-container.is-rail .sidebar-dropdown-toggle.active::after { background: var(--bs-primary); }
 
     #sidebarFlyout {
         position: fixed; z-index: 1080; display: none; min-width: 200px;
@@ -621,9 +582,8 @@
         letter-spacing: .02em; color: #1e293b; text-decoration: none; white-space: nowrap;
     }
     #sidebarFlyout .sf-link i { font-size: 1.05rem; color: #64748b; }
-    #sidebarFlyout .sf-link:hover { background: #f1f5f9; color: #0f172a; }
-    #sidebarFlyout .sf-link.is-active { background: rgba(21,128,61,.10); color: #15803D; }
-    #sidebarFlyout .sf-link.is-active i { color: #15803D; }
+    #sidebarFlyout .sf-link:hover { background: #f1f5f9; color: #0f172a; }        #sidebarFlyout .sf-link.is-active { background: rgba(var(--color-primary-rgb), 0.10); color: var(--bs-primary); }
+        #sidebarFlyout .sf-link.is-active i { color: var(--bs-primary); }
 </style>
 
 <script>

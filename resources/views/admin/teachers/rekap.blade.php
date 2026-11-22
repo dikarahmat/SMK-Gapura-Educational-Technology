@@ -4,13 +4,13 @@
 @push('styles')
 <style>
     .tab-btn { transition: color 0.15s ease, background-color 0.15s ease; border: 1px solid #dee2e6; margin: 2px; }
-    .tab-btn.active { background-color: #e3f2fd; color: #1976d2; border-color: #1976d2; }
+    .tab-btn.active { background-color: var(--color-primary-50); color: var(--color-primary); border-color: var(--color-primary); }
     .teacher-recap-table th { background-color: #f8f9fa; border: 1px solid #dee2e6; white-space: nowrap; }
     .teacher-recap-table td { border: 1px solid #dee2e6; white-space: nowrap; }
     .status-hadir { background-color: #e8f5e9; color: #2e7d32; }
     .status-terlambat { background-color: #fff3e0; color: #ef6c00; }
     .status-alfa { background-color: #ffebee; color: #c62828; }
-    .status-izin { background-color: #e3f2fd; color: #1565c0; }
+    .status-izin { background-color: var(--color-primary-50); color: var(--color-primary-700); }
     .status-sakit { background-color: #f1f8e9; color: #33691e; }
 </style>
 @endsection

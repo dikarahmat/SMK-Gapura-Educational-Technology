@@ -29,6 +29,31 @@ class DownloadCacheService
     /** @var array<string, \GdImage> */
     private static array $cardJpgTemplateCache = [];
 
+    /**
+     * Ubah hex (6 digit) ke array RGB [r, g, b].
+     */
+    protected static function hexToRgb(string $hex): array
+    {
+        $hex = ltrim($hex, '#');
+        if (strlen($hex) === 3) {
+            $hex = $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
+        }
+        return [
+            hexdec(substr($hex, 0, 2)),
+            hexdec(substr($hex, 2, 2)),
+            hexdec(substr($hex, 4, 2)),
+        ];
+    }
+
+    /**
+     * Dapatkan warna primary dalam format RGB array [r, g, b] dari config theme.
+     */
+    protected static function getPrimaryColorRgb(): array
+    {
+        $primaryHex = config('theme.primary', '#1e3a8a');
+        return self::hexToRgb($primaryHex);
+    }
+
     /***
      * Versi cache rekap. Naikkan nilainya setiap logika perhitungan rekap berubah
      * supaya file lama tidak pernah disajikan lagi.
@@ -335,7 +360,8 @@ public static function renderCardPngWithGd(Student $student, string $outputPath)
         imagefill($img, 0, 0, $transparent);
 
         // Palet warna resmi sesuai card.blade.php
-        $navy = imagecolorallocate($img, 30, 58, 138);         // #1e3a8a (Header)
+        $primaryRgb = self::getPrimaryColorRgb();
+        $navy = imagecolorallocate($img, $primaryRgb[0], $primaryRgb[1], $primaryRgb[2]);         // theme primary (Header)
         $amber = imagecolorallocate($img, 245, 158, 11);       // #f59e0b (Garis aksen 0.8mm)
         $gold = imagecolorallocate($img, 252, 211, 77);        // #fcd34d (KARTU PRESENSI DIGITAL)
         $white = imagecolorallocate($img, 255, 255, 255);      // #ffffff (Badan kartu & quiet zone QR)

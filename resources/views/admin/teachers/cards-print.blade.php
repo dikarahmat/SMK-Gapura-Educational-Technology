@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    @include('partials.theme')
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $pageTitle ?? 'Kartu Presensi Guru' }}</title>
@@ -28,7 +29,7 @@
             padding: 7px 14px;
             border: 0;
             border-radius: 6px;
-            background: var(--btn-cetak-kartu);
+            background: #1f8a70;
             color: #fff;
             font: inherit;
             cursor: pointer;

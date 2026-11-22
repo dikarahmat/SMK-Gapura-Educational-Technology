@@ -67,13 +67,13 @@
     .period-link.active:active,
     .period-link.active:focus,
     .period-link.active:focus-visible {
-        background-color: #15803D !important;
+        background-color: var(--color-primary) !important;
         color: #ffffff !important;
         font-weight: 400;
-        box-shadow: 0 2px 6px rgba(21, 128, 61, 0.25);
+        box-shadow: 0 2px 6px rgba(var(--color-primary-rgb), 0.25);
     }
     .period-link:focus-visible {
-        outline: 2px solid #15803D;
+        outline: 2px solid var(--color-primary);
         outline-offset: 2px;
     }
 
@@ -148,7 +148,7 @@
     /* Huruf header ringkasan sesuai warna status */
     .table-history thead tr > th.summary-h { color: #059669 !important; }
     .table-history thead tr > th.summary-t { color: #d97706 !important; }
-    .table-history thead tr > th.summary-s { color: #2563eb !important; }
+    .table-history thead tr > th.summary-s { color: var(--presensi-sakit) !important; }
     .table-history thead tr > th.summary-i { color: #7e22ce !important; }
     .table-history thead tr > th.summary-a { color: #dc2626 !important; }
     .table-history thead tr > th.summary-p { color: #111827 !important; }
@@ -171,13 +171,13 @@
     .table-history tbody td.text-left { text-align: left !important; }
     .table-history tbody td.summary-h { color: #059669 !important; }
     .table-history tbody td.summary-t { color: #d97706 !important; }
-    .table-history tbody td.summary-s { color: #2563eb !important; }
+    .table-history tbody td.summary-s { color: var(--presensi-sakit) !important; }
     .table-history tbody td.summary-i { color: #7e22ce !important; }
     .table-history tbody td.summary-a { color: #dc2626 !important; }
     .table-history tbody td.summary-p { color: #111827 !important; }
     .badge-h { color: #059669 !important; font-weight: 400 !important; }
     .badge-t { color: #d97706 !important; font-weight: 400 !important; }
-    .badge-s { color: #2563eb !important; font-weight: 400 !important; }
+    .badge-s { color: var(--presensi-sakit) !important; font-weight: 400 !important; }
     .badge-i { color: #7e22ce !important; font-weight: 400 !important; }
     .badge-a { color: #dc2626 !important; font-weight: 400 !important; }
 
@@ -246,8 +246,8 @@
                     <div class="stat-label" style="color: #d97706;">{{ __('Terlambat') }}</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value" style="color: #2563eb;">{{ $stats['sakit'] }}</div>
-                    <div class="stat-label" style="color: #2563eb;">{{ __('Sakit') }}</div>
+                    <div class="stat-value" style="color: var(--presensi-sakit);">{{ $stats['sakit'] }}</div>
+                    <div class="stat-label" style="color: var(--presensi-sakit);">{{ __('Sakit') }}</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-value" style="color: #7e22ce;">{{ $stats['izin'] }}</div>
@@ -418,7 +418,7 @@
                                     $_statusColor = match($_statusNorm) {
                                         'Terlambat' => '#d97706',
                                         'Hadir' => '#059669',
-                                        'Sakit' => '#2563eb',
+                                        'Sakit' => config('theme.status.sakit'),
                                         'Izin' => '#7e22ce',
                                         'Alfa' => '#dc2626',
                                         default => '#6b7280',

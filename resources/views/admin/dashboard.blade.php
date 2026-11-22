@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', is_admin() ? __('Dashboard Admin') : (is_piket() ? __('Dashboard Guru Piket') : __('Dashboard Guru')))
 @section('page_title', is_admin() ? __('Dashboard Administrator') : (is_piket() ? __('DASHBOARD GURU PIKET') : __('DASHBOARD GURU')))
@@ -42,7 +42,7 @@
            class="dashboard-date-input" tabindex="-1" aria-hidden="true">
 
     <button type="button" class="dashboard-date-trigger" title="{{ __('Pilih tanggal') }}" aria-label="{{ __('Pilih tanggal') }}">
-        <i class='bx bx-calendar text-primary fs-3'></i>
+        <i class='bx bx-calendar fs-3' style='color: var(--color-primary)'></i>
     </button>
 </form>
 
@@ -111,7 +111,7 @@
         --dash-inner-bg: #ffffff;
         --dash-inner-stroke: #e2e8f0;       /* garis tipis elemen kecil   */
         --dash-line: #e5e9f0;
-        --dash-accent: #2563eb;
+        --dash-accent: var(--color-primary);
         --dash-title-weight: 700;           /* judul section selalu bold */
     }
 
@@ -235,7 +235,11 @@
        Digunakan oleh Data Sekolah dan Kehadiran Hari Ini. */
     .dashboard-section .dash-stat-value.is-sidebar-blue,
     .dashboard-section .dash-att-value.is-sidebar-blue {
-        color: #2563eb !important;   /* biru = Sakit (sama dengan cell-sick di Rekap) */
+        color: var(--presensi-sakit) !important;   /* biru = Sakit (sama dengan cell-sick di Rekap) */
+    }
+    .dashboard-section .dash-stat-value.is-primary,
+    .dashboard-section .dash-att-value.is-primary {
+        color: var(--color-primary) !important;   /* primary = warna tema */
     }
     .dashboard-section .dash-stat-value.is-yellow,
     .dashboard-section .dash-att-value.is-yellow {
@@ -257,7 +261,7 @@
     /* Label Kehadiran Hari Ini: warna sinkron dengan angka status di atas. */
     .dashboard-section .absence-label-hadir   { color: #16a34a !important; }   /* hijau */
     .dashboard-section .absence-label-terlambat { color: #d97706 !important; } /* oranye */
-    .dashboard-section .absence-label-sakit   { color: #2563eb !important; }   /* biru */
+    .dashboard-section .absence-label-sakit   { color: var(--presensi-sakit) !important; }   /* biru */
     .dashboard-section .absence-label-izin    { color: #7e22ce !important; }   /* ungu */
     .dashboard-section .absence-label-alfa    { color: #ef4444 !important; }   /* merah */
 
@@ -389,7 +393,7 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        background-color: var(--sc-soft, #dbeafe);
+        background-color: var(--sc-soft, rgba(var(--color-primary-rgb), 0.12));
         border-radius: 14px;
         transition: transform 0.18s ease;
     }
@@ -748,8 +752,7 @@
     /* Baris kehadiran: TIDAK ada efek hover lagi (baris ini hanya
        teks, bukan tautan). Yang tersisa adalah penanda "sedang difilter"
        (.absence-row-active) - itu status, bukan efek klik. */
-    .dashboard-section .absence-row-active {
-        background-color: rgba(37, 99, 235, 0.05);
+    .dashboard-section .absence-row-active {         background-color: rgba(var(--color-primary-rgb), 0.05);
         border: 0;
         box-shadow: none;
         outline: 0;
@@ -787,7 +790,7 @@
     /* Label kecil "Aktif" pada baris yang sedang difilter */
     .dashboard-section .absence-row-active-badge {
         display: inline-block;
-        background: #2563eb;
+        background: var(--color-primary);
         color: #ffffff;
         border-radius: 9999px;
         font-size: 0.65rem;
@@ -931,8 +934,7 @@
             border-left: 0;
         }
         @media (hover: hover) {
-            .dash-seg .dash-seg__btn:hover {
-                background-color: rgba(37, 99, 235, 0.06);
+            .dash-seg .dash-seg__btn:hover {                 background-color: rgba(var(--color-primary-rgb), 0.06);
                 color: #0f172a;
             }
         }
@@ -949,11 +951,11 @@
         .dash-seg .dash-seg__btn--solid:focus,
         .dash-seg .dash-seg__btn.is-active:focus-visible,
         .dash-seg .dash-seg__btn--solid:focus-visible {
-            background-color: #2563eb !important;
+            background-color: var(--color-primary-hover) !important;
             color: #ffffff !important;
         }
         .dash-seg .dash-seg__btn:focus-visible {
-            outline: 2px solid #2563eb;
+            outline: 2px solid var(--color-primary);
             outline-offset: -2px;
         }
 
@@ -1112,7 +1114,7 @@
                      Khusus Guru Piket: data sekolah read-only. -->
                 @if(is_piket())
                 <div class="dash-stat-cell" title="{{ __('Data sekolah hanya dapat dilihat') }}">
-                    <strong class="dash-stat-value is-sidebar-blue">{{ number_format($totalStudents ?? 0, 0, ',', '.') }}</strong>
+                    <strong class="dash-stat-value is-primary">{{ number_format($totalStudents ?? 0, 0, ',', '.') }}</strong>
                     <span class="dash-stat-label">{{ __('Siswa Aktif') }}</span>
                 </div>
                 @else
@@ -1120,7 +1122,7 @@
                    class="dash-stat-cell"
                    aria-label="{{ __('Buka data siswa') }}"
                    title="{{ __('Buka data siswa') }}">
-                    <strong class="dash-stat-value is-sidebar-blue">{{ number_format($totalStudents ?? 0, 0, ',', '.') }}</strong>
+                    <strong class="dash-stat-value is-primary">{{ number_format($totalStudents ?? 0, 0, ',', '.') }}</strong>
                     <span class="dash-stat-label">{{ __('Siswa Aktif') }}</span>
                 </a>
                 @endif
@@ -1187,8 +1189,8 @@
                 <a href="{{ panel_route('absensi.kiosk') }}"
                    class="dash-shortcut-item"
                    title="{{ __('Buka Mode Gerbang (Scanner QR otomatis nyala)') }}">
-                    <span class="dash-sc-icon" style="--sc-soft: #dbeafe;">
-                        <i class='bx bx-qr-scan text-primary'></i>
+                    <span class="dash-sc-icon" style="--sc-soft: var(--shortcut-presensi-bg);">
+                        <i class='bx bx-qr-scan' style='color: var(--shortcut-presensi)'></i>
                     </span>
                     <span class="dash-sc-label">{{ __('Presensi Hari Ini') }}</span>
                 </a>
@@ -1197,8 +1199,8 @@
                 <a href="{{ panel_route('kehadiran') }}"
                    class="dash-shortcut-item"
                    title="{{ __('Lihat Log Kehadiran & Presensi Harian') }}">
-                    <span class="dash-sc-icon" style="--sc-soft: #dcfce7;">
-                        <i class='bx bx-list-check text-success'></i>
+                    <span class="dash-sc-icon" style="--sc-soft: var(--shortcut-kehadiran-bg);">
+                        <i class='bx bx-list-check' style='color: var(--shortcut-kehadiran)'></i>
                     </span>
                     <span class="dash-sc-label">{{ __('Catatan Kehadiran') }}</span>
                 </a>
@@ -1209,8 +1211,8 @@
                 <a href="{{ panel_route('rekap') }}"
                    class="dash-shortcut-item"
                    title="{{ __('Laporan Rekapitulasi & Ekspor Dokumen') }}">
-                    <span class="dash-sc-icon" style="--sc-soft: #fee2e2;">
-                        <i class='bx bxs-file-pdf text-danger'></i>
+                    <span class="dash-sc-icon" style="--sc-soft: var(--shortcut-rekap-bg);">
+                        <i class='bx bxs-file-pdf' style='color: var(--shortcut-rekap)'></i>
                     </span>
                     <span class="dash-sc-label">{{ __('Rekap Presensi') }}</span>
                 </a>
@@ -1219,8 +1221,8 @@
                 <a href="{{ panel_route('students.index') }}"
                    class="dash-shortcut-item"
                    title="{{ __('Kelola Master Data Siswa & Generate QR') }}">
-                    <span class="dash-sc-icon" style="--sc-soft: #cffafe;">
-                        <i class='bx bx-user text-info'></i>
+                    <span class="dash-sc-icon" style="--sc-soft: var(--shortcut-siswa-bg);">
+                        <i class='bx bx-user' style='color: var(--shortcut-siswa)'></i>
                     </span>
                     <span class="dash-sc-label">{{ __('Data Siswa') }}</span>
                 </a>
@@ -1230,8 +1232,8 @@
                 <a href="{{ route('admin.guru.index') }}"
                    class="dash-shortcut-item"
                    title="{{ __('Kelola Data Guru') }}">
-                    <span class="dash-sc-icon" style="--sc-soft: #f3e8ff;">
-                        <i class='bx bx-user-pin text-purple'></i>
+                    <span class="dash-sc-icon" style="--sc-soft: var(--shortcut-guru-bg);">
+                        <i class='bx bx-user-pin' style='color: var(--shortcut-guru)'></i>
                     </span>
                     <span class="dash-sc-label">{{ __('Data Guru') }}</span>
                 </a>
@@ -1241,8 +1243,8 @@
                 <a href="{{ panel_route('classes.index') }}"
                    class="dash-shortcut-item"
                    title="{{ __('Kelola Master Rombongan Belajar & Kelas') }}">
-                    <span class="dash-sc-icon" style="--sc-soft: #fef3c7;">
-                        <i class='bx bx-buildings text-warning'></i>
+                    <span class="dash-sc-icon" style="--sc-soft: var(--shortcut-kelas-bg);">
+                        <i class='bx bx-buildings' style='color: var(--shortcut-kelas)'></i>
                     </span>
                     <span class="dash-sc-label">{{ __('Data Kelas') }}</span>
                 </a>
@@ -1252,8 +1254,8 @@
                 <a href="{{ panel_route('holidays.index') }}"
                    class="dash-shortcut-item"
                    title="{{ __('Kelola Kalender Hari Libur Nasional & Sekolah') }}">
-                    <span class="dash-sc-icon" style="--sc-soft: #fee2e2;">
-                        <i class='bx bx-calendar-x text-danger'></i>
+                    <span class="dash-sc-icon" style="--sc-soft: var(--shortcut-libur-bg);">
+                        <i class='bx bx-calendar-x' style='color: var(--shortcut-libur)'></i>
                     </span>
                     <span class="dash-sc-label">{{ __('Hari Libur') }}</span>
                 </a>
@@ -1264,8 +1266,8 @@
                 <a href="{{ panel_route('settings.index') }}"
                    class="dash-shortcut-item"
                    title="{{ __('Konfigurasi Profil Sekolah, Jam Masuk, & Sistem') }}">
-                    <span class="dash-sc-icon" style="--sc-soft: #e2e8f0;">
-                        <i class='bx bx-cog text-secondary'></i>
+                    <span class="dash-sc-icon" style="--sc-soft: var(--shortcut-pengaturan-bg);">
+                        <i class='bx bx-cog' style='color: var(--shortcut-pengaturan)'></i>
                     </span>
                     <span class="dash-sc-label">{{ __('Pengaturan') }}</span>
                 </a>
@@ -1628,12 +1630,12 @@
                 if (legendEl) { legendEl.remove(); }
 
                 let STATUS = [
-                    { key: 'hadir',     label: {!! json_encode(__('Hadir')) !!},     color: '#22c55e' },
-                    { key: 'terlambat', label: {!! json_encode(__('Terlambat')) !!}, color: '#f59e0b' },
-                    { key: 'izin',      label: {!! json_encode(__('Izin')) !!},      color: '#3b82f6' },
-                    { key: 'sakit',     label: {!! json_encode(__('Sakit')) !!},     color: '#8b5cf6' },
-                    { key: 'alpa',      label: {!! json_encode(__('Alpa')) !!},      color: '#ef4444' },
-                    { key: 'belum',     label: isNarrow ? {!! json_encode(__('Belum')) !!} : {!! json_encode(__('Belum Presensi')) !!}, color: '#e2e8f0' }
+                    { key: 'hadir',     label: {!! json_encode(__('Hadir')) !!},     color: '{{ config("theme.status.hadir") }}' },
+                    { key: 'terlambat', label: {!! json_encode(__('Terlambat')) !!}, color: '{{ config("theme.status.terlambat") }}' },
+                    { key: 'izin',      label: {!! json_encode(__('Izin')) !!},      color: '{{ config("theme.status.izin") }}' },
+                    { key: 'sakit',     label: {!! json_encode(__('Sakit')) !!},     color: '{{ config("theme.status.sakit") }}' },
+                    { key: 'alpa',      label: {!! json_encode(__('Alpa')) !!},      color: '{{ config("theme.status.alfa") }}' },
+                    { key: 'belum',     label: isNarrow ? {!! json_encode(__('Belum')) !!} : {!! json_encode(__('Belum Presensi')) !!}, color: '{{ config("theme.status.belum", "#e2e8f0") }}' }
                 ];
                 // "Belum presensi" hanya tampil kalau memang ada datanya.
                 STATUS = STATUS.filter(function (st) {

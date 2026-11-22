@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    @include('partials.theme')
     <meta charset="UTF-8">
     <title>{{ $title ?? 'Rekap Presensi Guru' }}</title>
     <style>
@@ -11,14 +12,14 @@
         }
         .header-table { width: 100%; border-bottom: 2px solid #0f172a; padding-bottom: 8px; margin-bottom: 12px; }
         .header-table td { vertical-align: middle; }
-        .school-title { font-size: 14pt; font-weight: bold; color: #166534; letter-spacing: 0.5px; margin: 0; text-transform: uppercase; }
+        .school-title { font-size: 14pt; font-weight: bold; color: {{ config('theme.primary') }}; letter-spacing: 0.5px; margin: 0; text-transform: uppercase; }
         .school-subtitle { font-size: 8.5pt; color: #475569; margin-top: 2px; }
         .report-title { font-size: 11pt; font-weight: bold; text-align: center; margin-top: 4px; margin-bottom: 2px; color: #0f172a; }
         .report-subtitle { font-size: 8.5pt; text-align: center; color: #64748b; margin-bottom: 12px; }
 
         .data-table { width: 100%; table-layout: fixed; border-collapse: collapse; font-size: 8pt; }
         .data-table th, .data-table td { border: 1px solid #cbd5e1; padding: 3px 5px; text-align: center; }
-        .data-table th { background-color: #15803D; color: #ffffff; font-weight: bold; text-transform: uppercase; font-size: 7.5pt; }
+        .data-table th { background-color: {{ config('theme.primary') }}; color: #ffffff; font-weight: bold; text-transform: uppercase; font-size: 7.5pt; }
         .data-table thead { display: table-header-group; }
         /* Jangan pakai page-break-inside: avoid pada tr: DomPDF jadi memindahkan seluruh tabel ke halaman berikutnya */
         .data-table tr:nth-child(even) td { background-color: #f8fafc; }
@@ -29,24 +30,24 @@
         .data-table.tight th, .data-table.tight td { padding: 1px 4px; font-size: 7pt; line-height: 1.2; }
         .data-table.tight th { font-size: 7pt; }
 
-        .badge-h { color: #059669; font-weight: bold; }
-        .badge-s { color: #2563eb; font-weight: bold; }
-        .badge-i { color: #7e22ce; font-weight: bold; }
-        .badge-a { color: #e11d48; font-weight: bold; }
-        .badge-l { color: #94a3b8; }
-        .jk-l { color: #3B82F6; font-weight: 500; }
+        .badge-h { color: {{ config('theme.status.hadir') }}; font-weight: bold; }
+        .badge-s { color: {{ config('theme.status.sakit') }}; font-weight: bold; }
+        .badge-i { color: {{ config('theme.status.izin') }}; font-weight: bold; }
+        .badge-a { color: {{ config('theme.status.alfa') }}; font-weight: bold; }
+        .badge-l { color: {{ config('theme.status.libur') }}; }
+        .jk-l { color: var(--color-primary); font-weight: 500; }
         .jk-p { color: #EF4444; font-weight: 500; }
 
         td, td * { color: #000 !important; font-weight: 400 !important; }
         th { color: #ffffff !important; font-weight: bold !important; }
-        .badge-h { color: #059669 !important; font-weight: bold !important; }
-        .badge-s { color: #2563eb !important; font-weight: bold !important; }
-        .badge-i { color: #7e22ce !important; font-weight: bold !important; }
-        .badge-a { color: #e11d48 !important; font-weight: bold !important; }
-        .badge-l { color: #94a3b8 !important; font-weight: normal !important; }
-        .jk-l { color: #15803D !important; font-weight: 500 !important; }
+        .badge-h { color: {{ config('theme.status.hadir') }} !important; font-weight: bold !important; }
+        .badge-s { color: {{ config('theme.status.sakit') }} !important; font-weight: bold !important; }
+        .badge-i { color: {{ config('theme.status.izin') }} !important; font-weight: bold !important; }
+        .badge-a { color: {{ config('theme.status.alfa') }} !important; font-weight: bold !important; }
+        .badge-l { color: {{ config('theme.status.libur') }} !important; font-weight: normal !important; }
+        .jk-l { color: var(--color-primary) !important; font-weight: 500 !important; }
         .jk-p { color: #EF4444 !important; font-weight: 500 !important; }
-        .school-title { color: #166534 !important; font-weight: bold !important; }
+        .school-title { color: {{ config('theme.primary') }} !important; font-weight: bold !important; }
         .school-subtitle, .report-subtitle { color: #000 !important; font-weight: 400 !important; }
         .header-table td { color: #000 !important; font-weight: 400 !important; }
 
@@ -64,7 +65,7 @@
         /* Warna keterangan sama dengan warna status di tabel */
         .pdf-legend .lg-h { color: #059669 !important; }
         .pdf-legend .lg-t { color: #d97706 !important; }
-        .pdf-legend .lg-s { color: #2563eb !important; }
+        .pdf-legend .lg-s { color: {{ config('theme.status.sakit') }} !important; }
         .pdf-legend .lg-i { color: #7e22ce !important; }
         .pdf-legend .lg-a { color: #e11d48 !important; }
         .pdf-legend .lg-l { color: #94a3b8 !important; }
@@ -176,7 +177,7 @@
                 </th>
             @endforeach
             <th style="width: 2.6%; background-color: #059669;">H</th>
-            <th style="width: 2.6%; background-color: #15803D;">S</th>
+            <th style="width: 2.6%; background-color: {{ config('theme.status.sakit') }};">S</th>
             <th style="width: 2.6%; background-color: #7e22ce;">I</th>
             <th style="width: 2.6%; background-color: #e11d48;">A</th>
             <th style="width: 4%;">%</th>
@@ -225,7 +226,7 @@
                 <th style="padding: 2px 1px; width: {{ $wTanggal }}%;">{{ $d['label'] }}</th>
             @endforeach
             <th style="width: 2.6%; background-color: #059669;">H</th>
-            <th style="width: 2.6%; background-color: #15803D;">S</th>
+            <th style="width: 2.6%; background-color: {{ config('theme.status.sakit') }};">S</th>
             <th style="width: 2.6%; background-color: #7e22ce;">I</th>
             <th style="width: 2.6%; background-color: #e11d48;">A</th>
             <th style="width: 4%;">%</th>

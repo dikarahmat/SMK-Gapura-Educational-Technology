@@ -6,7 +6,7 @@
 @section('page_header_right')
 <!-- Widget Tanggal Real-time di Sisi Kanan -->
 <div class="d-flex align-items-center gap-3 bg-white px-3.5 py-2.5 rounded-3 border border-slate-200 shadow-2xs">
-    <div class="rounded-2 d-flex align-items-center justify-content-center bg-blue-50 text-blue-600" style="width: 40px; height: 40px; font-size: 1.3rem;">
+    <div class="rounded-2 d-flex align-items-center justify-content-center bg-primary-soft text-primary" style="width: 40px; height: 40px; font-size: 1.3rem;">
         <i class='bx bx-calendar-check'></i>
     </div>
     <div>
@@ -39,7 +39,7 @@
     }
 
     .role-card-clean.highlight-admin {
-        border-top: 3.5px solid #15803D;
+        border-top: 3.5px solid var(--color-primary);
     }
 
     .role-card-clean.highlight-guru {
@@ -47,7 +47,7 @@
     }
 
     .role-card-clean.highlight-piket {
-        border-top: 3.5px solid #0ea5e9;
+        border-top: 3.5px solid var(--color-primary);
     }
 
     .role-icon-box {
@@ -144,9 +144,9 @@
     }
 
     .status-full-access {
-        background: #F0FDF4;
-        color: #166534;
-        border: 1px solid #DCFCE7;
+        background: rgba(var(--color-primary-rgb), 0.10);
+        color: var(--color-primary);
+        border: 1px solid var(--color-primary-200);
     }
 
     .status-operational {
@@ -181,7 +181,7 @@
         <div class="role-card-clean highlight-admin">
             <div class="d-flex align-items-center justify-content-between mb-3">
                 <div class="d-flex align-items-center gap-2.5">
-                    <div class="role-icon-box bg-blue-50 text-blue-600">
+                    <div class="role-icon-box bg-primary-soft text-primary">
                         <i class='bx bx-shield-quarter'></i>
                     </div>
                     <div>
@@ -202,23 +202,23 @@
                 <span class="text-slate-400 fw-bold d-block text-uppercase mb-2" style="font-size: 0.68rem; letter-spacing: 0.05em;">{{ __('Cakupan Izin Akses:') }}</span>
                 <ul class="permission-simple-list">
                     <li>
-                        <i class='bx bx-check-circle text-blue-600'></i>
+                        <i class='bx bx-check-circle text-primary'></i>
                         <span>{{ __('Akses penuh seluruh modul aplikasi tanpa batasan') }}</span>
                     </li>
                     <li>
-                        <i class='bx bx-check-circle text-blue-600'></i>
+                        <i class='bx bx-check-circle text-primary'></i>
                         <span>{{ __('Pengaturan profil sekolah & batas jam toleransi') }}</span>
                     </li>
                     <li>
-                        <i class='bx bx-check-circle text-blue-600'></i>
+                        <i class='bx bx-check-circle text-primary'></i>
                         <span>{{ __('Kelola tahun ajaran, hari libur, dan jadwal akademik') }}</span>
                     </li>
                     <li>
-                        <i class='bx bx-check-circle text-blue-600'></i>
+                        <i class='bx bx-check-circle text-primary'></i>
                         <span>{{ __('Master data siswa, guru, kelas, & kenaikan tingkat') }}</span>
                     </li>
                     <li>
-                        <i class='bx bx-check-circle text-blue-600'></i>
+                        <i class='bx bx-check-circle text-primary'></i>
                         <span>{{ __('Monitoring presensi, koreksi manual, & ekspor laporan') }}</span>
                     </li>
                 </ul>
@@ -333,7 +333,7 @@
 <div class="matrix-table-card">
     <div class="d-flex align-items-center justify-content-between px-4 py-3 border-bottom border-slate-100 bg-white">
         <div class="d-flex align-items-center gap-2">
-            <i class='bx bx-grid-alt text-blue-600 fs-5'></i>
+            <i class='bx bx-grid-alt text-primary fs-5'></i>
             <h6 class="fw-bold text-slate-800 mb-0" style="font-size: 0.95rem;">{{ __('Matriks Otoritas Hak Akses Per Modul') }}</h6>
         </div>
         <span class="text-slate-400 fw-semibold" style="font-size: 0.74rem;">{{ __('Standar Keamanan Sistem Presensi') }}</span>
@@ -355,7 +355,7 @@
                 <tr>
                     <td>
                         <div class="d-flex align-items-center gap-2">
-                            <i class='bx bx-home-alt text-blue-600 fs-5'></i>
+                            <i class='bx bx-home-alt text-primary fs-5'></i>
                             <strong class="text-slate-800">Dashboard</strong>
                         </div>
                     </td>
@@ -466,7 +466,7 @@
 
     <div class="p-3 bg-slate-50 border-top border-slate-100 d-flex align-items-center justify-content-between flex-wrap gap-2">
         <span class="text-slate-500 small">
-            <i class='bx bx-info-circle text-blue-600 me-1'></i>
+            <i class='bx bx-info-circle text-primary me-1'></i>
             {{ __('Hak otoritas dikunci secara terstruktur untuk memastikan keamanan dan integritas rekam presensi.') }}
         </span>
         <span class="badge bg-white text-slate-700 border border-slate-200 px-2.5 py-1 rounded-pill small">

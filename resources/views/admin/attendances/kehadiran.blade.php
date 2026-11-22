@@ -124,8 +124,8 @@
         justify-content: center !important;
         box-sizing: border-box !important;
         padding: 0 !important;
-        background: #64748b !important;
-        border: 1px solid #64748b !important;
+        background: var(--btn-refresh) !important;
+        border: 1px solid var(--btn-refresh) !important;
         border-radius: 6px !important;
         color: #ffffff !important;
         text-decoration: none !important;
@@ -141,13 +141,13 @@
     }
     form#formFilterKehadiran.kehadiran-filter-form .btn-reset:hover,
     form#formFilterKehadiran.kehadiran-filter-form .btn-reset:focus-visible {
-        background: #475569 !important;
-        border-color: #475569 !important;
+        background: var(--btn-refresh-hover) !important;
+        border-color: var(--btn-refresh-hover) !important;
         color: #ffffff !important;
         text-decoration: none !important;
     }
     form#formFilterKehadiran.kehadiran-filter-form .btn-reset:focus-visible {
-        box-shadow: 0 0 0 3px rgba(100, 116, 139, .3) !important;
+        box-shadow: 0 0 0 3px rgba(var(--btn-refresh-rgb), .3) !important;
     }
 
     .table-enterprise {
@@ -300,21 +300,21 @@
     }
 
     .kehadiran-pagination-page.is-active {
-        color: #15803D !important;
+        color: var(--color-primary) !important;
         font-weight: 700;
-        border-bottom: 2px solid #15803D !important;
+        border-bottom: 2px solid var(--color-primary) !important;
         cursor: default;
     }
 
     .kehadiran-pagination-step:hover,
     .kehadiran-pagination-page:hover {
-        color: #15803D !important;
+        color: var(--color-primary-hover) !important;
         text-decoration: underline;
     }
 
     .kehadiran-pagination-step:focus-visible,
     .kehadiran-pagination-page:focus-visible {
-        outline: 2px solid #15803D !important;
+        outline: 2px solid var(--color-primary) !important;
         outline-offset: 1px;
         border-radius: 0 !important;
     }
@@ -419,7 +419,7 @@
                         @if($viewFor !== 'guru')
                         <th class="text-center py-3"><span style="color:#d97706 !important; font-weight: 700 !important;">{{ __('Terlambat') }}</span></th>
                         @endif
-                        <th class="text-center py-3"><span style="color:#2563eb !important; font-weight: 700 !important;">{{ __('Sakit') }}</span></th>
+                        <th class="text-center py-3"><span style="color:var(--presensi-sakit) !important; font-weight: 700 !important;">{{ __('Sakit') }}</span></th>
                         <th class="text-center py-3"><span style="color:#7e22ce !important; font-weight: 700 !important;">{{ __('Izin') }}</span></th>
                         <th class="text-center py-3"><span style="color:#dc2626 !important; font-weight: 700 !important;">{{ __('Alfa') }}</span></th>
                         <th class="text-center py-3">{{ __('Aksi') }}</th>
@@ -443,7 +443,7 @@
                         @if($viewFor !== 'guru')
                         <td class="text-center fw-bold" style="color:#d97706 !important"><span style="color:#d97706 !important; font-weight: 700 !important;">{{ $item->terlambat }}</span></td>
                         @endif
-                        <td class="text-center fw-bold" style="color:#2563eb !important"><span style="color:#2563eb !important; font-weight: 700 !important;">{{ $item->sakit }}</span></td>
+                        <td class="text-center fw-bold" style="color:var(--presensi-sakit) !important"><span style="color:var(--presensi-sakit) !important; font-weight: 700 !important;">{{ $item->sakit }}</span></td>
                         <td class="text-center fw-bold" style="color:#7e22ce !important"><span style="color:#7e22ce !important; font-weight: 700 !important;">{{ $item->izin }}</span></td>
                         <td class="text-center fw-bold" style="color:#dc2626 !important"><span style="color:#dc2626 !important; font-weight: 700 !important;">{{ $item->alfa }}</span></td>
                         <td class="text-center">

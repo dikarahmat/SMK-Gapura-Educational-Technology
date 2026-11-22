@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    @include('partials.theme')
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -29,14 +30,14 @@
             /* Latar halaman = foto sekolah (public/images/bg.webp) + kabut putih tipis,
                supaya halaman tidak polos tetapi teks/kamera tetap mudah dibaca
                (desktop maupun mobile) */
-            --kiosk-bg: #dbe4f0;
+            --kiosk-bg: rgba(var(--color-primary-rgb), 0.12);
             --kiosk-bg-image: url('{{ asset('images/bg.webp') }}');
             --kiosk-card: rgba(255, 255, 255, 0.60);
             --kiosk-veil: rgba(255, 255, 255, 0.72);
             --kiosk-border: rgba(255, 255, 255, 0.65);
             --kiosk-text: #0f172a;
             --kiosk-muted: #5a6a80;
-            --kiosk-primary: #15803D;
+            --kiosk-primary: var(--color-primary);
         }
 
         html {
@@ -307,9 +308,8 @@
         .kiosk-switch-btn:hover { color: #1e293b; }
 
         .kiosk-switch-btn.active {
-            background: #15803D;
-            color: #ffffff;
-            box-shadow: 0 2px 8px rgba(21, 128, 61, 0.25);
+            background: var(--color-primary);
+            color: #ffffff;             box-shadow: 0 2px 8px rgba(var(--color-primary-rgb), 0.25);
         }
 
         /* ===== VIEWPORT SCANNER =====
@@ -590,7 +590,7 @@
                 <div id="cameraView" class="w-100 h-100">
                     <div id="reader"></div>
                     <div id="cameraPlaceholder" class="kiosk-placeholder">
-                        <i class='bx bx-qr-scan' style="font-size: 2.4rem; color: #94a3b8;"></i>
+                        <i class='bx bx-qr-scan' style="font-size: 2.4rem; color: var(--kiosk-muted);"></i>
                         <p class="kiosk-placeholder-text">Tempelkan kartu QR ke kamera</p>
                     </div>
                     <!-- Bracket 4 sudut, sejajar & simetris dengan qrbox proporsional -->
@@ -606,7 +606,7 @@
 
                 <!-- Mode Alat Scanner USB -->
                 <div id="hardwareView" class="d-none">
-                    <i class='bx bx-scan' style="font-size: 2.2rem; color: #15803D;"></i>
+                    <i class='bx bx-scan' style="font-size: 2.2rem; color: var(--color-primary);"></i>
                     <p class="kiosk-placeholder-text">{{ __('Scan kartu dengan alat, atau ketik NIS/NIP lalu tekan Enter') }}</p>
                     <div class="w-100 mt-2 px-1">
                         <input type="text" id="hardwareInput" class="form-control form-control-sm text-center fw-semibold font-monospace py-2" placeholder="{{ __('Ketik NIS/NIP untuk Siswa/Guru') }}" autocomplete="off">

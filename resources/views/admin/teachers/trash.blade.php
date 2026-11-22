@@ -96,8 +96,8 @@
 
     .trash-tab-active,
     .trash-tab-active:hover {
-        background-color: #15803D;
-        border-color: #15803D;
+        background-color: var(--color-primary);
+        border-color: var(--color-primary);
         color: #ffffff;
         cursor: default;
     }
@@ -199,7 +199,7 @@
     }
 
     /* ===== Tombol Melayang Scroll Dinamis (Ke Bawah / Ke Atas) =====
-       Bulat 44px, biru tema (#2563eb), ikon putih, shadow lembut.
+       Bulat 44px, biru tema (var(--color-primary)), ikon putih, shadow lembut.
        Melayang di kanan bawah area konten tanpa menutupi tombol Aksi di tabel. */
     .btn-floating-scroll-down {
         position: fixed;
@@ -208,7 +208,7 @@
         width: 44px;
         height: 44px;
         border-radius: 50%;
-        background-color: #15803D;
+        background-color: var(--color-primary);
         color: #ffffff !important;
         border: none;
         outline: none;
@@ -233,7 +233,7 @@
     }
 
     .btn-floating-scroll-down:hover {
-        background-color: #166534;
+        background-color: var(--color-primary-hover);
         color: #ffffff !important;
         box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
     }
@@ -243,7 +243,7 @@
     }
 
     .btn-floating-scroll-down:focus-visible {
-        outline: 2px solid #93c5fd;
+        outline: 2px solid var(--color-primary-300);
         outline-offset: 2px;
     }
 

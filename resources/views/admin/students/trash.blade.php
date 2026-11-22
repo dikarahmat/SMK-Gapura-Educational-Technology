@@ -106,8 +106,8 @@
 
     .trash-tab-active,
     .trash-tab-active:hover {
-        background-color: #15803D;
-        border-color: #15803D;
+        background-color: var(--color-primary);
+        border-color: var(--color-primary);
         color: #ffffff;
         cursor: default;
     }
@@ -210,7 +210,7 @@
     }
 
     /* ===== Tombol Melayang Scroll Dinamis (Ke Bawah / Ke Atas) =====
-       Bulat 44px, biru tema (#2563eb), ikon putih, shadow lembut.
+       Bulat 44px, biru tema (var(--color-primary)), ikon putih, shadow lembut.
        Melayang di kanan bawah area konten tanpa menutupi tombol Aksi di tabel. */
     .btn-floating-scroll-down {
         position: fixed;
@@ -219,7 +219,7 @@
         width: 44px;
         height: 44px;
         border-radius: 50%;
-        background-color: #15803D;
+        background-color: var(--color-primary);
         color: #ffffff !important;
         border: none;
         outline: none;
@@ -244,7 +244,7 @@
     }
 
     .btn-floating-scroll-down:hover {
-        background-color: #166534;
+        background-color: var(--color-primary-hover);
         color: #ffffff !important;
         box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
     }
@@ -254,7 +254,7 @@
     }
 
     .btn-floating-scroll-down:focus-visible {
-        outline: 2px solid #93c5fd;
+        outline: 2px solid var(--color-primary-300);
         outline-offset: 2px;
     }
 
@@ -375,13 +375,13 @@
             <div class="table-responsive">
                 <table class="table table-hover align-middle mb-0 table-zebra-custom text-nowrap">
                     <thead class="bg-slate-50 border-b border-gray-100">
-                        <tr class="align-middle text-blue-500 text-xs font-bold uppercase tracking-wider border-b border-gray-100">
-                            <th class="text-center py-3 text-nowrap px-3 text-blue-500 text-xs font-bold uppercase border-0 border-b border-gray-100" style="width: 1%; min-width: 45px;">{{ __('No') }}</th>
-                            <th class="text-center py-3 text-nowrap px-3 text-blue-500 text-xs font-bold uppercase border-0 border-b border-gray-100" style="width: 1%; min-width: 80px;">{{ __('Kelas') }}</th>
-                            <th class="text-center py-3 text-nowrap px-3 text-blue-500 text-xs font-bold uppercase border-0 border-b border-gray-100" style="width: 12%;">{{ __('NISN') }}</th>
-                            <th class="text-start py-3 text-nowrap px-3 text-blue-500 text-xs font-bold uppercase border-0 border-b border-gray-100">{{ __('Nama Siswa') }}</th>
-                            <th class="text-center py-3 text-nowrap px-3 text-blue-500 text-xs font-bold uppercase border-0 border-b border-gray-100" style="width: 15%;">{{ __('Tanggal Dihapus') }}</th>
-                            <th class="text-center py-3 text-nowrap px-3 text-blue-500 text-xs font-bold uppercase border-0 border-b border-gray-100" style="width: 180px;">{{ __('Aksi') }}</th>
+                        <tr class="align-middle text-primary text-xs font-bold uppercase tracking-wider border-b border-gray-100">
+                            <th class="text-center py-3 text-nowrap px-3 text-primary text-xs font-bold uppercase border-0 border-b border-gray-100" style="width: 1%; min-width: 45px;">{{ __('No') }}</th>
+                            <th class="text-center py-3 text-nowrap px-3 text-primary text-xs font-bold uppercase border-0 border-b border-gray-100" style="width: 1%; min-width: 80px;">{{ __('Kelas') }}</th>
+                            <th class="text-center py-3 text-nowrap px-3 text-primary text-xs font-bold uppercase border-0 border-b border-gray-100" style="width: 12%;">{{ __('NISN') }}</th>
+                            <th class="text-start py-3 text-nowrap px-3 text-primary text-xs font-bold uppercase border-0 border-b border-gray-100" style="width: 12%;">{{ __('Nama Siswa') }}</th>
+                            <th class="text-center py-3 text-nowrap px-3 text-primary text-xs font-bold uppercase border-0 border-b border-gray-100" style="width: 15%;">{{ __('Tanggal Dihapus') }}</th>
+                            <th class="text-center py-3 text-nowrap px-3 text-primary text-xs font-bold uppercase border-0 border-b border-gray-100" style="width: 180px;">{{ __('Aksi') }}</th>
                         </tr>
                     </thead>
                     <tbody>

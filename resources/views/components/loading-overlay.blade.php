@@ -15,7 +15,7 @@
         height: 3px;
         z-index: 999999998;
         pointer-events: none;
-        background: #15803D;
+        background: var(--color-primary);
         box-shadow: none;
         transform-origin: left center;
         transform: scaleX(0);

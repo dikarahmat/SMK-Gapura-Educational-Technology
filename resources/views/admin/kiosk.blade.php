@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    @include('partials.theme')
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -24,17 +25,14 @@
 
     <style>
         :root {
-            /* Latar halaman = foto sekolah (public/images/bg.webp) + kabut putih tipis,
-               supaya halaman tidak polos tetapi teks/kamera tetap mudah dibaca
-               (desktop maupun mobile) */
-            --kiosk-bg: #F0FDF4;
+            --kiosk-bg: rgba(var(--color-primary-rgb), 0.12);
             --kiosk-bg-image: url('{{ asset('images/bg.webp') }}');
             --kiosk-card: rgba(255, 255, 255, 0.60);
             --kiosk-veil: rgba(255, 255, 255, 0.72);
             --kiosk-border: rgba(255, 255, 255, 0.65);
             --kiosk-text: #0f172a;
             --kiosk-muted: #5a6a80;
-            --kiosk-primary: #15803D;
+            --kiosk-primary: var(--color-primary);
         }
 
         html {
@@ -80,8 +78,6 @@
         }
 
         .mono { font-family: 'JetBrains Mono', monospace; }
-
-        /* ===== HEADER & FOOTER: DIHAPUS (tampilan full-screen) ===== */
 
         .kiosk-main {
             flex-grow: 1;
@@ -157,11 +153,6 @@
             right: 24px;
         }
 
-        /* ===== BESAR FULLSCREEN ===== */
-        :root:fullscreen {
-            --gerbang-camera-size: min(78vh, 580px);
-        }
-
         /* ===== JAM DIGITAL ===== */
         .kiosk-clock {
             position: fixed;
@@ -206,11 +197,8 @@
 
     {{-- ============ CSS KAMERA ============ --}}
     <style>
-        /* ==========================================================================
-           KAMERA GERBANG - UKURAN 520px SESUAI PERMINTAAN
-           ========================================================================== */
         :root {
-            --gerbang-camera-size: 520px;   /* Ukuran 520px di tengah */
+            --gerbang-camera-size: 520px;
             --gerbang-camera-radius: 16px;
             --gerbang-scan-ratio: 72%;
             --gerbang-card-max: 540px;
@@ -261,7 +249,7 @@
         }
 
         .kiosk-switch-btn.active {
-            background: rgba(21, 128, 61, 0.7);
+            background: rgba(var(--color-primary-rgb), 0.7);
             color: #ffffff;
         }
 
@@ -319,11 +307,6 @@
         #qr-shaded-region { pointer-events: none !important; }
         #qr-shaded-region > div { display: none !important; }
 
-        /* ===== BESAR FULLSCREEN ===== */
-        :root:fullscreen {
-            --gerbang-camera-size: min(78vh, 580px);
-        }
-        
         /* ===== BRACKET 4 SUDUT ===== */
         .kiosk-scan-frame {
             position: absolute;
@@ -406,12 +389,12 @@
 
         /* ===== MOBILE KHUSUS (max-width: 767px) ===== */
         @media (max-width: 767px) {
-            html { background-color: #ffffff; }
+            html { background-color: var(--color-primary-900); }
             body {
                 min-height: 100vh;
                 min-height: 100dvh;
-                background-color: #ffffff;
-                background-image: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+                background-color: transparent;
+                background-image: none;
             }
             body::before { display: none; }
             body::after { display: none; }
@@ -433,7 +416,7 @@
                 font-size: 1.25rem;
                 font-weight: 700;
                 line-height: 1.25;
-                color: #0f172a;
+                color: #ffffff;
                 text-wrap: balance;
                 margin-top: 0.25rem;
             }
@@ -441,14 +424,14 @@
                 font-family: 'Poppins', 'Roboto', system-ui, sans-serif;
                 font-size: 0.8rem;
                 font-weight: 500;
-                color: #64748b;
+                color: #fbbf24;
                 margin-top: 0.1rem;
             }
 
             .kiosk-clock {
                 position: static;
                 align-items: center;
-                color: #0f172a;
+                color: #ffffff;
                 opacity: 1;
                 padding: 0.35rem 1rem 0;
                 flex: 0 0 auto;
@@ -456,12 +439,12 @@
             .kiosk-clock:hover { opacity: 1; }
             .kiosk-clock-time {
                 font-size: 2rem;
-                color: #0f172a;
+                color: #ffffff;
                 text-shadow: none;
             }
             .kiosk-clock-date {
                 font-size: 0.8rem;
-                color: #64748b;
+                color: #ffffff;
                 opacity: 1;
                 text-shadow: none;
             }
@@ -504,25 +487,21 @@
         }
     </style>
 
-    {{-- ============ DESAIN BARU KIOSK (desktop + mobile) ============
-         Latar BARU tanpa foto, seirama dengan kartu presensi (card-bg-single.svg):
-         pita biru tua di atas + garis emas, badan biru muda dengan bentuk
-         geometris di sudut, pita biru tua di bawah + garis emas.
-         Markup latar ada di .kiosk-bg (tepat setelah <body>).
-         - Kamera DIKUNCI tepat di tengah layar. Ukurannya dihitung otomatis dari
-           tinggi layar dikurangi pita atas/bawah, sehingga TIDAK PERNAH menabrak
-           header, jam, ataupun tombol bawah.
-         - Switcher menempel di atas kamera (absolute), tidak menggeser kamera. --}}
+    {{-- ============ DESAIN KIOSK (desktop + mobile) ============
+         Semua warna mengikuti config/theme.php lewat CSS variable
+         (--color-primary, --color-primary-rgb, --color-primary-600..900, --kiosk-stripe).
+         - Kamera dikunci tepat di tengah layar, ukurannya menyesuaikan sisa ruang.
+         - Switcher (kamera | alat scan | speaker) menempel di atas kamera. --}}
     <style>
         :root {
-            --kb-navy: #14532D;
-            --kb-navy-2: #166534;
-            --kb-navy-3: #15803D;
-            --kb-navy-4: #16A34A;
-            --kb-gold: #f59e0b;
-            --kb-body: #F0FDF4;
-            --kb-body-2: #DCFCE7;
-            --kb-body-3: #DCFCE7;
+            --kb-navy: var(--color-primary-900);
+            --kb-navy-2: var(--color-primary-800);
+            --kb-navy-3: var(--color-primary-700);
+            --kb-navy-4: var(--color-primary-600);
+            --kb-gold: var(--kiosk-stripe);
+            --kb-body: rgba(var(--color-primary-rgb), 0.12);
+            --kb-body-2: rgba(var(--color-primary-rgb), 0.18);
+            --kb-body-3: rgba(var(--color-primary-rgb), 0.24);
 
             /* tinggi pita atas & bawah (desktop) */
             --kb-top: 124px;
@@ -543,8 +522,7 @@
         /* ---------- Latar: tanpa foto ---------- */
         html { background-color: var(--kb-body); }
         body {
-            /* TRANSPARAN: kalau body diberi warna, ia menutupi .kiosk-bg (z-index negatif)
-               dan latar baru tidak terlihat sama sekali. */
+            /* TRANSPARAN: kalau body diberi warna, ia menutupi .kiosk-bg (z-index negatif). */
             background: transparent !important;
             color: #0f172a;
         }
@@ -566,7 +544,7 @@
             position: relative;
             flex: 0 0 var(--kb-top);
             height: var(--kb-top);
-            background: linear-gradient(100deg, #14532D 0%, #15803D 50%, #166534 100%);
+            background: linear-gradient(100deg, var(--color-primary-900) 0%, var(--color-primary-800) 50%, var(--color-primary-700) 100%);
             border-bottom: var(--kb-gold-h) solid var(--kb-gold);
             box-sizing: border-box;
             overflow: hidden;
@@ -596,14 +574,14 @@
             flex: 1 1 auto;
             min-height: 0;
             overflow: hidden;
-            background: linear-gradient(180deg, #F0FDF4 0%, #DCFCE7 55%, #BBF7D0 100%);
+            background: linear-gradient(180deg, rgba(var(--color-primary-rgb), 0.12) 0%, rgba(var(--color-primary-rgb), 0.18) 55%, rgba(var(--color-primary-rgb), 0.24) 100%);
         }
         /* Pola titik halus, makin jelas ke arah tepi */
         .kiosk-bg__body::before {
             content: "";
             position: absolute;
             inset: 0;
-            background-image: radial-gradient(rgba(21,128,61,.16) 1.3px, transparent 1.7px);
+            background-image: radial-gradient(rgba(var(--color-primary-rgb), 0.16) 1.3px, transparent 1.7px);
             background-size: 26px 26px;
             -webkit-mask-image: radial-gradient(ellipse 55% 50% at 50% 50%, transparent 0%, #000 100%);
             mask-image: radial-gradient(ellipse 55% 50% at 50% 50%, transparent 0%, #000 100%);
@@ -618,7 +596,7 @@
             position: relative;
             flex: 0 0 var(--kb-foot);
             height: var(--kb-foot);
-            background: linear-gradient(260deg, #14532D 0%, #15803D 50%, #166534 100%);
+            background: linear-gradient(260deg, var(--color-primary-900) 0%, var(--color-primary-800) 50%, var(--color-primary-700) 100%);
             border-top: var(--kb-gold-h) solid var(--kb-gold);
             box-sizing: border-box;
             overflow: hidden;
@@ -647,7 +625,7 @@
             pointer-events: auto;
         }
 
-        /* Switcher: kaca bening di atas kamera */
+        /* Switcher: pil putih di atas kamera */
         .kiosk-switcher {
             position: absolute;
             left: 50%;
@@ -657,19 +635,21 @@
             z-index: 8;
             opacity: 1;
             background: #ffffff;
-            border: 1px solid rgba(21,128,61,.15);
-            box-shadow: 0 4px 12px rgba(21,128,61,.12);
+            border: 1px solid rgba(var(--color-primary-rgb), 0.15);
+            box-shadow: 0 4px 12px rgba(var(--color-primary-rgb), 0.12);
         }
         .kiosk-switch-btn { width: 44px; height: 38px; color: var(--kb-navy); }
-        .kiosk-switch-btn:hover { background: rgba(21,128,61,.10); }
+        .kiosk-switch-btn:hover { background: rgba(var(--color-primary-rgb), 0.10); }
         .kiosk-switch-btn.active {
             background: var(--kb-navy);
             color: #ffffff;
-            box-shadow: 0 4px 12px rgba(21,128,61,.35);
+            box-shadow: 0 4px 12px rgba(var(--color-primary-rgb), 0.35);
         }
+
+        /* Tombol speaker: merah saat mute (class is-muted diatur oleh kiosk-speech.js) */
         .kiosk-sound-toggle.is-muted {
             color: #b91c1c;
-            background: rgba(185,28,28,.08);
+            background: rgba(185, 28, 28, 0.08);
         }
 
         /* Kotak kamera */
@@ -678,13 +658,12 @@
             border: 1px solid rgba(255,255,255,.75);
             border-radius: var(--gerbang-camera-radius);
             box-shadow:
-                0 22px 48px rgba(21,128,61,.28),
+                0 22px 48px rgba(var(--color-primary-rgb), 0.28),
                 0 0 0 8px rgba(255,255,255,.38);
         }
         .kiosk-corner { border-color: #ffffff; filter: drop-shadow(0 0 5px rgba(0,0,0,.35)); }
 
-        /* ---------- Identitas sekolah, jam: di dalam pita atas ---------- */
-        /* ---------- Jam: font biasa (Poppins), tanpa panel ---------- */
+        /* ---------- Identitas sekolah & jam: di dalam pita atas ---------- */
         .kiosk-clock-time {
             font-family: 'Poppins', 'Roboto', system-ui, sans-serif !important;
             font-weight: 600;
@@ -779,12 +758,10 @@
         /* ============================ MOBILE (<768px) ============================ */
         @media (max-width: 767px) {
             :root {
-                /* pita atas: logo, nama, "presensi gerbang", jam (tersusun vertikal) */
                 --kb-top: calc(132px + env(safe-area-inset-top, 0px));
                 --kb-foot: calc(66px + env(safe-area-inset-bottom, 0px));
                 --kb-gold-h: 4px;
                 --kiosk-cam-max: min(84vw, 360px);
-                /* kamera tepat di tengah layar; ukuran menyesuaikan sisa ruang (termasuk switcher) */
                 --kiosk-cam-fit: max(140px, min(calc(100dvh - 2 * var(--kb-top) - 150px), calc(100dvh - 2 * var(--kb-foot) - 24px)));
             }
 
@@ -825,7 +802,7 @@
             .kiosk-clock-date {
                 font-size: .66rem;
                 line-height: 14px;
-                color: rgba(219,234,254,.9);
+                color: #ffffff;
                 opacity: 1;
                 margin-top: 0;
                 text-shadow: none;
@@ -836,7 +813,7 @@
             .kiosk-exit-corner { left: 16px; }
             .kiosk-fullscreen-corner { right: 16px; }
 
-            /* bentuk sudut lebih kecil lagi di layar sempit */
+            /* bentuk sudut lebih kecil di layar sempit */
             .kb-tl { width: 15vw; }
             .kb-tr { width: 12vw; }
             .kb-bl { width: 22vw; }
@@ -847,43 +824,43 @@
 
 <body>
 
-    <!-- LATAR KIOSK (seirama dengan kartu presensi): pita atas, badan, pita bawah -->
+    <!-- LATAR KIOSK: pita atas, badan, pita bawah (warna dari config/theme.php) -->
     <div class="kiosk-bg" aria-hidden="true">
         <div class="kiosk-bg__top">
             <svg viewBox="0 0 1086 267" preserveAspectRatio="xMaxYMid slice" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="602,0 843,0 695,267 453,267" fill="#166534"/>
-                <polygon points="843,0 1086,0 1086,267 695,267" fill="#15803D"/>
-                <path d="M902,0 A130,130 0 0 0 1086,157 L1086,0 Z" fill="#16A34A"/>
+                <polygon points="602,0 843,0 695,267 453,267" fill="var(--color-primary-800)"/>
+                <polygon points="843,0 1086,0 1086,267 695,267" fill="var(--color-primary-700)"/>
+                <path d="M902,0 A130,130 0 0 0 1086,157 L1086,0 Z" fill="var(--color-primary-600)"/>
             </svg>
         </div>
         <div class="kiosk-bg__body">
             <svg class="kb-tl" viewBox="0 0 219 201" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="219,0 110,0 0,110 0,201 90,201" fill="#DCFCE7"/>
-                <polygon points="110,0 0,0 0,110" fill="#DCFCE7"/>
+                <polygon points="219,0 110,0 0,110 0,201 90,201" fill="rgba(var(--color-primary-rgb), 0.24)"/>
+                <polygon points="110,0 0,0 0,110" fill="rgba(var(--color-primary-rgb), 0.30)"/>
             </svg>
             <svg class="kb-tr" viewBox="0 0 171 171" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0,0 A171,171 0 0 0 171,171 L171,0 Z" fill="#DCFCE7"/>
-                <path d="M81,0 A90,90 0 0 0 171,90 L171,0 Z" fill="#DCFCE7"/>
+                <path d="M0,0 A171,171 0 0 0 171,171 L171,0 Z" fill="rgba(var(--color-primary-rgb), 0.24)"/>
+                <path d="M81,0 A90,90 0 0 0 171,90 L171,0 Z" fill="rgba(var(--color-primary-rgb), 0.30)"/>
             </svg>
             <svg class="kb-bl" viewBox="0 0 293 293" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0,0 A293,293 0 0 1 293,293 L0,293 Z" fill="#DCFCE7"/>
-                <path d="M0,133 A160,160 0 0 1 160,293 L0,293 Z" fill="#DCFCE7"/>
+                <path d="M0,0 A293,293 0 0 1 293,293 L0,293 Z" fill="rgba(var(--color-primary-rgb), 0.24)"/>
+                <path d="M0,133 A160,160 0 0 1 160,293 L0,293 Z" fill="rgba(var(--color-primary-rgb), 0.30)"/>
             </svg>
             <svg class="kb-br" viewBox="0 0 390 277" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="168,0 298,0 149,277 0,277" fill="#DCFCE7"/>
-                <polygon points="298,0 390,0 390,277 149,277" fill="#DCFCE7"/>
+                <polygon points="168,0 298,0 149,277 0,277" fill="rgba(var(--color-primary-rgb), 0.24)"/>
+                <polygon points="298,0 390,0 390,277 149,277" fill="rgba(var(--color-primary-rgb), 0.30)"/>
             </svg>
         </div>
         <div class="kiosk-bg__foot">
             <svg viewBox="0 0 602 141" preserveAspectRatio="xMinYMid slice" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="244,0 485,0 602,141 361,141" fill="#166534"/>
-                <polygon points="0,0 244,0 361,141 0,141" fill="#15803D"/>
-                <path d="M0,69 A91,91 0 0 1 151,141 L0,141 Z" fill="#16A34A"/>
+                <polygon points="244,0 485,0 602,141 361,141" fill="var(--color-primary-800)"/>
+                <polygon points="0,0 244,0 361,141 0,141" fill="var(--color-primary-700)"/>
+                <path d="M0,69 A91,91 0 0 1 151,141 L0,141 Z" fill="var(--color-primary-600)"/>
             </svg>
             <svg class="mirror" viewBox="0 0 602 141" preserveAspectRatio="xMinYMid slice" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="244,0 485,0 602,141 361,141" fill="#166534"/>
-                <polygon points="0,0 244,0 361,141 0,141" fill="#15803D"/>
-                <path d="M0,69 A91,91 0 0 1 151,141 L0,141 Z" fill="#16A34A"/>
+                <polygon points="244,0 485,0 602,141 361,141" fill="var(--color-primary-800)"/>
+                <polygon points="0,0 244,0 361,141 0,141" fill="var(--color-primary-700)"/>
+                <path d="M0,69 A91,91 0 0 1 151,141 L0,141 Z" fill="var(--color-primary-600)"/>
             </svg>
         </div>
     </div>
@@ -953,7 +930,7 @@
 
                 <!-- Mode Alat Scanner USB -->
                 <div id="hardwareView" class="d-none">
-                    <i class='bx bx-scan' style="font-size: 2.6rem; color: #15803D;"></i>
+                    <i class='bx bx-scan' style="font-size: 2.6rem; color: var(--color-primary);"></i>
                     <p class="kiosk-placeholder-text">{{ __('Scan kartu dengan alat, atau ketik NIS/NIP lalu tekan Enter') }}</p>
                     <div class="w-100 mt-2 px-1">
                         <input type="text" id="hardwareInput" class="form-control form-control-sm text-center fw-semibold font-monospace py-2" placeholder="{{ __('Ketik NIS/NIP untuk Siswa/Guru') }}" autocomplete="off">
@@ -991,6 +968,7 @@
 
     <audio id="beepSound" src="{{ asset('audio/beep.mp3') }}" preload="auto"></audio>
 
+    <!-- Suara kiosk (tombol speaker + TTS). Harus dimuat SEBELUM scanner.js -->
     <script src="{{ asset('js/kiosk-speech.js') }}?v={{ file_exists(public_path('js/kiosk-speech.js')) ? filemtime(public_path('js/kiosk-speech.js')) : config('app.version', '1') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -1000,7 +978,7 @@
         (function() {
             const clockEl = document.getElementById('liveClock');
             const dateEl = document.getElementById('liveDate');
-            
+
             function updateClock() {
                 const now = new Date();
                 const hours = String(now.getHours()).padStart(2, '0');
@@ -1009,21 +987,17 @@
                 if (clockEl) {
                     clockEl.innerText = `${hours}:${minutes}:${seconds}`;
                 }
-                
+
                 // Update tanggal mengikuti bahasa aktif (id / en)
                 if (dateEl) {
                     const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Jakarta' };
                     dateEl.innerText = now.toLocaleDateString({!! json_encode(app()->getLocale() === 'en' ? 'en-US' : 'id-ID') !!}, options);
                 }
             }
-            
-            // Update immediately
+
             updateClock();
-            
-            // Update every second
             const intervalId = setInterval(updateClock, 1000);
-            
-            // Cleanup when page is unloaded
+
             window.addEventListener('beforeunload', function() {
                 clearInterval(intervalId);
             });

@@ -43,9 +43,9 @@
     .presence-summary .item i {
         font-size: 0.95rem;
     }
-    .presence-summary .sudah { color: #059669; }
-    .presence-summary .belum { color: #dc2626; }
-    .presence-summary .total { color: #15803D; }
+    .presence-summary .sudah { color: var(--presensi-hadir); }
+    .presence-summary .belum { color: var(--presensi-alfa); }
+    .presence-summary .total { color: var(--color-primary); }
 
     /* Responsif: di layar kecil bar tetap SATU baris (tidak wrap), item rata
        tengah terhadap layar dengan gap seragam ~12px, tidak mepet tepi layar.

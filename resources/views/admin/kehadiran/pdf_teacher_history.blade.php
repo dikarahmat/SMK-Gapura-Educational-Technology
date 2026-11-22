@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    @include('partials.theme')
     <meta charset="UTF-8">
     <title>{{ $title }}</title>
     <style>
@@ -26,7 +27,7 @@
         .school-title {
             font-size: 14pt;
             font-weight: bold;
-            color: #1d4ed8;
+            color: {{ config('theme.primary') }};
             letter-spacing: 0.5px;
             margin: 0;
             text-transform: uppercase;
@@ -62,7 +63,7 @@
             text-align: center;
         }
         .data-table th {
-            background-color: #15803D;
+            background-color: {{ config('theme.primary') }};
             color: #ffffff;
             font-weight: bold;
             text-transform: uppercase;
@@ -79,12 +80,12 @@
         }
         .text-left { text-align: left !important; }
         .text-center { text-align: center !important; }
-        .badge-h { color: #059669; font-weight: bold; }
-        .badge-s { color: #2563eb; font-weight: bold; }
-        .badge-i { color: #7e22ce; font-weight: bold; }
-        .badge-a { color: #e11d48; font-weight: bold; }
-        .badge-l { color: #94a3b8; }
-        .jk-l { color: #3B82F6; font-weight: 500; }
+        .badge-h { color: {{ config('theme.status.hadir') }}; font-weight: bold; }
+        .badge-s { color: {{ config('theme.status.sakit') }}; font-weight: bold; }
+        .badge-i { color: {{ config('theme.status.izin') }}; font-weight: bold; }
+        .badge-a { color: {{ config('theme.status.alfa') }}; font-weight: bold; }
+        .badge-l { color: {{ config('theme.status.libur') }}; }
+        .jk-l { color: var(--color-primary); font-weight: 500; }
         .jk-p { color: #EF4444; font-weight: 500; }
         td, td * { color: #000 !important; font-weight: 400 !important; }
         .badge-h, .badge-t, .badge-s, .badge-i, .badge-a, .badge-l,
@@ -92,13 +93,13 @@
         th { color: inherit !important; font-weight: inherit !important; }
         th { color: #ffffff !important; font-weight: bold !important; }
         .badge-h { color: #059669 !important; font-weight: bold !important; }
-        .badge-s { color: #2563eb !important; font-weight: bold !important; }
+        .badge-s { color: {{ config('theme.status.sakit') }} !important; font-weight: bold !important; }
         .badge-i { color: #7e22ce !important; font-weight: bold !important; }
         .badge-a { color: #e11d48 !important; font-weight: bold !important; }
         .badge-l { color: #94a3b8 !important; font-weight: normal !important; }
-        .jk-l { color: #3B82F6 !important; font-weight: 500 !important; }
+        .jk-l { color: var(--color-primary) !important; font-weight: 500 !important; }
         .jk-p { color: #EF4444 !important; font-weight: 500 !important; }
-        .school-title { color: #1d4ed8 !important; font-weight: bold !important; }
+        .school-title { color: {{ config('theme.primary') }} !important; font-weight: bold !important; }
         .school-subtitle, .report-subtitle { color: #000 !important; font-weight: 400 !important; }
         .printed-at, .printed-at strong { color: #000 !important; font-weight: 400 !important; }
         .legend-title { color: #000 !important; font-weight: 400 !important; }
@@ -138,7 +139,7 @@
         /* Warna keterangan sama dengan warna status di tabel */
         .pdf-legend .lg-h { color: #059669 !important; }
         .pdf-legend .lg-t { color: #d97706 !important; }
-        .pdf-legend .lg-s { color: #2563eb !important; }
+        .pdf-legend .lg-s { color: {{ config('theme.status.sakit') }} !important; }
         .pdf-legend .lg-i { color: #7e22ce !important; }
         .pdf-legend .lg-a { color: #e11d48 !important; }
         .pdf-legend .lg-l { color: #94a3b8 !important; }
@@ -314,7 +315,7 @@
                     </th>
                 @endforeach
                 <th style="width: 2.6%; background-color: #059669;">H</th>
-                <th style="width: 2.6%; background-color: #2563eb;">S</th>
+                <th style="width: 2.6%; background-color: {{ config('theme.status.sakit') }};">S</th>
                 <th style="width: 2.6%; background-color: #7e22ce;">I</th>
                 <th style="width: 2.6%; background-color: #e11d48;">A</th>
                 <th style="width: 4.4%;">%</th>

@@ -7,17 +7,24 @@
  */
 
 :root {
-    /* Brand Colors (Nilai awal asli) */
-    --presensi-primary: #14532D;       /* Hijau tua - Header Kartu, Sidebar */
-    --presensi-primary-hover: #166534;
-    --presensi-primary-light: #F0FDF4;
-    --primary-blue: #15803D;           /* Hijau utama tombol & aksen */
-    --primary-blue-hover: #166534;
-    --bg-canvas: #14532D;              /* Latar kanvas aplikasi */
-    --presensi-accent: #f59e0b;        /* Orange - Garis Aksen Header Tetap */
-    --presensi-accent-hover: #d97706;  /* Amber Dark */
-    --presensi-accent-light: #fffbeb;  /* Warm Light */
+    /* Brand Colors — diarahkan ke SISTEM TEMA TERPUSAT (config/theme.php).
+       Di-host di sini supaya komponen lama yang memakai --presensi-*/--primary-blue
+       tetap bekerja tanpa perubahan markup; nilainya terpadu dari satu sumber. */
+    --presensi-primary: var(--color-primary);       /* Header Kartu, Sidebar, tombol utama */
+    --presensi-primary-hover: var(--color-primary-hover);
+    --presensi-primary-light: var(--color-primary-100);
+    --primary-blue: var(--color-primary);           /* Biru utama tombol & aksen */
+    --primary-blue-hover: var(--color-primary-hover);
+    --bg-canvas: var(--color-primary);              /* Latar kanvas aplikasi */
 
+    /* Aksen oranye/amber — dipakai garis header modal & aksen terbatas.
+       Walau bukan keluarga biru, ini adalah WARNA BRAND (bukan status presensi),
+       jadi ikut berubah saat tema diganti. Dipetakan ke accent dari config. */
+    --presensi-accent: var(--color-accent);         /* Orange - Garis Aksen Header Tetap */
+    --presensi-accent-hover: var(--color-accent-hover);
+    --presensi-accent-light: var(--color-accent-100, #fffbeb);
+
+    /* --- Warna tekstural/netral (TIDAK termasuk tema, biarkan statis) --- */
     /* Typography & Neutral Colors */
     --presensi-text: #0f172a;          /* Teks Utama Gelap (Nama & Kelas Kartu) */
     --presensi-text-secondary: #334155;/* Slate 700 */
@@ -26,28 +33,30 @@
     --presensi-bg-page: #f8fafc;       /* Background Halaman */
     --presensi-bg-card: #ffffff;       /* Kartu Putih */
 
-    /* Status Presensi Colors */
-    --presensi-hadir: #10b981;
+    /* Status Presensi Colors — WARNA STATUS (H/T/S/I/A/L/B) TERPISAH dari tema utama.
+       Tidak berubah saat tema diganti. Nilai diselaraskan ke config('theme.status').
+       Dipakai oleh .presensi-badge.*, .scan-result-*, tabel rekap, dan status pill. */
+    --presensi-hadir: #059669;
     --presensi-hadir-bg: #ecfdf5;
     --presensi-hadir-border: #a7f3d0;
 
-    --presensi-terlambat: #f59e0b;
+    --presensi-terlambat: #d97706;
     --presensi-terlambat-bg: #fffbeb;
     --presensi-terlambat-border: #fde68a;
 
-    --presensi-sakit: #3b82f6;
+    --presensi-sakit: #2563eb;
     --presensi-sakit-bg: #eff6ff;
-    --presensi-sakit-border: #bfdbfe;
+    --presensi-sakit-border: var(--color-primary-200);
 
-    --presensi-izin: #8b5cf6;
+    --presensi-izin: #7e22ce;
     --presensi-izin-bg: #f5f3ff;
     --presensi-izin-border: #ddd6fe;
 
-    --presensi-alfa: #ef4444;
+    --presensi-alfa: #e11d48;
     --presensi-alfa-bg: #fef2f2;
     --presensi-alfa-border: #fecaca;
 
-    --presensi-belum: #94a3b8;
+    --presensi-belum: #cbd5e1;
     --presensi-belum-bg: #f1f5f9;
     --presensi-belum-border: #e2e8f0;
 
@@ -80,9 +89,9 @@
    KOMPONEN BERSAMA: TOMBOL & AKSI
    ========================================================================== */
 .btn-presensi-primary {
-    background-color: var(--presensi-primary) !important;
+    background-color: var(--btn-save) !important;
     color: #ffffff !important;
-    border: 1px solid var(--presensi-primary) !important;
+    border: 1px solid var(--btn-save) !important;
     border-radius: var(--presensi-radius-md);
     font-weight: 600;
     transition: all 0.2s ease;
@@ -93,10 +102,10 @@
 }
 .btn-presensi-primary:hover,
 .btn-presensi-primary:focus {
-    background-color: var(--presensi-primary-hover) !important;
-    border-color: var(--presensi-primary-hover) !important;
+    background-color: var(--btn-save-hover) !important;
+    border-color: var(--btn-save-hover) !important;
     color: #ffffff !important;
-    box-shadow: 0 4px 12px rgba(20, 83, 45, 0.25);
+    box-shadow: 0 4px 12px rgba(var(--btn-save-rgb), 0.25);
 }
 
 /* ==========================================================================
@@ -144,13 +153,13 @@
 
 .presensi-badge.hadir {
     background-color: var(--presensi-hadir-bg);
-    color: #065f46;
+    color: var(--presensi-hadir);
     border: 1px solid var(--presensi-hadir-border);
 }
 
 .presensi-badge.terlambat {
     background-color: var(--presensi-terlambat-bg);
-    color: #92400e;
+    color: var(--presensi-terlambat);
     border: 1px solid var(--presensi-terlambat-border);
 }
 
@@ -162,13 +171,13 @@
 
 .presensi-badge.izin {
     background-color: var(--presensi-izin-bg);
-    color: #5b21b6;
+    color: var(--presensi-izin);
     border: 1px solid var(--presensi-izin-border);
 }
 
 .presensi-badge.alfa {
     background-color: var(--presensi-alfa-bg);
-    color: #991b1b;
+    color: var(--presensi-alfa);
     border: 1px solid var(--presensi-alfa-border);
 }
 
@@ -259,7 +268,7 @@
    TOMBOL DOWNLOAD & EXPORT SOLID TANPA BORDER (IDENTIK DENGAN DOWNLOAD QR CODE)
    ========================================================================== */
 .btn-download-blue {
-    background-color: #3b82f6 !important;
+    background-color: var(--btn-print_card) !important;
     color: #ffffff !important;
     font-weight: 600 !important;
     font-size: 0.9rem !important;
@@ -276,7 +285,7 @@
     transition: background-color 0.2s ease, opacity 0.2s ease !important;
 }
 .btn-download-blue:hover {
-    background-color: #15803D !important;
+    background-color: var(--btn-print_card-hover) !important;
     color: #ffffff !important;
     border: none !important;
     outline: none !important;
@@ -284,7 +293,7 @@
 }
 
 .btn-download-green {
-    background-color: #059669 !important;
+    background-color: var(--action-excel) !important;
     color: #ffffff !important;
     font-weight: 600 !important;
     font-size: 0.9rem !important;
@@ -302,7 +311,7 @@
     min-height: 42px !important;
 }
 .btn-download-green:hover {
-    background-color: #047857 !important;
+    background-color: var(--action-excel-hover) !important;
     color: #ffffff !important;
     border: none !important;
     outline: none !important;
@@ -403,10 +412,10 @@
 }
 
 .pagination-arrow-btn:hover:not(.is-disabled) {
-    background-color: #15803D !important;
+    background-color: var(--btn-print_card-hover) !important;
     color: #ffffff !important;
-    border-color: #15803D !important;
-    box-shadow: 0 3px 8px rgba(21, 128, 61, 0.28) !important;
+    border-color: var(--color-primary-hover) !important;
+    box-shadow: 0 3px 8px rgba(var(--color-primary-rgb), 0.28) !important;
     transform: translateY(-1px) !important;
 }
 
@@ -1288,7 +1297,7 @@
         margin: 0;
         border: 0 !important;                     /* hapus pemisah antar item */
         background-color: transparent;
-        color: #15803D;
+        color: #334155;
         font-size: 0.65rem;
         font-weight: 700;
         letter-spacing: 0.03em;
@@ -1301,9 +1310,9 @@
     /* Catatan: :hover segmented ada di blok @media (hover: hover) and
        (pointer: fine) pada bagian (k) di bawah, agar tidak menempel di HP. */
     body .dash-seg .dash-seg__btn.is-active,
-    body .dash-seg .dash-seg__btn--solid { background-color: #16A34A; color: #ffffff; }
+    body .dash-seg .dash-seg__btn--solid { background-color: var(--color-primary); color: #ffffff; }
     body .dash-seg .dash-seg__btn.is-active:hover,
-    body .dash-seg .dash-seg__btn--solid:hover { background-color: #15803D; color: #ffffff; }
+    body .dash-seg .dash-seg__btn--solid:hover { background-color: var(--color-primary-hover); color: #ffffff; }
     /* Tanggal periode: TEKS BIAS, tanpa kontainer (badge/bg-light/rounded-pill/
        px-2/py-1 Bootstrap dibatalkan), rata kanan, sejajar dengan segmented. */
     body .dashboard-box .chart-header-actions .dash-period,

@@ -56,10 +56,10 @@
         height: 38px;
         padding: 0 1rem;
     }
-    .btn-green-excel { background-color: #059669; }
-    .btn-red-pdf { background-color: #ef4444; }
-    .btn-green-excel:hover, .btn-green-excel:active, .btn-green-excel:focus, .btn-green-excel:focus-visible { background-color: #059669 !important; color: #ffffff !important; transform: none !important; box-shadow: none !important; outline: none; }
-    .btn-red-pdf:hover, .btn-red-pdf:active, .btn-red-pdf:focus, .btn-red-pdf:focus-visible { background-color: #ef4444 !important; color: #ffffff !important; transform: none !important; box-shadow: none !important; outline: none; }
+    .btn-green-excel { background-color: var(--action-excel); }
+    .btn-red-pdf { background-color: var(--action-pdf); }
+    .btn-green-excel:hover, .btn-green-excel:active, .btn-green-excel:focus, .btn-green-excel:focus-visible { background-color: var(--action-excel-hover) !important; color: #ffffff !important; transform: none !important; box-shadow: none !important; outline: none; }
+    .btn-red-pdf:hover, .btn-red-pdf:active, .btn-red-pdf:focus, .btn-red-pdf:focus-visible { background-color: var(--action-pdf-hover) !important; color: #ffffff !important; transform: none !important; box-shadow: none !important; outline: none; }
 
     .recap-mobile-actions .btn {
         transition: none !important;
@@ -94,17 +94,17 @@
     }
     .period-link:active { background-color: #cbd5e1; }
     .period-link.active {
-        background-color: #15803D !important; color: #ffffff !important; font-weight: 600;
-        box-shadow: 0 2px 6px rgba(21, 128, 61, 0.25);
+        background-color: var(--color-primary) !important; color: #ffffff !important; font-weight: 600;
+        box-shadow: 0 2px 6px rgba(var(--color-primary-rgb), 0.25);
     }
     .period-link.active:hover,
     .period-link.active:active,
     .period-link.active:focus,
     .period-link.active:focus-visible {
-        background-color: #15803D !important; color: #ffffff !important;
+        background-color: var(--color-primary-hover) !important; color: #ffffff !important;
     }
     .period-link:focus-visible {
-        outline: 2px solid #2563eb; outline-offset: 2px;
+        outline: 2px solid var(--color-primary); outline-offset: 2px;
     }
 
     @media (max-width: 575.98px) {
@@ -129,7 +129,7 @@
         background-color: #ffffff; padding: 0.35rem 0.65rem; transition: all 0.15s ease-in-out;
         border: 1px solid #cbd5e1;
     }
-    .filter-input:focus { border-color: #15803D; box-shadow: 0 0 0 2px rgba(21, 128, 61, 0.25); }
+    .filter-input:focus { border-color: var(--color-primary); box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb), 0.15); }
     .filter-btn { height: 38px; font-size: 0.82rem; border-radius: var(--clean-radius); display: inline-flex; align-items: center; justify-content: center; gap: 0.35rem; font-weight: 600; }
 
     /* Banner hari libur - kompak */
@@ -180,7 +180,7 @@
        memaksa warna thead th. Class dipasang di <th> DAN <span> di dalamnya. */
     #daftar-rekap .table-matrix .clr-h { color: #16a34a !important; }
     #daftar-rekap .table-matrix .clr-t { color: #d97706 !important; }
-    #daftar-rekap .table-matrix .clr-s { color: #2563eb !important; }
+    #daftar-rekap .table-matrix .clr-s { color: var(--presensi-sakit) !important; }
     #daftar-rekap .table-matrix .clr-i { color: #7e22ce !important; }
     #daftar-rekap .table-matrix .clr-a { color: #ef4444 !important; }
     #daftar-rekap .table-matrix .clr-pct { color: #212529 !important; }
@@ -191,7 +191,7 @@
     /* Status Colors */
     .cell-present { color: #16a34a !important; font-weight: 700; }
     .cell-late { color: #d97706 !important; font-weight: 700; }
-    .cell-sick { color: #2563eb !important; font-weight: 700; }
+    .cell-sick { color: var(--presensi-sakit) !important; font-weight: 700; }
     .cell-permission { color: #7e22ce !important; font-weight: 700; }
     .cell-alpha { color: #ef4444 !important; font-weight: 700; }
     .cell-holiday { color: #64748b !important; font-weight: 600; }
@@ -213,7 +213,7 @@
         line-height: 1.2;
     }
     .rekap-jk.is-laki {
-        color: #3B82F6 !important;
+        color: var(--color-primary) !important;
         font-weight: 500 !important;
     }
     .rekap-jk.is-perempuan {
@@ -282,21 +282,21 @@
     }
 
     .kehadiran-pagination-page.is-active {
-        color: #15803D !important;
+        color: var(--color-primary) !important;
         font-weight: 700;
-        border-bottom: 2px solid #15803D !important;
+        border-bottom: 2px solid var(--color-primary) !important;
         cursor: default;
     }
 
     .kehadiran-pagination-step:hover,
     .kehadiran-pagination-page:hover {
-        color: #15803D !important;
+        color: var(--color-primary-hover) !important;
         text-decoration: underline;
     }
 
     .kehadiran-pagination-step:focus-visible,
     .kehadiran-pagination-page:focus-visible {
-        outline: 2px solid #15803D !important;
+        outline: 2px solid var(--color-primary) !important;
         outline-offset: 1px;
         border-radius: 0 !important;
     }
@@ -351,11 +351,11 @@
         min-width: 0;
         white-space: nowrap;
         isolation: isolate;
-        background-color: #15803D !important;
-        border-color: #15803D !important;
+        background-color: var(--color-primary) !important;
+        border-color: var(--color-primary) !important;
         color: #fff !important;
     }
-    #printRekapSubmitBtn.is-done { background-color: #16a34a !important; border-color: #16a34a !important; color: #fff !important; }
+    #printRekapSubmitBtn.is-done { background-color: var(--status-hadir) !important; border-color: var(--status-hadir) !important; color: #fff !important; }
     #printRekapSubmitBtn.is-done .btn-progress__fill { display: none; }
 
     #printRekapModal .dl-actions > .btn {
@@ -885,7 +885,7 @@
                                 </span>
                             </td>
                             @for($d = 1; $d <= $daysInMonth; $d++)
-                                @php $code = $days[$d] ?? '-'; @endphp
+                                @php $code = $days[substr($startDate, 0, 8) . sprintf('%02d', $d)] ?? '-'; @endphp
                                 <td class="text-center">
                                     @if($code === 'H') <span class="cell-present">H</span>
                                     @elseif($code === 'T') <span class="cell-late">T</span>

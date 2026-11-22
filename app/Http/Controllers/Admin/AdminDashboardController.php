@@ -47,78 +47,6 @@ class AdminDashboardController extends Controller
         return $today->copy();
     }
 
-    /**
-     * Petakan satu koleksi ringkasan harian ke [id rombel => baris].
-     *
-     * Baris dicocokkan ke rombel lewat class_id / school_class_id pada
-     * barisnya; kalau tidak ada, lewat key koleksi (bila berupa id rombel);
-     * kalau tidak juga, lewat urutan posisi.
-     */
-    private function indexSummaryByClass($classesList, $summary): array
-    {
-        $classIds = $classesList->pluck('id')->all();
-        $byClass = [];
-        $position = 0;
-
-        foreach ($summary as $key => $row) {
-            if (is_object($row) && method_exists($row, 'toArray')) {
-                $r = $row->toArray();
-            } else {
-                $r = (array) $row;
-            }
-
-            $classId = $r['class_id'] ?? $r['school_class_id'] ?? null;
-            if ($classId === null) {
-                $classId = in_array($key, $classIds, true)
-                    ? $key
-                    : ($classIds[$position] ?? null);
-            }
-
-            if ($classId !== null) {
-                $byClass[$classId] = $r;
-            }
-            $position++;
-        }
-
-        return $byClass;
-    }
-
-    /**
-     * Susun data batang bertumpuk: satu entri per rombel, urut sesuai
-     * $classesList (sama dengan urutan label sumbu X). $summaries berisi satu
-     * ringkasan per hari; jumlah tiap status dijumlahkan antar hari.
-     *
-     * "belum" = (siswa aktif x jumlah hari) yang belum punya status apa pun.
-     */
-    private function buildChartStatus($classesList, array $summaries): array
-    {
-        $jumlahHari = max(1, count($summaries));
-        $indexed = array_map(fn ($s) => $this->indexSummaryByClass($classesList, $s), $summaries);
-
-        return $classesList->map(function ($cls) use ($indexed, $jumlahHari) {
-            $tot = ['hadir' => 0, 'terlambat' => 0, 'izin' => 0, 'sakit' => 0, 'alpha' => 0];
-
-            foreach ($indexed as $byClass) {
-                $r = $byClass[$cls->id] ?? [];
-                foreach (array_keys($tot) as $k) {
-                    $tot[$k] += (int) ($r[$k] ?? 0);
-                }
-            }
-
-            $tercatat = array_sum($tot);
-
-            return [
-                'label'     => $cls->name,
-                'hadir'     => $tot['hadir'],
-                'terlambat' => $tot['terlambat'],
-                'izin'      => $tot['izin'],
-                'sakit'     => $tot['sakit'],
-                'alpa'      => $tot['alpha'],
-                'belum'     => max(0, (int) ($cls->total_students ?? 0) * $jumlahHari - $tercatat),
-            ];
-        })->values()->all();
-    }
-
     public function index(Request $request, DailyAttendanceSummary $dailyAttendanceSummary)
     {
         Carbon::setLocale('id');
@@ -291,47 +219,6 @@ class AdminDashboardController extends Controller
 
         $totalChartPoints = count($chartValues);
 
-        // Data BATANG BERTUMPUK per rombel (semua mode). Jumlah siswa per status
-        // dari DailyAttendanceSummary, helper yang sama dengan kartu
-        // "Kehadiran Hari Ini" dan halaman Presensi, jadi angkanya konsisten.
-        // - Harian  : hari ini.
-        // - Mingguan / Bulanan: dijumlahkan untuk tiap hari efektif (tanggal
-        //   yang punya catatan presensi) pada periode, di-cache 2 menit.
-        // Grafik tetap memakai HARI INI sebagai acuan periode, bukan tanggal
-        // pilihan, sama seperti aturan grafik lainnya di atas.
-        $chartStatus = [];
-        if ($chartMode === 'harian') {
-            $ringkasanHariIni = $isToday
-                ? $kelasSummary
-                : $dailyAttendanceSummary->summarize($classesList, $todayJakarta->toDateString());
-
-            $chartStatus = $this->buildChartStatus($classesList, [$ringkasanHariIni]);
-        } else {
-            $tanggalEfektif = Attendance::whereBetween('date', [$rentangMulai, $rentangAkhir])
-                ->distinct()
-                ->orderBy('date')
-                ->pluck('date')
-                ->map(fn ($d) => Carbon::parse((string) $d)->toDateString())
-                ->unique()
-                ->values();
-
-            if ($tanggalEfektif->isNotEmpty()) {
-                $chartStatus = Cache::remember(
-                    'dash_chart_status:' . $chartMode . ':' . $rentangMulai . ':' . $rentangAkhir
-                        . ':' . $tanggalEfektif->count() . ':' . $classesList->count(),
-                    120,
-                    function () use ($tanggalEfektif, $classesList, $dailyAttendanceSummary) {
-                        $ringkasan = [];
-                        foreach ($tanggalEfektif as $tgl) {
-                            $ringkasan[] = $dailyAttendanceSummary->summarize($classesList, $tgl);
-                        }
-
-                        return $this->buildChartStatus($classesList, $ringkasan);
-                    }
-                );
-            }
-        }
-
         // Apakah periode yang sedang ditampilkan punya catatan presensi?
         $periodeChart = match ($chartMode) {
             'harian'   => [$todayJakarta->copy()->startOfDay()->toDateString(),
@@ -388,7 +275,6 @@ class AdminDashboardController extends Controller
             'classesAttendance',
             // Data grafik (sudah dihitung sesuai mode di atas)
             'chartMode', 'chartLabels', 'chartValues', 'totalChartPoints', 'chartHasData',
-            'chartStatus',
             'chartTitle', 'chartPeriodLabel', 'chartTotalText', 'chartScopeText', 'chartEmptyText'
         ));
     }

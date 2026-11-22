@@ -40,12 +40,12 @@
     .table-responsive { -webkit-overflow-scrolling: touch; overflow-x: auto; }
     .table-guru { min-width: 720px; }
     .table-guru thead tr > th {
-        background-color: #15803D !important;
+        background-color: var(--color-primary) !important;
         color: #ffffff !important;
         font-weight: 700 !important;
         font-size: 0.8rem !important;
         padding: 0.8rem 1rem;
-        border-bottom: 1.5px solid #166534;
+        border-bottom: 1.5px solid var(--color-primary-hover);
         text-transform: uppercase;
         letter-spacing: 0.03em;
         white-space: nowrap !important;
@@ -54,9 +54,9 @@
     }
     .table-guru thead tr > th:first-child {
         border-top-left-radius: 0 !important;
-        background-color: #15803D !important;
+        background-color: var(--color-primary) !important;
     }
-    .table-guru thead tr > th:last-child  { border-top-right-radius: 8px !important; background-color: #15803D !important; }
+    .table-guru thead tr > th:last-child  { border-top-right-radius: 8px !important; background-color: var(--color-primary) !important; }
     .table-guru thead tr > th.th-nama { text-align: left !important; padding-left: 0.75rem; }
 
     .table-guru tbody td {
@@ -76,7 +76,7 @@
 
     /* Warna huruf status: sama dengan Rekap Presensi (font-weight 700) */
     .num-cell.is-on.hadir { color: #16a34a !important; font-weight: 700 !important; }   /* hijau */
-    .num-cell.is-on.sakit { color: #2563eb !important; font-weight: 700 !important; }   /* biru */
+    .num-cell.is-on.sakit { color: var(--presensi-sakit) !important; font-weight: 700 !important; }   /* biru */
     .num-cell.is-on.izin  { color: #7e22ce !important; font-weight: 700 !important; }   /* ungu */
     .num-cell.is-on.alfa  { color: #ef4444 !important; font-weight: 700 !important; }   /* merah */
     .num-cell.is-off      { color: #64748b !important; font-weight: 400 !important; }   /* abu untuk "-" */
@@ -112,7 +112,7 @@
     .aksi-form select.select-quick-status option { font-size: 11px; text-transform: uppercase; }
 
     .btn-save-quick {
-        background: #15803D;
+        background: var(--btn-save);
         color: #ffffff;
         border: none;
         border-radius: 6px;
@@ -126,14 +126,14 @@
         cursor: pointer;
         transition: background-color 0.12s ease;
     }
-    .btn-save-quick:not(:disabled):hover { background: #166534; }
+    .btn-save-quick:not(:disabled):hover { background: var(--btn-save-hover); }
     .btn-save-quick:disabled {
-        background: #15803D !important;
+        background: var(--btn-save) !important;
         opacity: 0.45 !important;
         cursor: not-allowed !important;
     }
     .btn-save-quick i { font-size: 13px !important; color: #ffffff !important; }
-    .btn-save-quick:focus-visible { outline: 2px solid #15803D; outline-offset: 2px; }
+    .btn-save-quick:focus-visible { outline: 2px solid var(--btn-save); outline-offset: 2px; }
 
     /* ===== MOBILE: tabel tidak tertumpuk, digeser horizontal ===== */
     @media (max-width: 767.98px) {

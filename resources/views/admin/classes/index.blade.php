@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @php
     // Admin dan guru memakai view ini dengan tampilan yang sama.
@@ -198,8 +198,8 @@
         justify-content: center !important;
         box-sizing: border-box !important;
         padding: 0 !important;
-        background: var(--btn-reset) !important;
-        border: 1px solid var(--btn-reset) !important;
+        background: var(--btn-refresh) !important;
+        border: 1px solid var(--btn-refresh) !important;
         border-radius: 6px !important;
         color: #ffffff !important;
         text-decoration: none !important;
@@ -217,14 +217,14 @@
 
     .btn-reset:hover,
     .btn-reset:focus-visible {
-        background: var(--btn-reset-hover) !important;
-        border-color: var(--btn-reset-hover) !important;
+        background: var(--btn-refresh-hover) !important;
+        border-color: var(--btn-refresh-hover) !important;
         color: #ffffff !important;
         text-decoration: none;
     }
 
     .btn-reset:focus-visible {
-        box-shadow: 0 0 0 3px rgba(100, 116, 139, .3);
+        box-shadow: 0 0 0 3px rgba(var(--btn-refresh-rgb), .3);
     }
 
     /* Dropdown Filter Tingkat Kelas */
@@ -343,14 +343,9 @@
     .btn-solid-pill:active {
         transform: scale(0.98);
     }
-    .btn-solid-green { background-color: var(--btn-import-excel); }
-    .btn-solid-blue { background-color: var(--btn-tambah); }
-    .btn-solid-red { background-color: var(--btn-hapus); }
-    .btn-cetak-kartu { background-color: var(--btn-cetak-kartu); color: #ffffff; }
-    .btn-solid-blue:hover { background-color: var(--btn-tambah-hover); }
-    .btn-solid-green:hover { background-color: var(--btn-import-excel-hover); }
-    .btn-solid-red:hover { background-color: var(--btn-hapus-hover); }
-    .btn-cetak-kartu:hover { background-color: var(--btn-cetak-kartu-hover); }
+    .btn-solid-green { background-color: var(--btn-import); }
+    .btn-solid-blue { background-color: var(--btn-add); }
+    .btn-solid-red { background-color: var(--btn-delete); }
 
     /* Row Action Buttons (Pure Icon) */
     .btn-row-action {
@@ -397,9 +392,9 @@
     }
     #btnSaveClass:disabled,
     #btnSaveClass[disabled] {
-        background-color: #15803D !important;
+        background-color: var(--color-primary) !important;
         color: #ffffff !important;
-        border-color: #15803D !important;
+        border-color: var(--color-primary) !important;
         cursor: not-allowed !important;
         opacity: 0.5 !important;
         box-shadow: none !important;
@@ -860,7 +855,7 @@
                             {{ __('Format kolom file Excel:') }} <strong>{{ __('Nama Kelas') }}, {{ __('Tingkat (7/8/9)') }}</strong> (.xlsx {{ __('atau') }} .csv)
                         </div>
                         @if($templateRoute)
-                        <a href="{{ $templateRoute }}" class="btn-download-import w-100" data-download data-dl-progress>{{ __('Unduh Template Excel') }}</a>
+                        <a href="{{ $templateRoute }}" class="btn-download-green w-100" data-download data-dl-progress>{{ __('Unduh Template Excel') }}</a>
                         @endif
                     </div>
                     <label class="form-label small fw-semibold">{{ __('Pilih File Excel') }}</label>
@@ -868,7 +863,7 @@
                 </div>
                 <div class="modal-footer border-top-0">
                     <button type="button" class="btn btn-light rounded-3 px-3 fw-semibold" data-bs-dismiss="modal">{{ __('Batal') }}</button>
-                    <button type="submit" class="btn-download-import px-4" data-import data-dl-progress>{{ __('Unggah & Import') }}</button>
+                    <button type="submit" class="btn-download-green px-4" data-import data-dl-progress>{{ __('Unggah & Import') }}</button>
                 </div>
             </form>
         </div>

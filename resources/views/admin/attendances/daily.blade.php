@@ -135,66 +135,66 @@
         }
     }
 
-    /* Mode Gerbang Button = biru #2563EB; hover #1D4ED8; Teks putih. */
+    /* Mode Gerbang Button (hijau statis - aksi, bukan tema) */
     .btn-portal-gate {
-        background-color: #2563EB;
+        background-color: var(--btn-gate) !important;
         color: #ffffff !important;
-        border-color: #2563EB;
-        box-shadow: 0 1px 2px rgba(22, 163, 74, 0.2);
+        border-color: var(--btn-gate) !important;
+        box-shadow: 0 1px 2px rgba(var(--btn-gate-rgb), 0.2) !important;
         -webkit-tap-highlight-color: transparent !important;
     }
     .btn-portal-gate:active,
     .btn-portal-gate:focus {
-        background-color: #2563EB !important;
-        border-color: #2563EB !important;
+        background-color: var(--btn-gate) !important;
+        border-color: var(--btn-gate) !important;
         color: #ffffff !important;
         transform: none !important;
-        box-shadow: 0 1px 2px rgba(22, 163, 74, 0.2) !important;
+        box-shadow: 0 1px 2px rgba(var(--btn-gate-rgb), 0.2) !important;
     }
     @media (hover: hover) {
         .btn-portal-gate:hover {
-            background-color: #1D4ED8 !important;
-            border-color: #1D4ED8 !important;
+            background-color: var(--btn-gate) !important;
+            border-color: var(--btn-gate) !important;
             color: #ffffff !important;
             transform: none !important;
-            box-shadow: 0 1px 2px rgba(22, 163, 74, 0.2) !important;
+            box-shadow: 0 1px 2px rgba(var(--btn-gate-rgb), 0.2) !important;
         }
     }
 
-    /* Buka Scanner Button = ungu #7C3AED; hover #6D28D9. Teks putih. */
+    /* Buka Scanner Button - pakai warna tema primary */
     .btn-portal-scanner {
-        background-color: #7C3AED;
+        background-color: var(--btn-scanner) !important;
         color: #ffffff !important;
-        border-color: #7C3AED;
-        box-shadow: 0 1px 3px rgba(21, 128, 61, 0.25);
+        border-color: var(--btn-scanner) !important;
+        box-shadow: 0 1px 3px rgba(var(--btn-scanner-rgb), 0.25) !important;
         -webkit-tap-highlight-color: transparent !important;
     }
     .btn-portal-scanner:active,
     .btn-portal-scanner:focus {
-        background-color: #7C3AED !important;
-        border-color: #7C3AED !important;
+        background-color: var(--btn-scanner-hover) !important;
+        border-color: var(--btn-scanner-hover) !important;
         color: #ffffff !important;
         transform: none !important;
-        box-shadow: 0 1px 3px rgba(21, 128, 61, 0.25) !important;
+        box-shadow: 0 1px 3px rgba(var(--btn-scanner-rgb), 0.25) !important;
     }
     @media (hover: hover) {
         .btn-portal-scanner:hover {
-            background-color: #7C3AED !important;
-            border-color: #7C3AED !important;
+            background-color: var(--btn-scanner-hover) !important;
+            border-color: var(--btn-scanner-hover) !important;
             color: #ffffff !important;
             transform: none !important;
-            box-shadow: 0 1px 3px rgba(21, 128, 61, 0.25) !important;
+            box-shadow: 0 1px 3px rgba(var(--btn-scanner-rgb), 0.25) !important;
         }
     }
     .btn-portal-scanner.scanner-active {
-        background-color: #7C3AED !important;
-        border-color: #7C3AED !important;
+        background-color: #ef4444 !important;
+        border-color: #ef4444 !important;
         color: #ffffff !important;
-        box-shadow: 0 1px 3px rgba(21, 128, 61, 0.25);
+        box-shadow: 0 1px 3px rgba(239, 68, 68, 0.25);
     }
     .btn-portal-scanner.scanner-active:hover {
-        background-color: #6D28D9 !important;
-        border-color: #6D28D9 !important;
+        background-color: #dc2626 !important;
+        border-color: #dc2626 !important;
         box-shadow: 0 4px 8px rgba(239, 68, 68, 0.35);
     }
 
@@ -377,7 +377,7 @@
         border: none !important;
         border-radius: 0 !important;
         padding: 0.2rem;
-        color: #15803D;
+        color: var(--color-primary);
         font-size: 0.80rem;
         font-weight: 600;
         text-decoration: none !important;
@@ -388,7 +388,7 @@
         cursor: pointer;
     }
     .btn-buka-kelas:hover {
-        color: #254fd9;
+        color: var(--color-primary);
         opacity: 0.85;
         transform: none;
         box-shadow: none !important;
@@ -407,7 +407,7 @@
         align-items: center !important;
         justify-content: center !important;
     }
-        box-shadow: 0 1px 2px rgba(21, 128, 61, 0.2);
+        box-shadow: 0 1px 2px rgba(var(--color-primary-rgb), 0.2);
     }
 
     /* Card Scanner Mode Gerbang Style di Halaman Presensi Harian */
@@ -489,20 +489,20 @@
 
     /* Tombol AKTIF: biru penuh sampai ke tepi pembungkus. */
     .presensi-hari-ini-scanner-col .kiosk-switch-btn.active {
-        background: #15803D;
+        background: var(--color-primary);
         color: #ffffff;
         border-right-color: transparent;
     }
 
     .presensi-hari-ini-scanner-col .kiosk-switch-btn.active:hover {
-        background: #166534;
+        background: var(--color-primary-hover);
         color: #ffffff;
     }
 
     /* Fokus keyboard: outline tipis biru di dalam tombol (z-index naik
        supaya tidak terpotong overflow:hidden pembungkus). */
     .presensi-hari-ini-scanner-col .kiosk-switch-btn:focus-visible {
-        outline: 2px solid #2563eb;
+        outline: 2px solid var(--color-primary);
         outline-offset: -2px;
         z-index: 1;
     }
@@ -597,7 +597,7 @@
 
     .presensi-hari-ini-status.hadir     { color: #065f46 !important; } /* hijau */
     .presensi-hari-ini-status.terlambat { color: #92400e !important; } /* oranye */
-    .presensi-hari-ini-status.sakit     { color: #1d4ed8 !important; } /* biru  */
+    .presensi-hari-ini-status.sakit     { color: var(--presensi-sakit) !important; } /* biru  */
     .presensi-hari-ini-status.izin      { color: #5b21b6 !important; } /* ungu   */
     .presensi-hari-ini-status.alfa      { color: #991b1b !important; } /* merah  */
     .presensi-hari-ini-status.libur,
@@ -970,7 +970,7 @@
                                 <td class="text-center align-middle col-td-aksi text-nowrap">
                                     <div class="d-flex align-items-center justify-content-center w-100 text-nowrap">
                                         <a href="{{ panel_route('absensi.show', ['schoolClass' => $clsId, 'tanggal' => $tanggal ?? date('Y-m-d')]) }}" class="btn-buka-kelas text-nowrap" title="{!! __('Buka Kelas') !!}" aria-label="{!! __('Buka Kelas') !!}">
-                                            <i class='bx bx-door-open' style="font-size: 22px !important; font-weight: 400 !important; width: 24px !important; height: 24px !important; min-width: 24px !important; min-height: 24px !important; display: inline-flex; align-items: center; justify-content: center; color: #15803D !important;"></i>
+                                            <i class='bx bx-door-open' style="font-size: 22px !important; font-weight: 400 !important; width: 24px !important; height: 24px !important; min-width: 24px !important; min-height: 24px !important; display: inline-flex; align-items: center; justify-content: center; color: var(--color-primary) !important;"></i>
                                         </a>
                                     </div>
                                 </td>

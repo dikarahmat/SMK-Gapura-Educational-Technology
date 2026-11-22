@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', __('Hari Libur'))
 @section('page_title', __('Hari Libur & Cuti'))
@@ -77,22 +77,22 @@
     }
 
     .btn-green-excel {
-        background-color: var(--btn-import-excel) !important;
+        background-color: var(--action-excel) !important;
         color: #ffffff !important;
         border: none !important;
-        font-weight: 600;
-        font-size: 0.88rem;
-        border-radius: var(--clean-radius);
-        padding: 0.45rem 1rem;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.4rem;
+        font-weight: 600 !important;
+        font-size: 0.88rem !important;
+        border-radius: var(--clean-radius) !important;
+        padding: 0.45rem 1rem !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 0.4rem !important;
     }
     .btn-green-excel:hover, 
     .btn-green-excel:active, 
     .btn-green-excel:focus,
     .btn-green-excel:focus-visible { 
-        background-color: var(--btn-import-excel-hover) !important; 
+        background-color: var(--action-excel-hover) !important; 
         color: #ffffff !important; 
         transform: none !important;
         box-shadow: 0 1px 2px rgba(5, 150, 105, 0.15) !important;
@@ -100,13 +100,13 @@
     }
 
     .btn-add-holiday {
-        background-color: var(--btn-tambah) !important;
+        background-color: var(--btn-add) !important;
         color: #ffffff !important;
         border: none !important;
-        font-weight: 600;
-        font-size: 0.88rem;
-        border-radius: var(--clean-radius);
-        padding: 0.45rem 1rem;
+        font-weight: 600 !important;
+        font-size: 0.88rem !important;
+        border-radius: var(--clean-radius) !important;
+        padding: 0.45rem 1rem !important;
         display: inline-flex;
         align-items: center;
         gap: 0.4rem;
@@ -115,30 +115,30 @@
     .btn-add-holiday:active, 
     .btn-add-holiday:focus,
     .btn-add-holiday:focus-visible { 
-        background-color: #166534 !important; 
+        background-color: var(--btn-add-hover) !important; 
         color: #ffffff !important; 
         transform: none !important; 
-        box-shadow: 0 1px 2px rgba(21, 128, 61, 0.15) !important;
+        box-shadow: 0 1px 2px rgba(var(--btn-add-rgb), 0.15) !important;
         outline: none !important;
     }
 
     .btn-download-green {
-        background-color: var(--btn-import-excel) !important;
+        background-color: var(--action-excel) !important;
         color: #ffffff !important;
         border: none !important;
-        font-weight: 600;
-        font-size: 0.88rem;
-        border-radius: var(--clean-radius);
-        padding: 0.45rem 1rem;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        text-decoration: none;
+        font-weight: 600 !important;
+        font-size: 0.88rem !important;
+        border-radius: var(--clean-radius) !important;
+        padding: 0.45rem 1rem !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-decoration: none !important;
     }
     .btn-download-green:hover, 
     .btn-download-green:active,
     .btn-download-green:focus {
-        background-color: #047857 !important;
+        background-color: var(--action-excel-hover) !important;
         color: #ffffff !important;
         transform: none !important;
         outline: none !important;
@@ -204,12 +204,12 @@
         gap: 0.6rem;
         padding: 0.8rem 1rem;
         border-radius: 0.75rem;
-        background-color: #DCFCE7;
+        background-color: rgba(var(--color-primary-rgb), 0.08);
         color: #1e293b;
         font-size: 0.85rem;
         line-height: 1.5;
     }
-    .info-box i { color: #15803D; font-size: 1.2rem; margin-top: 0.05rem; }
+    .info-box i { color: var(--color-primary); font-size: 1.2rem; margin-top: 0.05rem; }
 
     /* Pagination Ringkas */
     .pagination-compact .pagination {
@@ -444,7 +444,7 @@
                             <div class="mb-2">
                                 {{ __('Format kolom file Excel:') }} <strong>{{ __('Tanggal, Keterangan') }}</strong> {{ __('(.xlsx atau .csv)') }}
                             </div>
-                            <a href="{{ panel_route('holidays.template') }}" class="btn-download-import w-100" data-download data-no-download data-dl-progress>{{ __('Unduh Template Excel') }}</a>
+                            <a href="{{ panel_route('holidays.template') }}" class="btn-download-green w-100" data-download data-no-download data-dl-progress>{{ __('Unduh Template Excel') }}</a>
                         </div>
                         <div class="mb-2">
                             <label class="form-label small fw-semibold">{{ __('Pilih File Excel') }}</label>
@@ -455,7 +455,7 @@
                     </div>
                     <div class="modal-footer border-top-0 pt-0">
                         <button type="button" class="btn btn-light rounded-3 px-3 fw-semibold" data-bs-dismiss="modal" id="btnBatalImportHoliday">{{ __('Batal') }}</button>
-                        <button type="submit" id="submitImportBtn" class="btn-download-import px-4 btn-progress" data-import data-dl-progress disabled style="opacity: 0.45; cursor: not-allowed; background-color: #059669 !important;">{{ __('Unggah & Import') }}</button>
+                        <button type="submit" id="submitImportBtn" class="btn-download-green px-4 btn-progress" data-import data-dl-progress disabled style="opacity: 0.45; cursor: not-allowed; background-color: #059669 !important;">{{ __('Unggah & Import') }}</button>
                     </div>
                 </form>
             </div>

@@ -81,7 +81,13 @@
             }
         } catch (e) {}
 
-        return '#14532D'; // Fallback warna hijau tua
+        // Fallback: ambil dari CSS variable tema jika tersedia, else navy asli
+        try {
+            const rootVars = window.getComputedStyle(document.documentElement);
+            const primary = rootVars.getPropertyValue('--color-primary').trim();
+            if (primary) return primary;
+        } catch (e) {}
+        return '#1e3a8a'; // fallback hardcode jika CSS var tidak tersedia
     }
 
     /**
@@ -175,8 +181,8 @@
         const isLight = isLightColor(btnColor);
 
         if (isLight) {
-            btn.style.setProperty('--dl-swipe-bg', '#14532D');
-            btn.style.setProperty('--dl-btn-color', '#ffffff');
+            btn.style.setProperty('--dl-swipe-bg', 'rgb(255,255,255)');
+            btn.style.setProperty('--dl-btn-color', '#1e3a8a');
         } else {
             btn.style.setProperty('--dl-swipe-bg', '#ffffff');
             btn.style.setProperty('--dl-btn-color', btnColor);

@@ -16,6 +16,7 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    @include('partials.theme')
     <meta charset="utf-8">
     <title>{{ $pageTitle ?? 'Kartu Presensi Guru' }}</title>
     <style>
@@ -26,7 +27,7 @@
         .toolbar button { background: #059669; color: #fff; border: 0; border-radius: 8px; padding: 10px 18px; font-weight: bold; cursor: pointer; }
         .toolbar span { font-size: 13px; color: #475569; }
         .sheet { display: flex; flex-wrap: wrap; gap: 4mm; max-width: 210mm; margin: 0 auto; }
-        .card { position: relative; width: 53.9mm; height: 85.6mm; overflow: hidden; background: #DCFCE7; page-break-inside: avoid; break-inside: avoid; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .card { position: relative; width: 53.9mm; height: 85.6mm; overflow: hidden; background: #dcefe2; page-break-inside: avoid; break-inside: avoid; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         .card .abs { position: absolute; left: 0; width: 53.9mm; text-align: center; white-space: nowrap; overflow: hidden; line-height: normal; font-weight: bold; }
         @media print {
             body { background: #fff; padding: 0; }
@@ -69,14 +70,14 @@
 
                 <div class="abs" style="top:16.5mm; font-size:7pt; color:#0f172a;">{{ mb_strtoupper($teacher->name ?? '-') }}</div>
                 <div class="abs" style="top:20.6mm; font-size:6.8pt; color:#0f172a;">{{ $__nip }}</div>
-                <div class="abs" style="top:24.6mm; font-size:8pt; color:#14532D;">GURU</div>
+                <div class="abs" style="top:24.6mm; font-size:8pt; color:#14532d;">GURU</div>
 
                 <div style="position:absolute; left:10.95mm; top:30.5mm; width:32mm; height:32mm; background:#fff;">
                     @if($qrSrc)
                         <img src="{{ $qrSrc }}" alt="" style="position:absolute; left:1mm; top:1mm; width:30mm; height:30mm;">
                     @endif
                 </div>
-                <div class="abs" style="top:64.8mm; font-size:5pt; letter-spacing:0.4mm; color:#14532D;">SCAN PRESENSI</div>
+                <div class="abs" style="top:64.8mm; font-size:5pt; letter-spacing:0.4mm; color:#14532d;">SCAN PRESENSI</div>
 
                 <div style="position:absolute; left:0; top:78.6mm; width:53.9mm; height:7mm; line-height:7mm; text-align:center; font-size:4.5pt; font-style:italic; color:#fff;">Tunjukkan kartu saat presensi masuk</div>
             </div>

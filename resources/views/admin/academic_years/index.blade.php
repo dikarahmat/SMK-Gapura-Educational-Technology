@@ -16,17 +16,17 @@
 <style>
     /* KUNCI UTAMA: Tombol Tambah Tahun Ajaran agar Diam Total (Tanpa Efek Putih / Klik / Animasi) */
     .btn-add-year {
-        background-color: #15803D !important;
+        background-color: var(--btn-add) !important;
         color: #ffffff !important;
         border: none !important;
-        font-weight: 600;
-        font-size: 0.88rem;
-        border-radius: var(--clean-radius);
-        padding: 0.45rem 1rem;
+        font-weight: 600 !important;
+        font-size: 0.88rem !important;
+        border-radius: var(--clean-radius) !important;
+        padding: 0.45rem 1rem !important;
         display: inline-flex;
         align-items: center;
         gap: 0.4rem;
-        box-shadow: 0 1px 2px rgba(59, 130, 246, 0.15) !important;
+        box-shadow: 0 1px 2px rgba(var(--btn-add-rgb), 0.15) !important;
         transition: none !important;
         transform: none !important;
     }
@@ -34,10 +34,10 @@
     .btn-add-year:active, 
     .btn-add-year:focus, 
     .btn-add-year:focus-visible { 
-        background-color: #15803D !important; 
+        background-color: var(--btn-add-hover) !important; 
         color: #ffffff !important; 
         transform: none !important; 
-        box-shadow: 0 1px 2px rgba(21, 128, 61, 0.15) !important;
+        box-shadow: 0 1px 2px rgba(var(--btn-add-rgb), 0.15) !important;
         outline: none !important;
     }
 
@@ -110,12 +110,12 @@
         gap: 0.6rem;
         padding: 0.8rem 1rem;
         border-radius: 0.75rem;
-        background-color: #DCFCE7;
+        background-color: rgba(var(--color-primary-rgb), 0.08);
         color: #1e293b;
         font-size: 0.85rem;
         line-height: 1.5;
     }
-    .info-box i { color: #15803D; font-size: 1.2rem; margin-top: 0.05rem; }
+    .info-box i { color: var(--color-primary); font-size: 1.2rem; margin-top: 0.05rem; }
 
     .pagination-compact .pagination { margin-bottom: 0; font-size: 0.82rem; }
     .pagination-compact .page-link { padding: 0.25rem 0.6rem; }

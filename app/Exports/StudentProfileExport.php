@@ -4,6 +4,7 @@ namespace App\Exports;
 
 use App\Models\AcademicYear;
 use App\Models\Setting;
+use App\Support\Theme;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\FromArray;
@@ -232,7 +233,7 @@ class StudentProfileExport implements FromArray, WithMultipleSheets, WithTitle, 
         $sheet->mergeCells("A1:{$lastCol}1");
         $sheet->mergeCells("A2:{$lastCol}2");
         $sheet->mergeCells("A3:{$lastCol}3");
-        $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(14)->setColor(new Color('1D4ED8'));
+        $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(14)->setColor(new Color((new Theme(config('theme')))->primary700Argb()));
         $sheet->getStyle('A1')->getAlignment()->setWrapText(true);
         $sheet->getStyle('A2')->getFont()->setSize(10)->setColor(new Color('475569'));
         $sheet->getStyle('A3')->getFont()->setSize(10)->setColor(new Color('475569'));
@@ -260,7 +261,7 @@ class StudentProfileExport implements FromArray, WithMultipleSheets, WithTitle, 
         for ($row = 1; $row <= $lastDataRow; $row++) {
             $cellValue = $sheet->getCell('A' . $row)->getValue();
             if (is_string($cellValue) && str_starts_with($cellValue, 'Persentase Kehadiran')) {
-                $sheet->getStyle('B' . $row)->getFont()->setBold(true)->setSize(12)->setColor(new Color('1D4ED8'));
+                $sheet->getStyle('B' . $row)->getFont()->setBold(true)->setSize(12)->setColor(new Color((new Theme(config('theme')))->primary700Argb()));
                 break;
             }
         }
@@ -269,7 +270,7 @@ class StudentProfileExport implements FromArray, WithMultipleSheets, WithTitle, 
         $tableHeaderRow = $this->dataStartRow;
         $tableHeaderRange = "A{$tableHeaderRow}:{$lastCol}{$tableHeaderRow}";
         $sheet->getStyle($tableHeaderRange)->getFont()->setBold(true)->setColor(new Color('FFFFFF'));
-        $sheet->getStyle($tableHeaderRange)->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('2563EB');
+        $sheet->getStyle($tableHeaderRange)->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB((new Theme(config('theme')))->primaryArgb());
         $sheet->getStyle($tableHeaderRange)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER)->setVertical(Alignment::VERTICAL_CENTER);
 
         // Freeze pane below table header
@@ -285,14 +286,15 @@ class StudentProfileExport implements FromArray, WithMultipleSheets, WithTitle, 
             // Status column coloring (column F = 6)
             for ($row = $this->dataStartRow; $row <= $this->dataEndRow; $row++) {
                 $status = $sheet->getCell('F' . $row)->getValue(); // Status is column F (6)
+                $theme = new Theme(config('theme'));
                 $color = match ($status) {
-                    'Hadir' => '059669',
-                    'Terlambat' => 'D97706',
-                    'Sakit' => '2563EB',
-                    'Izin' => '7E22CE',
-                    'Alfa' => 'EF4444',
-                    'Libur' => '94A3B8',
-                    default => '1E293B',
+                    'Hadir'     => $theme->status('hadir'),
+                    'Terlambat' => $theme->status('terlambat'),
+                    'Sakit'     => $theme->status('sakit'),
+                    'Izin'      => $theme->status('izin'),
+                    'Alfa'      => $theme->status('alfa'),
+                    'Libur'     => $theme->status('libur'),
+                    default     => '1E293B',
                 };
                 $sheet->getStyle('F' . $row)->getFont()->setBold(true)->setColor(new Color($color));
             }
